@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kollektif İSG Yönetim ve Denetim Sistemi - Supabase Sürümü</title>
+    <!-- Tailwind CSS ve Lucide Simgeleri CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- React ve Babel (Canlı Tarayıcı Derlemesi İçin) -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Supabase CDN Client JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @media print {
+            .print\:hidden {
+                display: none !important;
+            }
+            .print\:p-0 {
+                padding: 0 !important;
+            }
+            .print\:shadow-none {
+                box-shadow: none !important;
+            }
+            .print\:rounded-none {
+                border-radius: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- PDF'DEN ALINAN VARSAYILAN LOKAL VERİLER (Supabase boşken veya bağlı değilken kullanılır) ---
+        const initialExperts = [
+            { id: 'exp1', name: "Ahmet Yılmaz (İSG Uzmanı)" },
+            { id: 'exp2', name: "Ayşe Kaya (İSG Uzmanı)" }
+        ];
+
+        const initialCompanies = [
+            { 
+                id: 'comp1', name: "12 M TURİZM SAN. VE DIŞ TİC.", debt: "127.300,48 ₺", progress: 65, nextVisit: "2026-05-10", expertId: 'exp1',
+                report: { status: 'draft', date: '27.04.2026', findings: [
+                    { id: 1, observation: 'Ana elektrik panosunda kaçak akım rölesi (KAR) eksik.', risk: 'Yüksek', action: 'Acilen 300mA KAR takılmalı.', deadline: '2026-05-01' }
+                ]}
+            },
+            { 
+                id: 'comp2', name: "AKRA CAM DEK. MAK. SAN.", debt: "44.120,99 ₺", progress: 40, nextVisit: "2026-05-12", expertId: 'exp1',
+                report: { status: 'draft', date: '', findings: []}
+            },
+            { 
+                id: 'comp3', name: "AYYILDIZ GRUP TEKSTİL A.Ş.", debt: "4.661,00 ₺", progress: 90, nextVisit: "2026-05-05", expertId: 'exp2',
+                report: { status: 'submitted', date: '25.04.2026', findings: [
+                    { id: 2, observation: 'Acil çıkış kapısının önü paletlerle kapatılmış.', risk: 'Yüksek', action: 'Paletler depoya kaldırılmalı ve güzergah boşaltılmalı.', deadline: '2026-04-26' }
+                ]}
+            },
+            { 
+                id: 'comp4', name: "MEDİCANA HASTANE İŞLETMELERİ", debt: "81.700,00 ₺", progress: 20, nextVisit: "2026-05-08", expertId: 'exp1',
+                report: { status: 'draft', date: '', findings: []}
+            },
+            { 
+                id: 'comp5', name: "SİRENA MARİNE DENİZCİLİK", debt: "186.598,92 ₺", progress: 50, nextVisit: "2026-05-15", expertId: 'exp2',
+                report: { status: 'draft', date: '', findings: []}
+            },
+            { 
+                id: 'comp6', name: "BEYPA BEYPİLİÇ ÜRÜNLERİ", debt: "879,99 ₺", progress: 100, nextVisit: "2026-05-20", expertId: 'exp2',
+                report: { status: 'submitted', date: '20.04.2026', findings: [
+                    { id: 3, observation: 'Personel soyunma odalarında havalandırma yetersiz.', risk: 'Düşük', action: 'Fan sistemi bakımı yapılmalı.', deadline: '2026-05-10' }
+                ]}
+            }
+        ];
+
+        const initialBulletins = [
+            { id: 'bul1', title: "Yüksekte Çalışma Kuralları", date: "24 Nisan 2026", content: "Emniyet kemeri kullanımı zorunludur. İskele kurulumları yetkili kişilerce yapılmalıdır." },
+            { id: 'bul2', title: "Kişisel Koruyucu Donanım (KKD)", date: "17 Nisan 2026", content: "Baret, çelik burunlu ayakkabı ve fosforlu yelek olmadan sahaya giriş kesinlikle yasaktır." }
+        ];
+
+        // SQL Kurulum Kodu Yardımı (Tek tıkla kopyalamak için)
+        const sqlQueryText = `-- 1. FİRMALAR TABLOSUNU OLUŞTUR
+CREATE TABLE IF NOT EXISTS public.companies (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    debt TEXT,
+    progress INTEGER DEFAULT 0,
+    nextVisit TEXT,
+    expertId TEXT,
+    report JSONB DEFAULT '{}'::jsonb
+);
+
+-- 2. BÜLTENLER TABLOSUNU OLUŞTUR
+CREATE TABLE IF NOT EXISTS public.bulletins (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    date TEXT,
+    content TEXT
+);
+
+-- 3. BAŞLANGIÇ VERİLERİNİ EKLE
+INSERT INTO public.companies (id, name, debt, progress, nextVisit, expertId, report)
+VALUES 
+('comp1', '12 M TURİZM SAN. VE DIŞ TİC.', '127.300,48 ₺', 65, '2026-05-10', 'exp1', '{"status": "draft", "date": "27.04.2026", "findings": [{"id": 1, "observation": "Ana elektrik panosunda kaçak akım rölesi (KAR) eksik.", "risk": "Yüksek", "action": "Acilen 300mA KAR takılmalı.", "deadline": "2026-05-01"}]}'),
+('comp2', 'AKRA CAM DEK. MAK. SAN.', '44.120,99 ₺', 40, '2026-05-12', 'exp1', '{"status": "draft", "date": "", "findings": []}'),
+('comp3', 'AYYILDIZ GRUP TEKSTİL A.Ş.', '4.661,00 ₺', 90, '2026-05-05', 'exp2', '{"status": "submitted", "date": "25.04.2026", "findings": [{"id": 2, "observation": "Acil çıkış kapısının önü paletlerle kapatılmış.", "risk": "Yüksek", "action": "Paletler depoya kaldırılmalı ve güzergah boşaltılmalı.", "deadline": "2026-04-26"}]}'),
+('comp4', 'MEDİCANA HASTANE İŞLETMELERİ', '81.700,00 ₺', 20, '2026-05-08', 'exp1', '{"status": "draft", "date": "", "findings": []}'),
+('comp5', 'SİRENA MARİNE DENİZCİLİK', '186.598,92 ₺', 50, '2026-05-15', 'exp2', '{"status": "draft", "date": "", "findings": []}'),
+('comp6', 'BEYPA BEYPİLİÇ ÜRÜNLERİ', '879,99 ₺', 100, '2026-05-20', 'exp2', '{"status": "submitted", "date": "20.04.2026", "findings": [{"id": 3, "observation": "Personel soyunma odalarında havalandırma yetersiz.", "risk": "Düşük", "action": "Fan sistemi bakımı yapılmalı.", "deadline": "2026-05-10"}]}');
+
+INSERT INTO public.bulletins (id, title, date, content)
+VALUES 
+('bul1', 'Yüksekte Çalışma Kuralları', '24 Nisan 2026', 'Emniyet kemeri kullanımı zorunludur. İskele kurulumları yetkili kişilerce yapılmalıdır.'),
+('bul2', 'Kişisel Koruyucu Donanım (KKD)', '17 Nisan 2026', 'Baret, çelik burunlu ayakkabı ve fosforlu yelek olmadan sahaya giriş kesinlikle yasaktır.');`;
+
+        function App() {
+            const [currentView, setCurrentView] = useState('login'); 
+            const [currentUser, setCurrentUser] = useState(null);
+            
+            // LocalStorage veri kalıcılığı
+            const [companies, setCompanies] = useState(() => {
+                const saved = localStorage.getItem('isg_companies');
+                return saved ? JSON.parse(saved) : initialCompanies;
+            });
+
+            const [experts, setExperts] = useState(initialExperts);
+            const [bulletins, setBulletins] = useState(initialBulletins);
+            
+            const [selectedCompanyId, setSelectedCompanyId] = useState('comp1');
+            const [reportModal, setReportModal] = useState({ isOpen: false, mode: null, companyId: null });
+
+            // Supabase Bağlantı Bilgileri
+            const [supabaseUrl, setSupabaseUrl] = useState(() => localStorage.getItem('isg_supabase_url') || '');
+            const [supabaseAnonKey, setSupabaseAnonKey] = useState(() => localStorage.getItem('isg_supabase_anon_key') || '');
+            const [supabaseClient, setSupabaseClient] = useState(null);
+            const [isSupabaseConnected, setIsSupabaseConnected] = useState(false);
+            const [isTableMissing, setIsTableMissing] = useState(false); // Tablo hatasını yakalama
+
+            // Bildirim (Toast) State
+            const [toast, setToast] = useState({ message: '', type: 'info', show: false });
+
+            // Gelişmiş Dinamik Sunucu IP Ayarı: Tarayıcının mevcut URL'ini otomatik algılar ve temizler
+            const [serverIp, setServerIp] = useState(() => {
+                const saved = localStorage.getItem('isg_server_ip');
+                if (saved) return saved;
+                
+                let loc = window.location;
+                let currentUrl = `${loc.protocol}//${loc.host}${loc.pathname}`;
+                
+                // Blob kısıtlamalarını temizleme koruması
+                if (currentUrl.startsWith('blob:')) {
+                    currentUrl = currentUrl.replace('blob:', '');
+                }
+                // Sandbox içindeki geçici uydurma url'leri de temizleyelim
+                if (currentUrl.includes('usercontent.goog') || loc.protocol === 'file:') {
+                    return ""; // Boş bırakalım ki yedek plan devreye girsin veya ayardan girilsin
+                }
+                return currentUrl;
+            });
+            const [showSettings, setShowSettings] = useState(false);
+
+            // Toast gösterme yardımcı fonksiyonu
+            const showToastMessage = (message, type = 'success') => {
+                setToast({ message, type, show: true });
+                setTimeout(() => {
+                    setToast(prev => ({ ...prev, show: false }));
+                }, 3000);
+            };
+
+            // Güvenli Kopyalama Fonksiyonu (document.execCommand fallback kullanan ve iframe dostu yöntem)
+            const handleClipboardCopy = (textToCopy) => {
+                try {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = textToCopy;
+                    textarea.style.position = 'fixed'; // Ekrandan gizlemek için konumlandırma
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    textarea.setSelectionRange(0, 99999); // Mobil uyumluluk için
+
+                    const success = document.execCommand('copy');
+                    document.body.removeChild(textarea);
+
+                    if (success) {
+                        showToastMessage("SQL Script başarıyla kopyalandı!");
+                    } else {
+                        throw new Error("Kopyalama komutu başarısız döndü");
+                    }
+                } catch (err) {
+                    console.warn("Kopyalama işleminde hata oluştu, alternatif deneniyor:", err);
+                    try {
+                        navigator.clipboard.writeText(textToCopy);
+                        showToastMessage("SQL Script başarıyla kopyalandı!");
+                    } catch (fallbackErr) {
+                        showToastMessage("Panoya kopyalanamadı. Lütfen SQL kodunu el ile seçip kopyalayın.", "error");
+                    }
+                }
+            };
+
+            // --- SUPABASE CLIENT BAŞLATMA ---
+            useEffect(() => {
+                if (supabaseUrl && supabaseAnonKey) {
+                    try {
+                        const client = supabase.createClient(supabaseUrl, supabaseAnonKey);
+                        setSupabaseClient(client);
+                        setIsSupabaseConnected(true);
+                        setIsTableMissing(false);
+                        console.log("Supabase istemcisi başarıyla başlatıldı!");
+                    } catch (error) {
+                        console.error("Supabase başlatma hatası:", error);
+                        setIsSupabaseConnected(false);
+                    }
+                } else {
+                    setSupabaseClient(null);
+                    setIsSupabaseConnected(false);
+                }
+            }, [supabaseUrl, supabaseAnonKey]);
+
+            // --- SUPABASE VERİ ÇEKME AKIŞI ---
+            useEffect(() => {
+                if (!supabaseClient) return;
+
+                const fetchSupabaseData = async () => {
+                    try {
+                        // Firmaları çek
+                        const { data: companiesData, error: compError } = await supabaseClient
+                            .from('companies')
+                            .select('*')
+                            .order('id', { ascending: true });
+
+                        if (compError) {
+                            // Tablo bulunamadı hatası (PGRST205) durumunu yakala
+                            if (compError.code === 'PGRST205' || compError.message.includes('companies') || compError.message.includes('relation "public.companies" does not exist')) {
+                                setIsTableMissing(true);
+                                throw new Error("Companies tablosu Supabase üzerinde mevcut değil.");
+                            }
+                            throw compError;
+                        }
+                        
+                        setIsTableMissing(false);
+                        if (companiesData && companiesData.length > 0) {
+                            setCompanies(companiesData);
+                        }
+
+                        // Bültenleri çek
+                        const { data: bulletinsData, error: bulError } = await supabaseClient
+                            .from('bulletins')
+                            .select('*');
+
+                        if (bulError) throw bulError;
+                        if (bulletinsData && bulletinsData.length > 0) {
+                            setBulletins(bulletinsData);
+                        }
+                    } catch (err) {
+                        console.warn("Supabase veri çekme hatası (Lokal yedek veriler devrede kalıyor):", err);
+                        // Tablo yoksa lokal yedekleri güvenle kullan
+                        const saved = localStorage.getItem('isg_companies');
+                        if (saved) {
+                            setCompanies(JSON.parse(saved));
+                        } else {
+                            setCompanies(initialCompanies);
+                        }
+                    }
+                };
+
+                fetchSupabaseData();
+
+                // WebSocket Engeli/Canvas Sandbox korumalı Real-time Sync Aboneliği olmadan Polling entegre
+                const intervalId = setInterval(() => {
+                    fetchSupabaseData();
+                }, 10000);
+
+                return () => {
+                    clearInterval(intervalId);
+                };
+            }, [supabaseClient]);
+
+            // --- AKILLI YÖNLENDİRİCİ (ROUTER) VE BAŞLANGIÇ KONTROLÜ ---
+            useEffect(() => {
+                try {
+                    const params = new URLSearchParams(window.location.search);
+                    const viewParam = params.get('view');
+                    const idParam = params.get('id');
+
+                    if (viewParam === 'company') {
+                        setCurrentView('qr_company');
+                        if (idParam) {
+                            setSelectedCompanyId(idParam);
+                        }
+                    } else if (viewParam === 'worker') {
+                        setCurrentView('qr_worker');
+                    }
+                } catch (e) {
+                    console.warn("URL parametreleri çözümlenemedi:", e);
+                }
+            }, []);
+
+            // Görünüm Değiştirildiğinde URL'i Güncelleyen Güvenli Fonksiyon
+            const navigateTo = (view, companyId = null) => {
+                setCurrentView(view);
+                let targetId = companyId || selectedCompanyId;
+                if (companyId) {
+                    setSelectedCompanyId(companyId);
+                }
+
+                try {
+                    if (view === 'qr_company') {
+                        window.history.pushState({}, '', `?view=company&id=${targetId}`);
+                    } else if (view === 'qr_worker') {
+                        window.history.pushState({}, '', `?view=worker`);
+                    } else {
+                        window.history.pushState({}, '', window.location.pathname || '/');
+                    }
+                } catch (error) {
+                    console.warn("Iframe kısıtlaması nedeniyle pushState çalıştırılamadı, state üzerinden devam ediliyor:", error);
+                }
+            };
+
+            // Veritabanı bağlı değilse lokal hafızaya kaydetmeye devam et
+            useEffect(() => {
+                if (!isSupabaseConnected || isTableMissing) {
+                    localStorage.setItem('isg_companies', JSON.stringify(companies));
+                }
+            }, [companies, isSupabaseConnected, isTableMissing]);
+
+            // Ayarları Kaydet
+            const saveSettings = (ip, sUrl, sKey) => {
+                let cleanedIp = ip;
+                if (cleanedIp.startsWith('blob:')) {
+                    cleanedIp = cleanedIp.replace('blob:', '');
+                }
+                setServerIp(cleanedIp);
+                localStorage.setItem('isg_server_ip', cleanedIp);
+
+                setSupabaseUrl(sUrl);
+                localStorage.setItem('isg_supabase_url', sUrl);
+
+                setSupabaseAnonKey(sKey);
+                localStorage.setItem('isg_supabase_anon_key', sKey);
+
+                setIsTableMissing(false);
+                setShowSettings(false);
+                showToastMessage("Bağlantı ayarları başarıyla güncellendi!");
+            };
+
+            // Lucide ikonlarını her render sonrası güncelle
+            useEffect(() => {
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            });
+
+            // --- VERİ GÜNCELLEME FONKSİYONLARI (SUPABASE & LOKAL DESTEKLİ) ---
+
+            const increaseProgress = async (companyId) => {
+                const updatedCompanies = companies.map(c => {
+                    if (c.id === companyId) {
+                        return { ...c, progress: Math.min(c.progress + 10, 100) };
+                    }
+                    return c;
+                });
+                setCompanies(updatedCompanies);
+
+                // Supabase bağlantısı aktifse bulutta güncelle
+                if (isSupabaseConnected && supabaseClient && !isTableMissing) {
+                    const company = updatedCompanies.find(c => c.id === companyId);
+                    try {
+                        const { error } = await supabaseClient
+                            .from('companies')
+                            .update({ progress: company.progress })
+                            .eq('id', companyId);
+                        if (error) throw error;
+                        showToastMessage("Saha denetim ilerlemesi güncellendi!");
+                    } catch (err) {
+                        console.error("Supabase ilerleme güncelleme hatası:", err);
+                        showToastMessage("İlerleme kaydedilirken bulut hatası oluştu.", "error");
+                    }
+                } else {
+                    showToastMessage("Lokal modda ilerleme kaydedildi.");
+                }
+            };
+
+            const saveReport = async (companyId, reportData, status) => {
+                const updatedCompanies = companies.map(c => {
+                    if (c.id === companyId) {
+                        return { ...c, report: { ...reportData, status: status } };
+                    }
+                    return c;
+                });
+                setCompanies(updatedCompanies);
+                setReportModal({ isOpen: false, mode: null, companyId: null });
+
+                // Supabase bağlantısı aktifse bulutta güncelle
+                if (isSupabaseConnected && supabaseClient && !isTableMissing) {
+                    const company = updatedCompanies.find(c => c.id === companyId);
+                    try {
+                        const { error } = await supabaseClient
+                            .from('companies')
+                            .update({ report: company.report })
+                            .eq('id', companyId);
+                        if (error) throw error;
+                        showToastMessage("Saha raporu başarıyla kaydedildi!");
+                    } catch (err) {
+                        console.error("Supabase rapor kaydetme hatası:", err);
+                        showToastMessage("Rapor buluta yüklenirken hata oluştu.", "error");
+                    }
+                } else {
+                    showToastMessage("Lokal modda rapor başarıyla kaydedildi!");
+                }
+            };
+
+            // --- BİLEŞENLER ---
+
+            // Özel Toast Mesajı Kutusu
+            const ToastNotification = () => {
+                if (!toast.show) return null;
+                const isError = toast.type === 'error';
+                return (
+                    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-800 transition-all duration-300 transform translate-y-0">
+                        <i data-lucide={isError ? "alert-triangle" : "check-circle-2"} class={isError ? "text-red-400 w-5 h-5" : "text-emerald-400 w-5 h-5"}></i>
+                        <span className="text-sm font-semibold">{toast.message}</span>
+                    </div>
+                );
+            };
+
+            // Gelişmiş Ayarlar Paneli (Hem Yerel IP Hem Supabase Ayarı)
+            const SettingsModal = () => {
+                const [tempIp, setTempIp] = useState(serverIp);
+                const [tempUrl, setTempUrl] = useState(supabaseUrl);
+                const [tempKey, setTempKey] = useState(supabaseAnonKey);
+
+                return (
+                    <div className="fixed inset-0 bg-slate-950/70 z-40 flex items-center justify-center p-4 overflow-y-auto">
+                        <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-2xl border border-slate-100 my-8">
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                    <i data-lucide="settings" class="text-blue-500"></i> Sistem Bağlantı Ayarları
+                                </h3>
+                                <button onClick={() => setShowSettings(false)} className="text-slate-400 hover:text-slate-600">
+                                    <i data-lucide="x" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                            
+                            <div className="space-y-6">
+                                {/* Supabase Kurulum Alanı */}
+                                <div className="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                                    <h4 className="font-bold text-sm text-blue-900 mb-2 flex items-center gap-1">
+                                        <i data-lucide="database" class="w-4 h-4"></i> 1. Supabase Bulut Veritabanı Bağlantısı
+                                    </h4>
+                                    <p className="text-xs text-blue-700 mb-4 leading-relaxed">
+                                        Supabase projenizin API ayarlarından aldığınız bilgileri buraya yapıştırın. Sistem verileri anında gerçek zamanlı buluta taşınacaktır.
+                                    </p>
+                                    <div className="space-y-3">
+                                        <div>
+                                            <label className="text-[10px] font-bold text-slate-500 block uppercase mb-1">Project URL</label>
+                                            <input 
+                                                type="text" 
+                                                value={tempUrl} 
+                                                onChange={(e) => setTempUrl(e.target.value)} 
+                                                placeholder="https://your-project.supabase.co"
+                                                className="w-full border border-slate-200 p-2.5 rounded-xl text-xs font-semibold outline-none focus:border-blue-500 bg-white"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-[10px] font-bold text-slate-500 block uppercase mb-1">API Anon Key</label>
+                                            <input 
+                                                type="password" 
+                                                value={tempKey} 
+                                                onChange={(e) => setTempKey(e.target.value)} 
+                                                placeholder="eyJhbGciOi..."
+                                                className="w-full border border-slate-200 p-2.5 rounded-xl text-xs font-semibold outline-none focus:border-blue-500 bg-white"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Mobil Tarama Alanı */}
+                                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-2 flex items-center gap-1">
+                                        <i data-lucide="qr-code" class="w-4 h-4 text-emerald-500"></i> 2. Mobil QR Tarama Ayarı
+                                    </h4>
+                                    <div className="space-y-3">
+                                        <label className="text-[10px] font-bold text-slate-600 block uppercase mb-1">Uygulama Adresi / Bilgisayar IP / Vercel Domain</label>
+                                        <input 
+                                            type="text" 
+                                            value={tempIp} 
+                                            onChange={(e) => setTempIp(e.target.value)} 
+                                            placeholder="Örn: http://192.168.1.35:5500 veya https://isg-demo.vercel.app"
+                                            className="w-full border border-slate-200 p-2.5 rounded-xl text-xs font-semibold outline-none focus:border-blue-500 bg-white"
+                                        />
+                                        <span className="text-[10px] text-slate-400 block leading-tight">
+                                            * Yerel ağda test ederken kendi Wi-Fi IP adresinizi, Vercel'e deploy ettiyseniz gerçek Vercel site adresinizi yazın.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex gap-2 mt-6">
+                                <button onClick={() => saveSettings(tempIp, tempUrl, tempKey)} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 rounded-xl transition text-sm">
+                                    Değişiklikleri Kaydet
+                                </button>
+                                <button onClick={() => {
+                                    setTempUrl('');
+                                    setTempKey('');
+                                    setTempIp(window.location.origin + window.location.pathname);
+                                }} className="px-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium rounded-xl transition text-xs">
+                                    Sıfırla
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            // 1. GİRİŞ EKRANI
+            const LoginScreen = () => {
+                const handleCopySql = () => {
+                    handleClipboardCopy(sqlQueryText);
+                };
+
+                return (
+                    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 relative">
+                        {/* Sağ üst ayar butonu */}
+                        <button 
+                            onClick={() => setShowSettings(true)}
+                            className="absolute top-4 right-4 bg-slate-800 text-slate-300 hover:text-white p-3 rounded-2xl transition border border-slate-700 flex items-center gap-2 text-xs font-bold animate-pulse"
+                        >
+                            <i data-lucide="settings" class="w-4 h-4"></i> Bağlantı ve QR Ayarı
+                        </button>
+
+                        <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md">
+                            <div className="text-center mb-8">
+                                <div className="bg-blue-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-500/20">
+                                    <i data-lucide="shield-check" class="text-white w-10 h-10"></i>
+                                </div>
+                                <h1 className="text-2xl font-bold text-slate-800">Kollektif İSG Yönetim</h1>
+                                <p className="text-slate-500 mt-2 text-sm">Lütfen giriş yapmak istediğiniz paneli seçin</p>
+                                
+                                {/* Canlı Bağlantı Durumu Göstergesi */}
+                                <div className="mt-4 flex justify-center">
+                                    {isSupabaseConnected ? (
+                                        isTableMissing ? (
+                                            <span className="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+                                                <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-red-500 animate-bounce"></i>
+                                                Supabase Tabloları Eksik!
+                                            </span>
+                                        ) : (
+                                            <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+                                                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+                                                Supabase Bulut Aktif
+                                            </span>
+                                        )
+                                    ) : (
+                                        <span className="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+                                            <span className="w-2 h-2 bg-slate-400 rounded-full"></span>
+                                            Lokal Sürüm Aktif
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* SQL Tablo Eksik Uyarısı */}
+                            {isSupabaseConnected && isTableMissing && (
+                                <div className="bg-red-50 border border-red-200 text-red-900 rounded-2xl p-4 mb-6 text-xs text-left">
+                                    <p className="font-bold flex items-center gap-1 mb-1">
+                                        <i data-lucide="info" class="w-4 h-4 text-red-600 shrink-0"></i> Veritabanı Tabloları Eksik!
+                                    </p>
+                                    <p className="text-red-700 leading-relaxed mb-3">
+                                        Supabase bağlantısı kuruldu ancak veritabanınızda <b>companies</b> tablosu bulunamadı. Lütfen SQL Script'ini kopyalayıp Supabase SQL Editor'de çalıştırın.
+                                    </p>
+                                    <button 
+                                        onClick={handleCopySql}
+                                        className="w-full bg-red-600 hover:bg-red-700 text-white font-bold p-2.5 rounded-xl transition flex items-center justify-center gap-2"
+                                    >
+                                        <i data-lucide="copy" class="w-4 h-4"></i> SQL Script Kopyala
+                                    </button>
+                                </div>
+                            )}
+
+                            <div className="space-y-4">
+                                <button 
+                                    onClick={() => { setCurrentUser({ role: 'manager', name: 'Ali İhsan Bey' }); navigateTo('manager'); }}
+                                    className="w-full bg-slate-800 hover:bg-slate-900 text-white p-4 rounded-xl flex items-center justify-between transition-all"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <i data-lucide="users" class="w-5 h-5 text-blue-400"></i> 
+                                        <span className="font-semibold">Müdür Paneli (Ali İhsan)</span>
+                                    </div>
+                                    <i data-lucide="arrow-right" class="w-5 h-5 opacity-50"></i>
+                                </button>
+
+                                <button 
+                                    onClick={() => { setCurrentUser({ role: 'expert', id: 'exp1', name: 'Ahmet Yılmaz' }); navigateTo('expert'); }}
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl flex items-center justify-between transition-all"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <i data-lucide="clipboard-check" class="text-blue-200"></i> 
+                                        <span className="font-semibold">Uzman Paneli (Ahmet Y.)</span>
+                                    </div>
+                                    <i data-lucide="arrow-right" class="w-5 h-5 opacity-50"></i>
+                                </button>
+
+                                <div className="relative py-4">
+                                    <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200"></div></div>
+                                    <div className="relative flex justify-center"><span className="bg-white px-4 text-xs font-bold text-emerald-600 uppercase tracking-wider">CANLI QR KOD SİMÜLATÖRLERİ</span></div>
+                                </div>
+
+                                <button 
+                                    onClick={() => navigateTo('qr_generator_company')}
+                                    className="w-full border-2 border-emerald-500 text-emerald-600 hover:bg-emerald-50 p-4 rounded-xl flex items-center justify-between transition-all font-bold"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <i data-lucide="qr-code" class="w-5 h-5"></i> 
+                                        <span>Müşteriler İçin QR Üretici</span>
+                                    </div>
+                                </button>
+
+                                <button 
+                                    onClick={() => navigateTo('qr_generator_worker')}
+                                    className="w-full border-2 border-orange-500 text-orange-600 hover:bg-orange-50 p-4 rounded-xl flex items-center justify-between transition-all font-bold"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <i data-lucide="qr-code" class="w-5 h-5"></i> 
+                                        <span>İşçi Bilgilendirme QR Üretici</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            // 2. MÜDÜR PANELİ (Ali İhsan Bey)
+            const ManagerDashboard = () => {
+                const avgProgress = companies.length > 0 ? Math.round(companies.reduce((acc, curr) => acc + curr.progress, 0) / companies.length) : 0;
+                const pendingReports = companies.filter(c => c.report?.status === 'submitted').length;
+                
+                return (
+                    <div className="min-h-screen bg-slate-50">
+                        <header className="bg-slate-800 text-white p-4 sticky top-0 z-10 shadow-md print:hidden">
+                            <div className="max-w-6xl mx-auto flex justify-between items-center">
+                                <div className="flex items-center gap-2">
+                                    <i data-lucide="shield-check" class="text-blue-500"></i> 
+                                    <span className="font-bold text-lg">Ali İhsan Bey - Yönetici Paneli</span>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <span className="text-slate-300 text-sm hidden sm:block">Hoş geldiniz, {currentUser?.name}</span>
+                                    <button onClick={() => navigateTo('login')} className="p-2 rounded-lg hover:bg-slate-700"><i data-lucide="log-out" class="w-5 h-5"></i></button>
+                                </div>
+                            </div>
+                        </header>
+
+                        <main className="max-w-6xl mx-auto p-4 py-8 space-y-6 print:p-0">
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 print:hidden">
+                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+                                    <div className="bg-blue-100 p-4 rounded-xl text-blue-600"><i data-lucide="building"></i></div>
+                                    <div><p className="text-sm text-slate-500">Toplam Müşteri</p><p className="text-2xl font-bold text-slate-800">{companies.length}</p></div>
+                                </div>
+                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+                                    <div className="bg-emerald-100 p-4 rounded-xl text-emerald-600"><i data-lucide="check-circle-2"></i></div>
+                                    <div><p className="text-sm text-slate-500">Genel Ortalama Başarı</p><p className="text-2xl font-bold text-slate-800">%{avgProgress}</p></div>
+                                </div>
+                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+                                    <div className="bg-purple-100 p-4 rounded-xl text-purple-600"><i data-lucide="users"></i></div>
+                                    <div><p className="text-sm text-slate-500">Aktif Uzmanlar</p><p className="text-2xl font-bold text-slate-800">{experts.length}</p></div>
+                                </div>
+                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-200 flex items-center gap-4">
+                                    <div className="bg-orange-100 p-4 rounded-xl text-orange-600"><i data-lucide="file-text"></i></div>
+                                    <div><p className="text-sm text-orange-600 font-medium font-bold">Yeni Gelen Raporlar</p><p className="text-2xl font-bold text-orange-700">{pendingReports}</p></div>
+                                </div>
+                            </div>
+
+                            <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4 print:hidden">Sorumlu Uzman Performans Takibi</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 print:hidden">
+                                {experts.map(expert => (
+                                    <div key={expert.id} className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                                        <div className="bg-slate-100 p-4 border-b border-slate-200 font-semibold text-slate-700 flex items-center gap-2">
+                                            <i data-lucide="users" class="w-5 h-5 text-blue-600"></i> {expert.name}
+                                        </div>
+                                        <div className="p-4 space-y-4">
+                                            {companies.filter(c => c.expertId === expert.id).map(company => (
+                                                <div key={company.id} className="p-3 border border-slate-100 rounded-xl bg-slate-50">
+                                                    <div className="flex justify-between text-sm mb-2">
+                                                        <span className="font-bold text-slate-700 truncate w-2/3">{company.name}</span>
+                                                        <span className="text-slate-500">%{company.progress}</span>
+                                                    </div>
+                                                    
+                                                    <div className="w-full bg-slate-200 rounded-full h-1.5 mb-3">
+                                                        <div className={`h-1.5 rounded-full ${company.progress === 100 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${company.progress}%` }}></div>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-between">
+                                                        {company.report?.status === 'submitted' ? (
+                                                            <button 
+                                                                onClick={() => setReportModal({ isOpen: true, mode: 'view', companyId: company.id })}
+                                                                className="text-xs bg-emerald-100 text-emerald-700 px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1 hover:bg-emerald-200 transition"
+                                                            >
+                                                                <i data-lucide="file-text" class="w-3 h-3"></i> Saha Raporu Hazır (Gör)
+                                                            </button>
+                                                        ) : (
+                                                            <span className="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> Saha Raporu Bekleniyor</span>
+                                                        )}
+                                                        <span className="text-xs font-bold text-red-500">Cari Bakiye: {company.debt}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </main>
+                    </div>
+                );
+            };
+
+            // 3. UZMAN PANELİ
+            const ExpertDashboard = () => {
+                const myCompanies = companies.filter(c => c.expertId === currentUser.id);
+
+                return (
+                    <div className="min-h-screen bg-slate-50">
+                        <header className="bg-blue-600 text-white p-4 sticky top-0 z-10 shadow-md">
+                            <div className="max-w-4xl mx-auto flex justify-between items-center">
+                                <div className="flex items-center gap-2">
+                                    <i data-lucide="clipboard-check"></i> <span className="font-bold text-lg">İSG Uzmanı Çalışma Alanı</span>
+                                </div>
+                                <button onClick={() => navigateTo('login')} className="p-2 hover:bg-blue-700 rounded-lg"><i data-lucide="log-out" class="w-5 h-5"></i></button>
+                            </div>
+                        </header>
+
+                        <main className="max-w-4xl mx-auto p-4 py-8">
+                            <h2 className="text-2xl font-bold text-slate-800 mb-6">Atandığınız Aktif Sahalar</h2>
+                            <div className="space-y-4">
+                                {myCompanies.map(company => (
+                                    <div key={company.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                        <div className="flex-1">
+                                            <h3 className="font-bold text-lg text-slate-800 mb-1">{company.name}</h3>
+                                            <div className="flex items-center gap-4 text-sm text-slate-500 mb-3">
+                                                <span className="flex items-center gap-1"><i data-lucide="calendar" class="w-4 h-4"></i> Sonraki Denetim: {company.nextVisit}</span>
+                                            </div>
+                                            
+                                            <div className="flex items-center gap-3 mt-4">
+                                                <button 
+                                                    onClick={() => increaseProgress(company.id)}
+                                                    disabled={company.progress === 100}
+                                                    className="px-4 py-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-700 text-sm font-medium rounded-lg transition-colors flex items-center gap-2"
+                                                >
+                                                    İlerleme Kaydet: %{company.progress} <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                                </button>
+
+                                                <button 
+                                                    onClick={() => setReportModal({ isOpen: true, mode: 'edit', companyId: company.id })}
+                                                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-2 ${
+                                                        company.report?.status === 'submitted' 
+                                                        ? 'bg-emerald-100 text-emerald-700' 
+                                                        : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                                                    }`}
+                                                >
+                                                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                                                    {company.report?.status === 'submitted' ? 'Rapor Teslim Edildi (Düzelt)' : 'Denetim Raporu Yaz'}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </main>
+                    </div>
+                );
+            };
+
+            // --- RAPOR MODAL BİLEŞENİ ---
+            const ReportModal = () => {
+                const company = companies.find(c => c.id === reportModal.companyId);
+                if (!company) return null;
+
+                const [reportData, setReportData] = useState(company.report || { status: 'draft', date: '', findings: [] });
+                const isEditMode = reportModal.mode === 'edit';
+
+                const addFinding = () => {
+                    setReportData({
+                        ...reportData,
+                        findings: [...(reportData.findings || []), { id: Date.now(), observation: '', risk: 'Orta', action: '', deadline: '' }]
+                    });
+                };
+
+                const updateFinding = (id, field, value) => {
+                    setReportData({
+                        ...reportData,
+                        findings: reportData.findings.map(f => f.id === id ? { ...f, [field]: value } : f)
+                    });
+                };
+
+                const removeFinding = (id) => {
+                    setReportData({ ...reportData, findings: reportData.findings.filter(f => f.id !== id) });
+                };
+
+                return (
+                    <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 overflow-y-auto print:p-0 print:bg-white">
+                        <div className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden print:shadow-none print:rounded-none">
+                            
+                            <div className="bg-slate-800 text-white p-4 flex justify-between items-center print:hidden">
+                                <h3 className="font-bold flex items-center gap-2"><i data-lucide="file-text"></i> İSG Saha Gözlem ve Tespit Raporu</h3>
+                                <div className="flex gap-2">
+                                    {!isEditMode && (
+                                        <button onClick={() => window.print()} className="p-2 bg-slate-700 hover:bg-slate-600 rounded text-sm flex items-center gap-1">
+                                            <i data-lucide="printer" class="w-4 h-4"></i> Yazdır / PDF İndir
+                                        </button>
+                                    )}
+                                    <button onClick={() => setReportModal({ isOpen: false, mode: null, companyId: null })} className="p-2 hover:bg-red-500 rounded"><i data-lucide="x" class="w-5 h-5"></i></button>
+                                </div>
+                            </div>
+
+                            <div className="p-8 print:p-4 text-slate-800 bg-white min-h-[500px]">
+                                <div className="border-b-2 border-slate-800 pb-4 mb-6 flex justify-between items-end">
+                                    <div>
+                                        <h1 className="text-2xl font-black uppercase tracking-tight">KOLLEKTİF İŞ GÜVENLİĞİ</h1>
+                                        <p className="text-slate-500 mt-1 font-medium">Uzaktan Denetim Hizmet Raporu</p>
+                                    </div>
+                                    <div className="text-right text-sm">
+                                        <p><span className="font-bold">Hizmet Alan Müşteri:</span> {company.name}</p>
+                                        <p><span className="font-bold">Tarih:</span> {reportData.date || new Date().toLocaleDateString('tr-TR')}</p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-6">
+                                    <div className="flex justify-between items-center">
+                                        <h2 className="text-lg font-bold bg-slate-100 p-2 rounded w-full">Sahada Tespit Edilen Uygunsuzluklar ve Alınacak Önlemler (DÖF)</h2>
+                                    </div>
+
+                                    {!reportData.findings || reportData.findings.length === 0 ? (
+                                        <p className="text-slate-500 italic p-4 text-center border rounded">Şu ana kadar eklenmiş herhangi bir uygunsuzluk bulunmamaktadır. Saha temizdir.</p>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            {reportData.findings.map((finding) => (
+                                                <div key={finding.id} className="border border-slate-300 rounded-lg p-4 relative page-break-inside-avoid">
+                                                    {isEditMode && (
+                                                        <button onClick={() => removeFinding(finding.id)} className="absolute top-2 right-2 text-red-500 hover:bg-red-50 p-1 rounded print:hidden">
+                                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                                        </button>
+                                                    )}
+                                                    
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <div className="space-y-1">
+                                                            <label className="text-xs font-bold text-slate-500 uppercase">Saha Gözlemi ve Tespit</label>
+                                                            {isEditMode ? (
+                                                                <textarea value={finding.observation} onChange={(e) => updateFinding(finding.id, 'observation', e.target.value)} className="w-full border rounded p-2 text-sm h-20 bg-white" />
+                                                            ) : (
+                                                                <p className="text-sm font-medium border-b pb-1">{finding.observation}</p>
+                                                            )}
+                                                        </div>
+                                                        
+                                                        <div className="space-y-1">
+                                                            <label className="text-xs font-bold text-slate-500 uppercase">Düzeltici Önleyici Faaliyet Önerisi</label>
+                                                            {isEditMode ? (
+                                                                <textarea value={finding.action} onChange={(e) => updateFinding(finding.id, 'action', e.target.value)} className="w-full border rounded p-2 text-sm h-20 bg-white" />
+                                                            ) : (
+                                                                <p className="text-sm font-medium border-b pb-1 text-blue-700">{finding.action}</p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex gap-4 mt-3">
+                                                        <div className="w-1/3">
+                                                            <label className="text-xs font-bold text-slate-500 uppercase block mb-1">Risk Seviyesi</label>
+                                                            {isEditMode ? (
+                                                                <select value={finding.risk} onChange={(e) => updateFinding(finding.id, 'risk', e.target.value)} className="border rounded p-1.5 text-sm w-full bg-white">
+                                                                    <option value="Düşük">Düşük</option><option value="Orta">Orta</option><option value="Yüksek">Yüksek</option>
+                                                                </select>
+                                                            ) : (
+                                                                <span className={`px-2 py-1 text-xs font-bold rounded ${finding.risk === 'Yüksek' ? 'bg-red-100 text-red-700' : finding.risk === 'Orta' ? 'bg-orange-100 text-orange-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                                                                    {finding.risk}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <div className="w-1/3">
+                                                            <label className="text-xs font-bold text-slate-500 uppercase block mb-1">Termin Süresi (Son Gün)</label>
+                                                            {isEditMode ? (
+                                                                <input type="date" value={finding.deadline} onChange={(e) => updateFinding(finding.id, 'deadline', e.target.value)} className="border rounded p-1 text-sm w-full bg-white" />
+                                                            ) : (
+                                                                <span className="text-sm font-semibold">{finding.deadline || '-'}</span>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {isEditMode && (
+                                        <button onClick={addFinding} className="w-full py-3 border-2 border-dashed border-slate-300 text-slate-500 rounded-xl hover:bg-slate-50 hover:border-blue-500 hover:text-blue-600 transition flex items-center justify-center gap-2 font-medium print:hidden">
+                                            <i data-lucide="plus" class="w-5 h-5"></i> Yeni Saha Tespiti Ekle
+                                        </button>
+                                    )}
+                                    
+                                    <div className="mt-8 pt-8 border-t flex justify-between items-end">
+                                        <div className="text-sm">
+                                            <p className="font-bold">Denetimi Yapan Uzman:</p>
+                                            <p className="mt-4 border-b-2 border-slate-300 w-48 border-dotted pb-1">{experts.find(e => e.id === company.expertId)?.name}</p>
+                                            <p className="text-xs text-slate-400 mt-1">İmza</p>
+                                        </div>
+                                        <div className="text-sm text-right">
+                                            <p className="font-bold">İşveren / Temsilcisi:</p>
+                                            <p className="mt-4 border-b-2 border-slate-300 w-48 border-dotted pb-1"></p>
+                                            <p className="text-xs text-slate-400 mt-1">İmza / Kaşe</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {isEditMode && (
+                                <div className="bg-slate-50 p-4 border-t flex justify-end gap-3 print:hidden">
+                                    <button onClick={() => setReportModal({ isOpen: false, mode: null, companyId: null })} className="px-4 py-2 text-slate-600 hover:bg-slate-200 rounded font-medium">Vazgeç</button>
+                                    <button onClick={() => saveReport(company.id, reportData, 'draft')} className="px-4 py-2 bg-slate-200 text-slate-700 hover:bg-slate-300 rounded font-medium flex items-center gap-2">
+                                        <i data-lucide="save" class="w-4 h-4"></i> Taslak Olarak Sakla
+                                    </button>
+                                    <button onClick={() => saveReport(company.id, reportData, 'submitted')} className="px-6 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded font-bold flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="w-5 h-5"></i> Ali İhsan Bey'e Gönder
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
+            };
+
+            // --- QR KOD EKRANLARI VE ÜRETİCİLERİ ---
+            
+            const QRGeneratorCompany = () => {
+                const selectedCompany = companies.find(c => c.id === selectedCompanyId) || companies[0];
+                
+                const getDynamicQrUrl = () => {
+                    let cleanedBase = serverIp;
+                    if (!cleanedBase || cleanedBase.startsWith('file:') || cleanedBase === 'PROJE_YUKLENDIGINDE_BURAYA_URL_GELECEK') {
+                        if (window.location.origin && !window.location.origin.startsWith('null') && !window.location.origin.startsWith('file:')) {
+                            let originUrl = `${window.location.origin}${window.location.pathname}`;
+                            if (originUrl.startsWith('blob:')) {
+                                originUrl = originUrl.replace('blob:', '');
+                            }
+                            return `${originUrl}?view=company&id=${selectedCompany?.id}`;
+                        }
+                        return `http://192.168.1.100:5500/index.html?view=company&id=${selectedCompany?.id}`;
+                    }
+                    cleanedBase = cleanedBase.split('?')[0];
+                    if (cleanedBase.startsWith('blob:')) {
+                        cleanedBase = cleanedBase.replace('blob:', '');
+                    }
+                    return `${cleanedBase}?view=company&id=${selectedCompany?.id}`;
+                };
+
+                const qrUrl = getDynamicQrUrl();
+                const qrImageSource = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrUrl)}&color=059669`;
+
+                return (
+                    <div className="min-h-screen bg-slate-100 p-4 flex flex-col items-center py-10">
+                        <div className="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-xl p-8 text-center">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-xl font-bold text-slate-800 text-left">Firma Sahibi QR Kod</h2>
+                                <button onClick={() => setShowSettings(true)} className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100">
+                                    <i data-lucide="settings" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            
+                            <p className="text-xs text-slate-500 mb-6 text-left leading-relaxed">
+                                Aşağıdaki QR kod okutulduğunda doğrudan seçilen firmanın borç ve denetim detaylarına yönlendirir.
+                            </p>
+                            
+                            <select 
+                                className="w-full bg-slate-50 border border-slate-300 p-3 rounded-lg text-sm mb-6 font-semibold outline-none focus:border-emerald-500"
+                                value={selectedCompanyId}
+                                onChange={(e) => setSelectedCompanyId(e.target.value)}
+                            >
+                                {companies.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                            </select>
+
+                            {/* Uyarı Banner'ı */}
+                            {(!serverIp || serverIp.startsWith('file:') || window.location.href.startsWith('blob:')) && (
+                                <div className="bg-amber-50 text-amber-800 border border-amber-200 text-xs p-3 rounded-xl mb-4 text-left flex items-start gap-2">
+                                    <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 text-amber-600 mt-0.5"></i>
+                                    <span>
+                                        <b>Yerel dosya veya Blob modundasınız!</b> Telefonunuzla bu QR kodu okutmadan önce lütfen sağ üstteki <b>ayar simgesinden</b> bilgisayarınızın yerel IP adresini veya Vercel adresinizi tanımlayın.
+                                    </span>
+                                </div>
+                            )}
+
+                            {selectedCompany && (
+                                <div className="bg-white p-5 border-4 border-dashed border-emerald-500 rounded-3xl inline-block shadow-lg mb-4">
+                                    <img src={qrImageSource} alt="QR Code" className="w-48 h-48 rounded-lg" />
+                                </div>
+                            )}
+
+                            {/* QR Kodun yönlendirdiği gerçek URL bilgisi */}
+                            <div className="bg-slate-50 p-3 rounded-xl mb-6 text-left">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase block">QR Linki</span>
+                                <span className="text-xs font-semibold text-slate-600 break-all select-all">{qrUrl}</span>
+                            </div>
+
+                            <div className="flex gap-3">
+                                <button onClick={() => navigateTo('qr_company', selectedCompany?.id)} className="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-bold hover:bg-emerald-700">
+                                    Simülatörü Aç
+                                </button>
+                                <button onClick={() => navigateTo('login')} className="flex-1 bg-slate-200 text-slate-700 py-3 rounded-xl font-bold">
+                                    Geri Dön
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            const QRGeneratorWorker = () => {
+                const getDynamicQrUrl = () => {
+                    let cleanedBase = serverIp;
+                    if (!cleanedBase || cleanedBase.startsWith('file:') || cleanedBase === 'PROJE_YUKLENDIGINDE_BURAYA_URL_GELECEK') {
+                        if (window.location.origin && !window.location.origin.startsWith('null') && !window.location.origin.startsWith('file:')) {
+                            let originUrl = `${window.location.origin}${window.location.pathname}`;
+                            if (originUrl.startsWith('blob:')) {
+                                originUrl = originUrl.replace('blob:', '');
+                            }
+                            return `${originUrl}?view=worker`;
+                        }
+                        return `http://192.168.1.100:5500/index.html?view=worker`;
+                    }
+                    cleanedBase = cleanedBase.split('?')[0];
+                    if (cleanedBase.startsWith('blob:')) {
+                        cleanedBase = cleanedBase.replace('blob:', '');
+                    }
+                    return `${cleanedBase}?view=worker`;
+                };
+
+                const qrUrl = getDynamicQrUrl();
+                const qrImageSource = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrUrl)}&color=ea580c`;
+
+                return (
+                    <div className="min-h-screen bg-slate-100 p-4 flex flex-col items-center py-10">
+                        <div className="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-xl p-8 text-center">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-xl font-bold text-slate-800 text-left">İşçi Panosu Ortak QR</h2>
+                                <button onClick={() => setShowSettings(true)} className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100">
+                                    <i data-lucide="settings" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            
+                            <p className="text-xs text-slate-500 mb-8 text-left leading-relaxed">
+                                Bu ortak QR kodu sahaya veya yemekhaneye asarak, tüm çalışanların haftalık bilgilendirme bültenine mobil cihazlarıyla erişmesini sağlayabilirsiniz.
+                            </p>
+
+                            {/* Uyarı Banner'ı */}
+                            {(!serverIp || serverIp.startsWith('file:') || window.location.href.startsWith('blob:')) && (
+                                <div className="bg-amber-50 text-amber-800 border border-amber-200 text-xs p-3 rounded-xl mb-4 text-left flex items-start gap-2">
+                                    <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 text-amber-600 mt-0.5"></i>
+                                    <span>
+                                        <b>Yerel dosya veya Blob modundasınız!</b> Telefonunuzla bu QR kodu okutmadan önce lütfen sağ üstteki <b>ayar simgesinden</b> bilgisayarınızın yerel IP adresini tanımlayın.
+                                    </span>
+                                </div>
+                            )}
+
+                            <div className="bg-white p-5 border-4 border-dashed border-orange-500 rounded-3xl inline-block shadow-lg mb-6">
+                                <img src={qrImageSource} alt="QR Code" className="w-48 h-48 rounded-lg" />
+                            </div>
+
+                            <div className="bg-slate-50 p-3 rounded-xl mb-6 text-left">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase block">QR Linki</span>
+                                <span className="text-xs font-semibold text-slate-600 break-all select-all">{qrUrl}</span>
+                            </div>
+
+                            <div className="flex gap-3">
+                                <button onClick={() => navigateTo('qr_worker')} className="flex-1 bg-orange-600 text-white py-3 rounded-xl font-bold">
+                                    Simülatörü Aç
+                                </button>
+                                <button onClick={() => navigateTo('login')} className="flex-1 bg-slate-200 text-slate-700 py-3 rounded-xl font-bold">
+                                    Geri Dön
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            // --- QR OKUTULDUĞUNDA TELEFONDA AÇILAN EKRANLAR ---
+            const CompanyClientView = () => {
+                const company = companies.find(c => c.id === selectedCompanyId) || companies[0];
+
+                return (
+                    <div className="min-h-screen bg-slate-800 p-4 flex flex-col items-center py-10">
+                        <div className="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl">
+                            <div className="bg-emerald-500 p-6 text-center text-white">
+                                <i data-lucide="building" class="w-12 h-12 mx-auto mb-2 opacity-90"></i>
+                                <h2 className="text-xl font-bold opacity-90">Kollektif İSG Portal</h2>
+                                <p className="text-emerald-100 text-sm">Uzaktan Takip Paneli</p>
+                            </div>
+                            <div className="p-6">
+                                <h3 className="font-bold text-xl text-slate-800 text-center border-b pb-4 mb-6">{company.name}</h3>
+                                <div className="space-y-6">
+                                    <div>
+                                        <div className="flex justify-between text-sm mb-2">
+                                            <span className="font-semibold text-slate-600">Aylık Denetim Tamamlanma Durumu</span>
+                                            <span className="font-bold text-emerald-600">%{company.progress}</span>
+                                        </div>
+                                        <div className="w-full bg-slate-100 rounded-full h-3">
+                                            <div className="bg-emerald-500 h-3 rounded-full" style={{ width: `${company.progress}%` }}></div>
+                                        </div>
+                                    </div>
+                                    <div className="flex bg-slate-50 rounded-2xl p-4 border border-slate-100 gap-4 items-center">
+                                        <div className="bg-blue-100 p-3 rounded-full text-blue-600"><i data-lucide="calendar"></i></div>
+                                        <div>
+                                            <p className="text-xs text-slate-500 font-medium uppercase">Sonraki Uzman Ziyareti</p>
+                                            <p className="text-lg font-bold text-slate-800">{company.nextVisit}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex bg-slate-50 rounded-2xl p-4 border border-slate-100 gap-4 items-center">
+                                        <div className="bg-red-100 p-3 rounded-full text-red-600"><i data-lucide="wallet"></i></div>
+                                        <div>
+                                            <p className="text-xs text-slate-500 font-medium uppercase">Güncel Cari Borç Bakiyesi</p>
+                                            <p className="text-lg font-bold text-red-600">{company.debt}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onClick={() => navigateTo('qr_generator_company')} className="mt-8 w-full text-center text-slate-400 text-sm hover:text-slate-600">
+                                   ← QR Oluşturucuya Geri Dön (Demo)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            const WorkerClientView = () => (
+                <div className="min-h-screen bg-slate-100 p-4 flex flex-col items-center py-10">
+                    <div className="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-xl">
+                        <div className="bg-orange-500 p-6 text-center text-white">
+                            <i data-lucide="alert-triangle" class="w-12 h-12 mx-auto mb-2 opacity-90"></i>
+                            <h2 className="text-xl font-bold opacity-90">İSG İşçi Bilgilendirme</h2>
+                            <p className="text-orange-100 text-sm">Haftalık Eğitim ve Uyarı Panosu</p>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            {bulletins.map(bulletin => (
+                                <div key={bulletin.id} className="border border-slate-200 rounded-2xl p-5 shadow-sm">
+                                    <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">{bulletin.date}</span>
+                                    <h3 className="font-bold text-lg text-slate-800 mt-1 mb-2">{bulletin.title}</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">{bulletin.content}</p>
+                                </div>
+                            ))}
+                            <button onClick={() => navigateTo('qr_generator_worker')} className="mt-8 w-full text-center text-slate-400 text-sm hover:text-slate-600">
+                               ← QR Oluşturucuya Geri Dön (Demo)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            // --- ANA RENDER AKIŞI ---
+            return (
+                <>
+                    {currentView === 'manager' && <ManagerDashboard />}
+                    {currentView === 'expert' && <ExpertDashboard />}
+                    {currentView === 'qr_generator_company' && <QRGeneratorCompany />}
+                    {currentView === 'qr_generator_worker' && <QRGeneratorWorker />}
+                    {currentView === 'qr_company' && <CompanyClientView />}
+                    {currentView === 'qr_worker' && <WorkerClientView />}
+                    {currentView === 'login' && <LoginScreen />}
+                    
+                    {reportModal.isOpen && <ReportModal />}
+                    {showSettings && <SettingsModal />}
+                    
+                    {/* Toast Bildirimi */}
+                    <ToastNotification />
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
