@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dış Saha - Premium İSG & Cari Yönetim</title>
-    <!-- Tailwind CSS ve FontAwesome İkonları -->
+    <title>Dış Sahan - Premium İSG & Cari Yönetim</title>
+    <!-- Tailwind CSS, PapaParse ve FontAwesome İkonları -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -18,9 +18,9 @@
             color: #f1f5f9;
         }
 
-        /* Varak Altın ve Gece Mavisi Premium Geçişleri (image_344d2f.png esintili) */
+        /* Midnight Velvet, Emerald Green & Brass Gold Geçişleri */
         .premium-gradient {
-            background: linear-gradient(135deg, #090f19 0%, #0c1322 50%, #070b13 100%);
+            background: linear-gradient(135deg, #05080f 0%, #0c1322 50%, #070b13 100%);
         }
 
         .gold-border {
@@ -55,6 +55,12 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #c29c53;
         }
+
+        /* Select Kontrast Çözümü */
+        select option {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+        }
     </style>
 </head>
 <body class="min-h-screen premium-gradient selection:bg-amber-500 selection:text-black">
@@ -74,8 +80,8 @@
             <i class="fas fa-cog text-amber-500"></i> Yönlendirme Ayarı
         </button>
 
-        <div class="bg-[#0b1322]/90 border border-amber-500/20 rounded-[32px] shadow-2xl p-10 w-full max-w-md relative z-10 text-center">
-            <!-- Kurumsal Vektör Logo -->
+        <div class="bg-[#0b1322]/90 border border-amber-500/20 rounded-[32px] shadow-2xl p-6 sm:p-10 w-full max-w-md relative z-10 text-center">
+            <!-- Kurumsal Logo -->
             <div class="mb-10 flex justify-center items-center gap-3.5">
                 <svg viewBox="0 0 100 100" fill="none" class="w-12 h-12 drop-shadow-[0_0_15px_rgba(16,185,129,0.35)]">
                     <rect x="18" y="18" width="64" height="64" rx="18" stroke="url(#logoGoldGrad)" stroke-width="6.5" fill="#090f19"/>
@@ -90,21 +96,21 @@
                     </defs>
                 </svg>
                 <div class="text-left">
-                    <span class="font-extrabold text-white tracking-[0.15em] text-xl uppercase bg-gradient-to-r from-amber-400 via-yellow-200 to-emerald-400 bg-clip-text text-transparent block">DIŞ SAHA</span>
-                    <span class="text-[10px] font-black text-slate-400 tracking-[0.25em] block uppercase opacity-85">KOLLEKTİF GRUP</span>
+                    <span class="font-extrabold text-white tracking-[0.15em] text-xl uppercase bg-gradient-to-r from-amber-400 via-yellow-200 to-emerald-400 bg-clip-text text-transparent block">DIŞ SAHAN</span>
+                    <span class="text-[10px] font-black text-slate-400 tracking-[0.25em] block uppercase opacity-85">PREMIUM PORTAL</span>
                 </div>
             </div>
 
             <div class="space-y-4">
                 <!-- MÜDÜR PORTAL BUTONU -->
                 <button onclick="handleLogin('manager')" class="w-full bg-[#0a0f1d] border border-amber-500/20 hover:border-amber-500/60 hover:bg-[#121b30] text-white p-4 rounded-xl font-bold flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-3"><i class="fas fa-users text-amber-500"></i> <span class="font-semibold text-sm">MÜDÜR PORTALI (Ali İhsan Bey)</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-users text-amber-500"></i> <span class="font-semibold text-sm">MÜDÜR PORTALİ (Ali İhsan Bey)</span></div>
                     <i class="fas fa-arrow-right text-amber-500"></i>
                 </button>
 
                 <div class="relative py-2">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-800"></div></div>
-                    <div class="relative flex justify-center"><span class="bg-[#0b1322] px-4 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">UZMAN GİRİŞ ALANI (4 UZMAN)</span></div>
+                    <div class="relative flex justify-center"><span class="bg-[#0b1322] px-4 text-[10px] font-bold text-emerald-450 uppercase tracking-widest">UZMAN GİRİŞ ALANI (4 UZMAN)</span></div>
                 </div>
 
                 <!-- 4 UZMAN SEÇİM ALANI -->
@@ -121,7 +127,7 @@
 
                 <div class="relative py-2">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-800"></div></div>
-                    <div class="relative flex justify-center"><span class="bg-[#0b1322] px-4 text-xs font-bold text-amber-505 uppercase tracking-widest">SUNUM QR SİMÜLATÖRLERİ</span></div>
+                    <div class="relative flex justify-center"><span class="bg-[#0b1322] px-4 text-xs font-bold text-amber-500 uppercase tracking-widest">SUNUM QR SİMÜLATÖRLERİ</span></div>
                 </div>
 
                 <button onclick="navigateTo('qr_generator_company')" class="w-full border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 p-4 rounded-xl flex items-center justify-between transition-all font-bold text-xs uppercase tracking-wider">
@@ -129,7 +135,7 @@
                 </button>
 
                 <button onclick="navigateTo('qr_generator_worker')" class="w-full border-2 border-orange-500/30 text-orange-400 hover:bg-orange-500/10 p-4 rounded-xl flex items-center justify-between transition-all font-bold text-xs uppercase tracking-wider">
-                    <div class="flex items-center gap-3"><i class="fas fa-qrcode text-orange-550"></i> <span>İşçi Pano QR İstasyonu</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-qrcode text-orange-500"></i> <span>İşçi Pano QR İstasyonu</span></div>
                 </button>
             </div>
         </div>
@@ -141,7 +147,7 @@
             <div onclick="navigateTo('login')" class="cursor-pointer"><custom-logo></custom-logo></div>
             <div class="flex items-center gap-4">
                 <span class="text-amber-500 font-bold text-sm">Yönetici: Ali İhsan Bey</span>
-                <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-775 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
+                <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </header>
 
@@ -149,7 +155,7 @@
             <!-- Özet Kartları -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="bg-[#0b1322] border border-amber-500/10 p-6 rounded-[24px] shadow-sm flex items-center gap-4 hover:border-amber-500/30 transition">
-                    <div class="bg-blue-955 p-4 rounded-2xl text-blue-400"><i class="fas fa-building text-2xl"></i></div>
+                    <div class="bg-blue-950 p-4 rounded-2xl text-blue-400"><i class="fas fa-building text-2xl"></i></div>
                     <div class="min-w-0 flex-1">
                         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">Müşteriler</p>
                         <p id="mTotalCompanies" class="text-2xl font-black text-white truncate">0</p>
@@ -163,7 +169,7 @@
                     </div>
                 </div>
                 <div class="bg-[#0b1322] border border-amber-500/10 p-6 rounded-[24px] shadow-sm flex items-center gap-4 hover:border-amber-500/30 transition">
-                    <div class="bg-amber-955 p-4 rounded-2xl text-amber-405"><i class="fas fa-wallet text-2xl"></i></div>
+                    <div class="bg-amber-955 p-4 rounded-2xl text-amber-500"><i class="fas fa-wallet text-2xl"></i></div>
                     <div class="min-w-0 flex-1">
                         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">Toplam Alacak</p>
                         <p id="mTotalDebt" class="text-xl font-black text-amber-400 truncate">0,00 ₺</p>
@@ -173,8 +179,38 @@
                     <div class="bg-orange-955 p-4 rounded-2xl text-orange-400"><i class="fas fa-envelope text-2xl"></i></div>
                     <div class="min-w-0 flex-1">
                         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">Yeni Raporlar</p>
-                        <p id="mPendingReports" class="text-2xl font-black text-orange-755 truncate">0</p>
+                        <p id="mPendingReports" class="text-2xl font-black text-orange-500 truncate">0</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- DİNAMİK UZMAN PERFORMANS TABLOSU -->
+            <div class="bg-[#0b1322] border border-amber-500/15 p-6 rounded-[32px] shadow-lg">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 mb-4 gap-2">
+                    <div>
+                        <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                            <i class="fas fa-chart-line text-amber-500"></i> Uzman Saha Performansı & İzleme Masası
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Hangi uzman kaç firma yönetiyor, ortalama ilerleme derecesi ve mali bakiye yükleri.</p>
+                    </div>
+                    <span class="text-xs bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl font-bold text-amber-400 shrink-0">Canlı Sistem</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs min-w-[600px]">
+                        <thead>
+                            <tr class="bg-slate-900 border-b border-slate-800 text-slate-400 font-extrabold uppercase text-[10px] tracking-wider">
+                                <th class="p-3">Uzman Adı</th>
+                                <th class="p-3 text-center">Atanmış Firma</th>
+                                <th class="p-3">Ortalama İlerleme %</th>
+                                <th class="p-3">Toplam Cari Yük (₺)</th>
+                                <th class="p-3 text-center">Aktif Görevler</th>
+                                <th class="p-3 text-right">Aksiyon</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expertPerformanceTableBody" class="divide-y divide-slate-800 font-medium text-slate-300">
+                            <!-- Dinamik Uzman Satırları -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -218,9 +254,9 @@
                         </h3>
                         <p class="text-xs text-slate-400 mt-1">Excel'den aldığınız <b>Cari_Raporu.csv</b> dosyasını yükleyin, bakiyeleri tek seferde akıllı fuzzy eşleştirici ile güncelleyin.</p>
                     </div>
-                    <div class="relative shrink-0">
+                    <div class="relative shrink-0 w-full sm:w-auto">
                         <input type="file" accept=".csv" id="managerCsvInput" onchange="handleManagerCsv(this)" class="hidden">
-                        <label id="managerCsvLabel" for="managerCsvInput" class="bg-[#10b981] hover:bg-[#059669] text-white font-bold text-xs px-5 py-3.5 rounded-xl transition flex items-center gap-2 shadow-md shadow-emerald-600/10 cursor-pointer">
+                        <label id="managerCsvLabel" for="managerCsvInput" class="w-full sm:w-auto bg-[#10b981] hover:bg-[#059669] text-white font-bold text-xs px-5 py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md shadow-emerald-600/10 cursor-pointer">
                             <i class="fas fa-upload"></i> Cari Rapor CSV Yükle
                         </label>
                     </div>
@@ -236,7 +272,7 @@
                         </h3>
                         <p class="text-xs text-slate-400 mt-1">Sözleşmeli uzmanlarınıza anlık görevler atayın ve jüri önünde onları dürterek uyarın.</p>
                     </div>
-                    <button onclick="toggleTaskModal(true)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-3 rounded-xl transition flex items-center gap-1 shadow-md shadow-blue-600/10 shrink-0">
+                    <button onclick="toggleTaskModal(true)" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-3 rounded-xl transition flex items-center justify-center gap-1 shadow-md shadow-blue-600/10 shrink-0">
                         <i class="fas fa-plus"></i> Yeni Görev Tanımla
                     </button>
                 </div>
@@ -267,12 +303,15 @@
     <div id="expertView" class="min-h-screen bg-[#070b13] flex flex-col hidden">
         <header class="bg-slate-900 border-b border-slate-800 text-white p-4 sticky top-0 z-10 shadow-md flex justify-between items-center">
             <custom-logo></custom-logo>
-            <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-775 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
+            <div class="flex items-center gap-3">
+                <span id="expertHeaderName" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20 truncate max-w-[150px]">-</span>
+                <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
         </header>
 
-        <main class="max-w-4xl mx-auto p-4 py-8 space-y-6 flex-1 w-full">
+        <main class="max-w-6xl mx-auto p-4 py-8 space-y-6 flex-1 w-full">
             <!-- MÜDÜRDEN GELEN İŞ EMİRLERİ -->
-            <div id="expertTasksSection" class="bg-blue-955/20 border border-blue-800 rounded-3xl p-6 hidden">
+            <div id="expertTasksSection" class="bg-blue-950/20 border border-blue-800 rounded-3xl p-6 hidden">
                 <h3 class="font-extrabold text-lg text-white mb-3 flex items-center gap-2">
                     <i class="fas fa-tasks text-blue-500"></i> Ali İhsan Bey'den Gelen İş Emirleri
                 </h3>
@@ -281,14 +320,41 @@
                 </div>
             </div>
 
-            <h2 class="text-2xl font-bold text-amber-400">Atandığınız Aktif Sahalar</h2>
-            <div id="expertCompaniesContainer" class="space-y-4">
-                <!-- Sorumlu olunan şantiyeler -->
+            <!-- UZMAN AKTİF SAHA TABLOSU -->
+            <div class="bg-[#0b1322] border border-emerald-500/15 p-6 rounded-[32px] shadow-lg">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 mb-4 gap-2">
+                    <div>
+                        <h2 class="text-xl font-bold text-amber-400 flex items-center gap-2">
+                            <i class="fas fa-folder-open text-emerald-500"></i> Sorumlu Olduğunuz Aktif Sahalar
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">Yönetiminizdeki firmaların listesi, son denetim ilerlemeleri, sonraki ziyaret tarihleri ve işlem butonları.</p>
+                    </div>
+                    <div class="flex gap-2 shrink-0">
+                        <span class="text-xs bg-slate-900 border border-slate-850 px-3 py-2 rounded-xl text-slate-400 font-bold" id="expertStatsBadge">0 Şantiye Aktif</span>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs min-w-[700px]">
+                        <thead>
+                            <tr class="bg-slate-900 border-b border-slate-800 text-slate-400 font-extrabold uppercase text-[10px] tracking-wider">
+                                <th class="p-3">Firma / Şantiye Adı</th>
+                                <th class="p-3">İSG İlerleme Derecesi</th>
+                                <th class="p-3 text-center">Kalan Cari Borç</th>
+                                <th class="p-3 text-center">Ziyaret Tarihi</th>
+                                <th class="p-3 text-right">Aksiyonlar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expertCompaniesTableBody" class="divide-y divide-slate-800 font-medium text-slate-300">
+                            <!-- Sorumlu olunan şantiyeler satır bazlı akacak -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- VIP FİRMA SAHİBİ PORTALI (COMPANY VIEW) -->
+    <!-- VIP FİRMA SAHİBİ PORTALU (COMPANY VIEW) -->
     <div id="companyView" class="min-h-screen bg-[#070b13] p-4 flex flex-col items-center justify-start py-8 font-sans text-slate-100 hidden">
         <div id="companyPortalCard" class="w-full max-w-lg bg-slate-900 border border-amber-500/20 rounded-[32px] overflow-hidden shadow-2xl relative">
             <!-- JS ile dolacak -->
@@ -319,7 +385,7 @@
 
             <div class="relative text-slate-800">
                 <input type="text" id="workerSearchInput" oninput="filterWorkerBulletins()" placeholder="Yönetmelik veya kural ara..." class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-3.5 pl-10 text-xs font-semibold text-white placeholder-slate-555 outline-none focus:border-orange-500 transition shadow-inner" />
-                <i class="fas fa-search absolute left-3.5 top-4 text-slate-555"></i>
+                <i class="fas fa-search absolute left-3.5 top-4 text-slate-500"></i>
             </div>
 
             <div id="workerCategoryFilter" class="flex gap-2 overflow-x-auto pb-1 -mx-2 px-2">
@@ -338,7 +404,7 @@
                 </a>
             </div>
 
-            <button onclick="navigateTo('login')" class="w-full bg-slate-900 hover:bg-slate-855 border border-slate-800 text-slate-400 hover:text-white font-bold p-4 rounded-xl transition text-xs uppercase tracking-wider">
+            <button onclick="navigateTo('login')" class="w-full bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white font-bold p-4 rounded-xl transition text-xs uppercase tracking-wider">
                  ← Giriş Ekranına Dön
             </button>
         </div>
@@ -355,7 +421,7 @@
             </div>
             
             <p class="text-xs text-slate-400 mb-6 text-left leading-relaxed">Seçtiğiniz firmanın mobil jüri önizlemesini başlatmak için QR kodu telefondan taratın veya simülatörü çalıştırın.</p>
-            <select id="qrCompanySelector" onchange="updateCompanyQR()" class="w-full bg-[#070b13] border border-slate-800 p-3 rounded-lg text-sm mb-6 font-semibold outline-none focus:border-emerald-500 text-white">
+            <select id="qrCompanySelector" onchange="updateCompanyQR()" class="w-full bg-[#070b13] border border-slate-800 p-3 rounded-lg text-xs sm:text-sm mb-6 font-semibold outline-none focus:border-emerald-500 text-white">
                 <!-- Şantiyeler yüklenecek -->
             </select>
 
@@ -363,14 +429,14 @@
                 <img id="qrCompanyImg" src="" alt="QR" class="w-48 h-48 rounded-lg" />
             </div>
 
-            <div class="bg-slate-955 p-3 rounded-xl mb-6 text-left border border-slate-855">
+            <div class="bg-slate-955 p-3 rounded-xl mb-6 text-left border border-slate-800 min-w-0">
                 <span class="text-[10px] font-bold text-slate-555 uppercase block">QR Linki</span>
-                <span id="qrCompanyLink" class="text-xs font-semibold text-slate-300 break-all select-all text-emerald-400">-</span>
+                <span id="qrCompanyLink" class="text-[11px] font-semibold text-slate-300 break-all select-all text-emerald-400 block">-</span>
             </div>
 
             <div class="flex gap-3">
-                <button id="qrCompanySimBtn" class="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-bold hover:bg-emerald-700 transition">Simülatörü Aç</button>
-                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-750 text-slate-205 py-3 rounded-xl font-bold transition">Geri Dön</button>
+                <button id="qrCompanySimBtn" class="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-bold hover:bg-emerald-700 transition text-sm">Simülatörü Aç</button>
+                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-205 py-3 rounded-xl font-bold transition text-sm">Geri Dön</button>
             </div>
         </div>
     </div>
@@ -391,20 +457,20 @@
                 <img id="qrWorkerImg" src="" alt="QR" class="w-48 h-48 rounded-lg" />
             </div>
 
-            <div class="bg-slate-955 p-3 rounded-xl mb-6 text-left border border-slate-855">
+            <div class="bg-slate-955 p-3 rounded-xl mb-6 text-left border border-slate-800 min-w-0">
                 <span class="text-[10px] font-bold text-slate-500 uppercase block">QR Linki</span>
-                <span id="qrWorkerLink" class="text-xs font-semibold text-slate-300 break-all select-all text-orange-400">-</span>
+                <span id="qrWorkerLink" class="text-[11px] font-semibold text-slate-300 break-all select-all text-orange-400 block">-</span>
             </div>
 
             <div class="flex gap-3">
-                <button id="qrWorkerSimBtn" class="flex-1 bg-orange-600 text-white py-3 rounded-xl font-bold transition">Simülatörü Aç</button>
-                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-755 text-slate-200 py-3 rounded-xl font-bold transition">Geri Dön</button>
+                <button id="qrWorkerSimBtn" class="flex-1 bg-orange-600 text-white py-3 rounded-xl font-bold transition text-sm">Simülatörü Aç</button>
+                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 py-3 rounded-xl font-bold transition text-sm">Geri Dön</button>
             </div>
         </div>
     </div>
 
     <!-- PROJE AYARLARI MODAL -->
-    <div id="settingsModal" class="fixed inset-0 bg-slate-955/80 z-50 flex items-center justify-center p-4 hidden">
+    <div id="settingsModal" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl text-slate-100">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-cog text-blue-500"></i> Sistem IP ve Domain Ayarı</h3>
@@ -419,32 +485,32 @@
             </div>
             <div class="flex gap-2 mt-6">
                 <button onclick="saveAppSettings()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 transition text-sm rounded-xl text-center">Kaydet</button>
-                <button onclick="toggleSettingsModal(false)" class="px-4 py-3 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-xl text-sm transition">Kapat</button>
+                <button onclick="toggleSettingsModal(false)" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl text-sm transition">Kapat</button>
             </div>
         </div>
     </div>
 
     <!-- MÜDÜR YENİ GÖREV EKLEME MODAL -->
-    <div id="createTaskModal" class="fixed inset-0 bg-slate-955/70 z-50 flex items-center justify-center p-4 hidden">
+    <div id="createTaskModal" class="fixed inset-0 bg-slate-950/70 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl text-slate-100">
             <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
                 <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-plus text-blue-500"></i> Yeni İş Emri Görevi</h3>
-                <button onclick="toggleTaskModal(false)" class="text-slate-400 hover:text-slate-355"><i class="fas fa-times"></i></button>
+                <button onclick="toggleTaskModal(false)" class="text-slate-400 hover:text-slate-300"><i class="fas fa-times"></i></button>
             </div>
             <div class="space-y-4">
                 <div>
                     <label class="text-xs font-bold text-slate-400 block mb-1">Sorumlu İSG Uzmanı</label>
-                    <select id="taskExpertSelect" class="w-full border-2 border-slate-800 p-2.5 rounded-xl text-xs font-semibold bg-[#070b13] text-white outline-none focus:border-blue-500">
+                    <select id="taskExpertSelect" class="w-full border border-slate-800 p-2.5 rounded-xl text-xs font-semibold bg-[#070b13] text-white outline-none focus:border-blue-500">
                         <!-- JS ile dolacak -->
                     </select>
                 </div>
                 <div>
                     <label class="text-xs font-bold text-slate-400 block mb-1">Şantiye / Şirket Unvanı</label>
-                    <input type="text" id="taskCompanyNameInput" class="w-full border border-slate-855 text-white p-2.5 rounded-xl text-xs outline-none focus:border-blue-500" placeholder="Örn: 12 M TURİZM">
+                    <input type="text" id="taskCompanyNameInput" class="w-full border border-slate-800 text-white bg-[#070b13] p-2.5 rounded-xl text-xs outline-none focus:border-blue-500" placeholder="Örn: 12 M TURİZM">
                 </div>
                 <div>
                     <label class="text-xs font-bold text-slate-400 block mb-1">Görev / İş Emri Başlığı</label>
-                    <input type="text" id="taskTitleInput" class="w-full border-2 border-slate-800 bg-[#070b13] text-white p-2.5 rounded-xl text-xs outline-none focus:border-blue-500" placeholder="Örn: Yangın tüplerinin periyodik basınç testi">
+                    <input type="text" id="taskTitleInput" class="w-full border border-slate-800 bg-[#070b13] text-white p-2.5 rounded-xl text-xs outline-none focus:border-blue-500" placeholder="Örn: Yangın tüplerinin periyodik basınç testi">
                 </div>
                 <div>
                     <label class="text-xs font-bold text-slate-400 block mb-1">Açıklama</label>
@@ -453,53 +519,52 @@
             </div>
             <div class="flex gap-2 mt-6 pt-3 border-t border-slate-800">
                 <button onclick="createNewTask()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 transition text-sm shadow-md rounded-xl">Görevi Tanımla & Gönder</button>
-                <button onclick="toggleTaskModal(false)" class="px-4 py-3 bg-slate-805 hover:bg-slate-750 text-slate-300 font-bold rounded-xl transition text-sm">İptal</button>
+                <button onclick="toggleTaskModal(false)" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition text-sm">İptal</button>
             </div>
         </div>
     </div>
 
-    <!-- FIRMA YÖNETİM MODAL (MANAGE MODAL) -->
+    <!-- FIRMA YÖNETİM MODAL -->
     <div id="manageCompanyModal" class="fixed inset-0 bg-slate-955/70 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl text-slate-100">
           <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
             <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-building text-blue-500"></i> Şantiye Bilgi Yönetimi</h3>
-            <button onclick="toggleManageModal(false)" class="text-slate-400 hover:text-slate-350"><i class="fas fa-times"></i></button>
+            <button onclick="toggleManageModal(false)" class="text-slate-400 hover:text-slate-300"><i class="fas fa-times"></i></button>
           </div>
-          <p id="manageCompanyName" class="text-xs text-amber-505 font-bold mb-4 uppercase tracking-wider">-</p>
+          <p id="manageCompanyName" class="text-xs text-amber-505 font-bold mb-4 uppercase tracking-wider block break-words">-</p>
           <div class="space-y-4">
             <div>
               <label class="text-xs font-bold text-slate-400 block mb-1">Sorumlu Uzman Ataması</label>
-              <select id="manageExpertSelect" class="w-full border-2 border-slate-800 p-3 rounded-xl text-sm font-semibold outline-none bg-[#070b13] text-white">
+              <select id="manageExpertSelect" class="w-full border border-slate-800 p-3 rounded-xl text-sm font-semibold outline-none bg-[#070b13] text-white">
                 <!-- JS ile dolacak -->
               </select>
             </div>
             <div>
               <label class="text-xs font-bold text-slate-400 block mb-1">Sonraki Ziyaret Tarihi</label>
-              <input type="date" id="manageNextVisit" class="w-full border-2 border-[#c29c53]/20 bg-[#070b13] text-white p-2.5 rounded-xl text-xs outline-none">
+              <input type="date" id="manageNextVisit" class="w-full border border-slate-800 bg-[#070b13] text-white p-2.5 rounded-xl text-xs outline-none">
             </div>
             <div>
               <label class="text-xs font-bold text-slate-400 block mb-1">Güncel Cari Borç Bakiyesi</label>
-              <input type="text" id="manageDebt" class="w-full border-2 border-slate-800 bg-[#070b13] text-white p-3 rounded-xl text-sm outline-none">
+              <input type="text" id="manageDebt" class="w-full border border-slate-800 bg-[#070b13] text-white p-3 rounded-xl text-sm outline-none">
             </div>
           </div>
           <div class="flex gap-2 mt-6 pt-3 border-t border-slate-800">
             <button onclick="saveCompanyManagement()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 transition text-sm rounded-xl">Değişiklikleri Kaydet</button>
-            <button onclick="toggleManageModal(false)" class="px-4 py-3 bg-slate-850 hover:bg-slate-750 text-slate-300 font-bold rounded-xl transition text-sm">Kapat</button>
+            <button onclick="toggleManageModal(false)" class="px-4 py-3 bg-slate-850 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition text-sm">Kapat</button>
           </div>
         </div>
-      </div>
     </div>
 
     <!-- CARİ LİSTE CSV ÖNİZLEME MODAL -->
-    <div id="csvPreviewModal" class="fixed inset-0 bg-slate-955/70 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
+    <div id="csvPreviewModal" class="fixed inset-0 bg-slate-950/70 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
         <div class="bg-[#0b0f19] text-slate-200 border border-slate-800 rounded-[32px] p-6 w-full max-w-2xl shadow-2xl max-h-[90vh] flex flex-col border-amber-500/20">
             <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3 shrink-0">
                 <h3 class="font-extrabold text-lg text-white flex items-center gap-2"><i class="fas fa-wallet text-emerald-500"></i> Bakiye Güncelleme Önizleme Ekranı</h3>
-                <button onclick="toggleCsvPreviewModal(false)" class="text-slate-400 hover:text-slate-250"><i class="fas fa-times"></i></button>
+                <button onclick="toggleCsvPreviewModal(false)" class="text-slate-400 hover:text-slate-300"><i class="fas fa-times"></i></button>
             </div>
             <p class="text-xs text-slate-400 mb-4 leading-relaxed">Yüklediğiniz raporda akıllı unvan eşleştiriciyle eşleştirilen şantiye bakiye değişimleri aşağıdadır. Onay verdiğinizde bulut sistemi güncellenecektir.</p>
-            <div class="flex-1 overflow-y-auto border border-slate-800 bg-slate-955/50 rounded-2xl">
-                <table class="w-full text-left border-collapse text-xs">
+            <div class="flex-1 overflow-y-auto border border-slate-800 bg-slate-955 rounded-2xl">
+                <table class="w-full text-left border-collapse text-xs min-w-[450px]">
                     <thead>
                         <tr class="bg-slate-900 border-b border-slate-800 text-slate-400 font-extrabold uppercase">
                             <th class="p-3">Sistemdeki Şantiye</th>
@@ -514,7 +579,7 @@
             </div>
             <div class="flex gap-2 mt-6 pt-3 border-t border-slate-800 shrink-0">
                 <button onclick="confirmCariImport()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-3.5 rounded-xl transition text-sm shadow-lg">Değişiklikleri Onayla & Kaydet</button>
-                <button onclick="toggleCsvPreviewModal(false)" class="px-5 py-3.5 bg-slate-805 hover:bg-slate-750 text-slate-300 font-bold rounded-xl transition text-sm">Vazgeç</button>
+                <button onclick="toggleCsvPreviewModal(false)" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition text-sm">Vazgeç</button>
             </div>
         </div>
     </div>
@@ -522,60 +587,60 @@
     <!-- SAHA RAPORLAMA VE DÖF GÖZLEM EDİTÖRÜ (REPORT MODAL) -->
     <div id="reportModal" class="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
         <div class="bg-[#0b0f19] text-slate-200 border border-slate-800 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden">
-            <div class="bg-slate-900 border-b border-slate-800 text-white p-4 flex justify-between items-center">
-                <h3 class="font-bold flex items-center gap-2"><i class="fas fa-file-contract"></i> İSG Saha Gözlem ve Tespit Raporu</h3>
-                <div class="flex gap-2">
+            <div class="bg-slate-900 border-b border-slate-800 text-white p-4 flex justify-between items-center flex-wrap gap-2">
+                <h3 class="font-bold flex items-center gap-2 text-sm sm:text-base"><i class="fas fa-file-contract"></i> İSG Saha Gözlem ve Tespit Raporu</h3>
+                <div class="flex gap-2 flex-wrap">
                     <button id="btnDownloadReport" onclick="downloadReportText()" class="p-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs font-bold flex items-center gap-1.5 transition">
                         <i class="fas fa-download"></i> Raporu İndir (TXT)
                     </button>
-                    <button onclick="window.print()" class="p-2 bg-slate-850 border border-slate-750 rounded text-sm flex items-center gap-1 transition">
+                    <button onclick="window.print()" class="p-2 bg-slate-800 border border-slate-700 rounded text-xs flex items-center gap-1 transition">
                         <i class="fas fa-print"></i> Raporu Yazdır
                     </button>
-                    <button onclick="toggleReportModal(false)" class="p-2 hover:bg-red-500 rounded transition"><i class="fas fa-times"></i></button>
+                    <button onclick="toggleReportModal(false)" class="p-2 hover:bg-red-500 rounded transition text-xs"><i class="fas fa-times"></i></button>
                 </div>
             </div>
 
-            <div class="p-8 print:p-4 text-slate-100 bg-[#0b0f19] min-h-[500px]">
-                <div class="border-b-2 border-slate-800 pb-4 mb-6 flex justify-between items-end">
+            <div class="p-4 sm:p-8 print:p-4 text-slate-100 bg-[#0b0f19] min-h-[400px]">
+                <div class="border-b-2 border-slate-800 pb-4 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
                     <div>
-                        <h1 class="text-2xl font-black uppercase tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">KOLLEKTİF İŞ GÜVENLİĞİ</h1>
-                        <p class="text-slate-400 mt-1 font-medium">Uzaktan Saha Gözlem Raporu</p>
+                        <h1 class="text-xl sm:text-2xl font-black uppercase tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">KOLLEKTİF İŞ GÜVENLİĞİ</h1>
+                        <p class="text-slate-400 mt-1 font-medium text-xs sm:text-sm">Uzaktan Saha Gözlem Raporu</p>
                     </div>
-                    <div class="text-right text-sm">
-                        <p><span class="font-bold text-slate-400">Şantiye:</span> <span id="rCompanyName">-</span></p>
-                        <p><span class="font-bold text-slate-400">Tarih:</span> <span id="rReportDate">-</span></p>
+                    <div class="text-left sm:text-right text-xs sm:text-sm max-w-xs min-w-0">
+                        <p class="break-words"><span class="font-bold text-slate-400">Şantiye:</span> <span id="rCompanyName">-</span></p>
+                        <p class="mt-1"><span class="font-bold text-slate-400">Tarih:</span> <span id="rReportDate">-</span></p>
                     </div>
                 </div>
 
                 <div class="space-y-6">
-                    <h2 class="text-lg font-bold bg-slate-900/50 p-2 rounded w-full border border-slate-800 text-slate-300">Sahada Tespit Edilen Uygunsuzluklar ve DÖF Önerileri</h2>
+                    <h2 class="text-base sm:text-lg font-bold bg-slate-900/50 p-2 rounded w-full border border-slate-800 text-slate-300">Sahada Tespit Edilen Uygunsuzluklar ve DÖF Önerileri</h2>
                     
                     <div id="findingsContainer" class="space-y-4">
                         <!-- Uygunsuzluklar dinamik eklenecek -->
                     </div>
 
-                    <button id="btnNewFinding" onclick="addNewFindingField()" class="w-full py-3 border-2 border-dashed border-slate-800 text-slate-400 rounded-xl hover:bg-slate-900 hover:border-blue-500 hover:text-blue-400 transition flex items-center justify-center gap-2 font-medium">
+                    <button id="btnNewFinding" onclick="addNewFindingField()" class="w-full py-3 border-2 border-dashed border-slate-800 text-slate-400 rounded-xl hover:bg-slate-900 hover:border-blue-500 hover:text-blue-400 transition flex items-center justify-center gap-2 font-medium text-xs">
                         <i class="fas fa-plus"></i> Yeni Saha Tespiti Ekle
                     </button>
                 </div>
             </div>
 
-            <div class="bg-slate-955 p-4 border-t border-slate-800 flex justify-end gap-3">
-                <button onclick="toggleReportModal(false)" class="px-4 py-2 text-slate-400 hover:bg-slate-855 rounded font-medium">Kapat</button>
-                <button id="btnSaveReportDraft" onclick="submitReport('draft')" class="px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800 rounded font-medium flex items-center gap-2">
+            <div class="bg-slate-900 p-4 border-t border-slate-800 flex justify-end gap-3 flex-wrap">
+                <button onclick="toggleReportModal(false)" class="px-4 py-2 text-slate-400 hover:bg-slate-800 rounded font-medium text-xs">Kapat</button>
+                <button id="btnSaveReportDraft" onclick="submitReport('draft')" class="px-4 py-2 bg-slate-950 border border-slate-800 text-slate-300 hover:bg-slate-800 rounded font-medium flex items-center gap-2 text-xs">
                     <i class="fas fa-floppy-disk"></i> Taslak Kaydet
                 </button>
-                <button id="btnSubmitReportToManager" onclick="submitReport('submitted')" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center gap-2">
+                <button id="btnSubmitReportToManager" onclick="submitReport('submitted')" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center gap-2 text-xs">
                     <i class="fas fa-paper-plane"></i> Ali İhsan Bey'e Gönder
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- SUPABASE REALTIME BAĞLANTI SCRIPTLERİ -->
+    <!-- SUPABASE REALTIME BAĞLANTI VE SCRIPTLERİ -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // --- 1. PREMIUM UZMANLAR VE KURUMSAL VERİLER (YAPILANDIRILDI!) ---
+        // --- 1. PREMIUM UZMANLAR VE GERÇEK 20 PORTFÖY FİRMASI ---
         const initialExperts = [
           { id: 'exp1', name: "Ahmet Yılmaz (İSG Uzmanı)" },
           { id: 'exp2', name: "Ayşe Kaya (İSG Uzmanı)" },
@@ -583,43 +648,98 @@
           { id: 'exp4', name: "Fatma Şahin (İSG Uzmanı)" }
         ];
 
+        // "DIŞ SAHA CARİ.pdf" dökümanından süzülen 20 gerçek şantiye unvanı, borç bakiyeleri ve telefon numaraları.
+        // 4 uzman arasında eşit olarak (her uzmana tam 5 firma) dağıtılmıştır.
         const initialCompanies = [
+          // Ahmet Yılmaz (exp1) - 5 Firma
           { 
-            id: 'comp1', name: "12 M TURİZM SAN. VE VEDI TC. LTD.", debt: "127.300,48 ₺", progress: 65, nextVisit: "2026-05-10", expertId: 'exp1',
-            report: { status: 'draft', date: '17.05.2026', findings: [
-              { id: 1, observation: 'Ana elektrik panosunda kaçak akım rölesi (KAR) eksik.', risk: 'Yüksek', action: 'Acilen 300mA KAR takılmalı ve test edilmelidir.', deadline: '2026-05-25' }
+            id: 'comp1', name: "12 M TURİZM SAN. VE DIŞ TİC. LTD. ŞTİ.", debt: "127.300,48 ₺", progress: 65, nextVisit: "2026-05-20", expertId: 'exp1',
+            report: { status: 'draft', date: '18.05.2026', findings: [
+              { id: 1, observation: 'Ana elektrik panosunda kaçak akım rölesi (KAR) bulunmuyor.', risk: 'Yüksek', action: '300mA kaçak akım rölesi takılmalıdır.', deadline: '2026-05-25' }
             ]}
           },
           { 
-            id: 'comp2', name: "3 ENDÜSTRİ ENERJİ MÜHENDİSLİK", debt: "3.000,00 ₺", progress: 40, nextVisit: "2026-05-12", expertId: 'exp1',
+            id: 'comp2', name: "3 ENDÜSTRİ ENERJİ MÜHENDİSLİK TAAHHÜT", debt: "3.000,00 ₺", progress: 40, nextVisit: "2026-05-22", expertId: 'exp1',
             report: { status: 'draft', date: '', findings: []}
           },
           { 
-            id: 'comp3', name: "5S GRUP GIDA TEKSTİL SAN.", debt: "5.865,00 ₺", progress: 90, nextVisit: "2026-05-25", expertId: 'exp2',
+            id: 'comp3', name: "5S GRUP GIDA TEKSTİL İTH. İHR. LTD. ŞTİ.", debt: "5.865,00 ₺", progress: 90, nextVisit: "2026-05-25", expertId: 'exp1',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp4', name: "A PLUS PARTNER YAZILIM BİLİŞİM DİJİTAL", debt: "1.725,00 ₺", progress: 20, nextVisit: "2026-05-26", expertId: 'exp1',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp5', name: "ABC DENT SAĞLIK HİZMETLERİ LTD. ŞTİ.", debt: "28.455,35 ₺", progress: 50, nextVisit: "2026-05-28", expertId: 'exp1',
+            report: { status: 'draft', date: '', findings: []}
+          },
+
+          // Ayşe Kaya (exp2) - 5 Firma
+          { 
+            id: 'comp6', name: "ALP NANE DIŞ TİCARET VE GIDA LTD. ŞTİ.", debt: "483,00 ₺", progress: 85, nextVisit: "2026-05-21", expertId: 'exp2',
             report: { status: 'submitted', date: '15.05.2026', findings: [
-              { id: 2, observation: 'Acil çıkış kapısının önü paletlerle kapatılmış.', risk: 'Yüksek', action: 'Paletler depoya kaldırılmalı ve güzergah boşaltılmalı.', deadline: '2026-05-18' }
+              { id: 2, observation: 'Yemekhane havalandırma fanı çalışmıyor.', risk: 'Düşük', action: 'Fanın elektrik bağlantısı onarılmalıdır.', deadline: '2026-05-30' }
             ]}
           },
           { 
-            id: 'comp4', name: "A PLUS PARTNER YAZILIM DJİTAL", debt: "1.725,00 ₺", progress: 20, nextVisit: "2026-05-22", expertId: 'exp3',
+            id: 'comp7', name: "ALRUKBI GOLD KUYUMCULUK SANAYİ VE TİC.", debt: "1.380,00 ₺", progress: 30, nextVisit: "2026-05-23", expertId: 'exp2',
             report: { status: 'draft', date: '', findings: []}
           },
           { 
-            id: 'comp5', name: "ABC DENT SAĞLIK HİZMETLERİ", debt: "28.455,35 ₺", progress: 50, nextVisit: "2026-05-24", expertId: 'exp4',
+            id: 'comp8', name: "ALTIN İPLİK SANAYİ VE TİCARET LTD. ŞTİ.", debt: "6.623,99 ₺", progress: 75, nextVisit: "2026-05-27", expertId: 'exp2',
             report: { status: 'draft', date: '', findings: []}
           },
           { 
-            id: 'comp6', name: "ALP NANE DIŞ TİCARET", debt: "483,00 ₺", progress: 100, nextVisit: "2026-05-30", expertId: 'exp2',
-            report: { status: 'submitted', date: '2026-05-10', findings: [
-              { id: 3, observation: 'Personel soyunma odalarında havalandırma yetersiz.', risk: 'Düşük', action: 'Fan sistemi bakımı yapılmalı.', deadline: '2026-05-28' }
-            ]}
-          },
-          { 
-            id: 'comp7', name: "ALRUKBI GOLD KUYUMCULUK", debt: "1.380,00 ₺", progress: 30, nextVisit: "2026-05-19", expertId: 'exp3',
+            id: 'comp9', name: "ALYA YAKUP YİĞİT PASTACILIK VE UNLU MAM.", debt: "8.280,00 ₺", progress: 60, nextVisit: "2026-05-29", expertId: 'exp2',
             report: { status: 'draft', date: '', findings: []}
           },
           { 
-            id: 'comp8', name: "ALTIN İPLİK SANAYİ VE TİCARET", debt: "6.623,99 ₺", progress: 75, nextVisit: "2026-05-28", expertId: 'exp4',
+            id: 'comp10', name: "ANAÇ BİLİŞİM TEKNOLOJİ HİZMETLERİ VE TİC.", debt: "9.465,00 ₺", progress: 95, nextVisit: "2026-05-30", expertId: 'exp2',
+            report: { status: 'draft', date: '', findings: []}
+          },
+
+          // Mehmet Demir (exp3) - 5 Firma
+          { 
+            id: 'comp11', name: "ARAS MAKİNA VE SERVİS HİZMETLERİ TO.", debt: "34.545,60 ₺", progress: 55, nextVisit: "2026-05-24", expertId: 'exp3',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp12', name: "ARSLAN ALÜMİNYUM SANAYİ VE TİC. LTD. ŞTİ.", debt: "43.125,00 ₺", progress: 70, nextVisit: "2026-05-26", expertId: 'exp3',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp13', name: "ARTIBEL BELGELENDİRME VE GÖZETİM HİZ.", debt: "1.865,00 ₺", progress: 35, nextVisit: "2026-05-27", expertId: 'exp3',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp14', name: "AS SİGORTA ARACILIK HİZMETLERİ LTD. ŞTİ.", debt: "6.900,00 ₺", progress: 80, nextVisit: "2026-05-28", expertId: 'exp3',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp15', name: "ASAL TEKNİK CAM DEKORASYON SAN. VE TİC.", debt: "18.435,00 ₺", progress: 45, nextVisit: "2026-05-29", expertId: 'exp3',
+            report: { status: 'draft', date: '', findings: []}
+          },
+
+          // Fatma Şahin (exp4) - 5 Firma
+          { 
+            id: 'comp16', name: "ASUR GRUP İNŞAAT TAAHHÜT TURİZM LTD. ŞTİ.", debt: "112.500,00 ₺", progress: 50, nextVisit: "2026-05-25", expertId: 'exp4',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp17', name: "ATLAS GLOBAL DIŞ TİCARET VE LOJİSTİK A.Ş.", debt: "15.000,00 ₺", progress: 65, nextVisit: "2026-05-27", expertId: 'exp4',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp18', name: "AVRASYA İKLİMLENDİRME VE MEKANİK SİST.", debt: "3.450,00 ₺", progress: 75, nextVisit: "2026-05-28", expertId: 'exp4',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp19', name: "AYAZ GRUP TEKSTİL İNŞAAT VE PAZARLAMA", debt: "22.800,00 ₺", progress: 60, nextVisit: "2026-05-29", expertId: 'exp4',
+            report: { status: 'draft', date: '', findings: []}
+          },
+          { 
+            id: 'comp20', name: "AYDEMİR TEKSTİL VE KONFEKSİYON SAN. TİC.", debt: "55.400,00 ₺", progress: 80, nextVisit: "2026-05-30", expertId: 'exp4',
             report: { status: 'draft', date: '', findings: []}
           }
         ];
@@ -629,7 +749,7 @@
           { id: 'bul2', title: "Kişisel Koruyucu Donanım (KKD)", date: "10 Mayıs 2026", content: "Baret, çelik burunlu ayakkabı ve fosforlu yelek olmadan sahaya giriş kesinlikle yasaktır.", category: "Kişisel Koruyucular" }
         ];
 
-        // --- 2. SUPABASE CANLI ENTEGRASYON ANAHTARLARI ---
+        // --- 2. SUPABASE BAĞLANTI AYARLARI ---
         const supabaseUrl = "https://bdjbicxcggibtsavkdwv.supabase.co";
         const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkamJpY3hjZ2dpYnRzYXZrZHd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5MzAzNDYsImV4cCI6MjA5NDUwNjM0Nn0.euGESefnRlcCIHLRvNQGY1yLYs8NmeAkxpcfvwQN5i0";
         
@@ -640,15 +760,69 @@
             console.error("Supabase yüklenemedi, lokal moda geçildi.");
         }
 
-        // --- 3. HELPER YARDIMCI FONKSİYONLAR (DÜZELTİLDİ: EN ÜSTE ALINDI!) ---
+        // --- 3. PROJE BELLEK DEĞİŞKENLERİ ---
+        let currentUserId = null;
+        let currentUserRole = null;
+        let currentUserName = "";
+        
+        let companies = JSON.parse(localStorage.getItem('isg_companies'));
+        if (!companies || companies.length === 0) {
+            companies = initialCompanies.map(normalizeCompany);
+            localStorage.setItem('isg_companies', JSON.stringify(companies));
+        } else {
+            companies = companies.map(normalizeCompany);
+        }
+
+        let bulletins = JSON.parse(localStorage.getItem('isg_bulletins'));
+        if (!bulletins || bulletins.length === 0) {
+            bulletins = initialBulletins;
+            localStorage.setItem('isg_bulletins', JSON.stringify(initialBulletins));
+        }
+
+        let tasks = JSON.parse(localStorage.getItem('isg_tasks')) || [];
+        const experts = initialExperts;
+
+        let serverIp = localStorage.getItem('isg_server_ip') || "https://isg-sistem.vercel.app/";
+        let selectedCompanyId = 'comp1';
+        let workerSearch = "";
+        let workerCategory = "Hepsi";
+        const phoneContact = "905325169318"; // WhatsApp Dürtme Ping Hattı
+
+        let activeReportCompanyId = null;
+        let activeFindings = [];
+
+        // --- 4. VERİ NORMALİZASYON KÖPRÜSÜ (SUPABASE BÜYÜK/KÜÇÜK HARF UYUMSUZLUĞUNU KESİN ÇÖZER) ---
+        function normalizeCompany(c) {
+            if (!c) return null;
+            return {
+                id: c.id,
+                name: c.name || c.companyname || c.company_name || '',
+                debt: c.debt || '0,00 ₺',
+                progress: c.progress !== undefined ? c.progress : 0,
+                nextVisit: c.nextVisit || c.nextvisit || c.next_visit || '',
+                expertId: c.expertId || c.expertid || c.expert_id || '',
+                report: c.report || { status: 'draft', date: '', findings: [] }
+            };
+        }
+
+        function normalizeTask(t) {
+            if (!t) return null;
+            return {
+                id: t.id,
+                title: t.title || '',
+                desc: t.desc || '',
+                expertId: t.expertId || t.expertid || t.expert_id || '',
+                companyName: t.companyName || t.companyname || t.company_name || '',
+                status: t.status || 'pending'
+            };
+        }
+
         function parseDebtToFloat(debtStr) {
             if (!debtStr) return 0;
-            // Para birimini ve biçimlendirmeyi temizle (örn. 127.300,48 ₺ -> 127300.48)
             let cleaned = debtStr.replace(/[^0-9,.-]/g, '').replace(/\./g, '').replace(',', '.');
             return parseFloat(cleaned) || 0;
         }
 
-        // AKILLI BİLDİRİM TOAST SÜRÜCÜSÜ EKLENDİ! (KUTSAL TOAST REFERANS HATASI ÇÖZÜMÜ)
         function showToastMessage(message, type = 'success') {
             const toast = document.getElementById('toastNotification');
             const icon = document.getElementById('toastIcon');
@@ -656,58 +830,64 @@
 
             msgSpan.innerText = message;
             
-            // Bildirim Türü Stil Tasarımı
             if (type === 'error') {
                 icon.className = "fas fa-circle-exclamation text-red-500 text-lg";
                 toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-red-955 border border-red-800 text-red-100";
             } else if (type === 'info') {
                 icon.className = "fas fa-info-circle text-blue-400 text-lg";
                 toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-blue-955 border border-blue-900/30 text-white";
-            } else { // success / default
+            } else {
                 icon.className = "fas fa-shield-halved text-amber-400 text-lg";
                 toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-[#0b0f19] border border-amber-500/30 text-white";
             }
 
-            // 3 Saniye Sonra Gizleme Motoru
             setTimeout(() => {
                 toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-[#0b0f19] border border-amber-500/30 text-white";
             }, 3000);
         }
 
-        // --- 4. UYGULAMA BELLEĞİ (STATE) ---
-        let currentUserId = null;
-        let currentUserRole = null;
-        let currentUserName = "";
-        
-        let companies = JSON.parse(localStorage.getItem('isg_companies')) || initialCompanies;
-        let bulletins = JSON.parse(localStorage.getItem('isg_bulletins')) || initialBulletins;
-        let tasks = JSON.parse(localStorage.getItem('isg_tasks')) || [];
-        const experts = initialExperts; // Referans hatası çözümü!
-
-        // --- CANLI YÖNLENDİRME SERVER IP VE AYAR BELLEĞİ (DÜZELTİLDİ!) ---
-        let serverIp = localStorage.getItem('isg_server_ip') || "https://isg-sistem.vercel.app/";
-        let selectedCompanyId = 'comp1';
-        let workerSearch = ""; // Referans hatası giderildi!
-        let workerCategory = "Hepsi"; // Referans hatası giderildi!
-        const phoneContact = "905325169318"; // Referans hatası giderildi! (Gömülü WhatsApp hattı)
-
-        // Rapor modalında düzenleme yapılan aktif şantiye
-        let activeReportCompanyId = null;
-        let activeFindings = [];
-
-        // --- 5. İLK BAŞLANGIÇ AKIŞI (ON LOAD) ---
+        // --- 5. İLK AÇILIŞ VE OTO-TOHUMLAMA (AUTO SEED) ---
         window.onload = function() {
             initLoginSelectors();
-            realtimeSync();
             checkUrlRouting();
-            
-            // Eğer veritabanında hiç veri yoksa ilk şantiyeleri ekleyelim
             if (supabaseClient) {
                 checkAndSeedDatabase();
             }
+            realtimeSync();
         }
 
-        // URL üzerinden worker veya company VIP portallarına hızlı yönlendirme
+        async function checkAndSeedDatabase() {
+            try {
+                const { data, error } = await supabaseClient.from('companies').select('*');
+                if (error || !data || data.length === 0) {
+                    for (let comp of initialCompanies) {
+                        const seedComp = {
+                            id: comp.id,
+                            name: comp.name,
+                            companyname: comp.name, // Postgres küçük harf alternatifi
+                            debt: comp.debt,
+                            progress: comp.progress,
+                            nextVisit: comp.nextVisit,
+                            nextvisit: comp.nextVisit, // Postgres küçük harf alternatifi
+                            expertId: comp.expertId,
+                            expertid: comp.expertId, // Postgres küçük harf alternatifi
+                            report: comp.report
+                        };
+                        await supabaseClient.from('companies').upsert([seedComp]);
+                    }
+                    for (let bul of initialBulletins) {
+                        await supabaseClient.from('bulletins').upsert([bul]);
+                    }
+                    showToastMessage("Sistem ilk kurulum verileriyle bulutta tohumlandı!", "info");
+                } else {
+                    companies = data.map(normalizeCompany);
+                    localStorage.setItem('isg_companies', JSON.stringify(companies));
+                }
+            } catch(e) {
+                console.error("Bulut Seed hatası, lokal bellek devrede.", e);
+            }
+        }
+
         function checkUrlRouting() {
             const params = new URLSearchParams(window.location.search);
             const viewParam = params.get('view');
@@ -721,21 +901,9 @@
             }
         }
 
-        // Supabase veri tabanı tohumlama (Seed)
-        async function checkAndSeedDatabase() {
-            const { data, error } = await supabaseClient.from('companies').select('*');
-            if (error || !data || data.length === 0) {
-                for (let comp of initialCompanies) {
-                    await supabaseClient.from('companies').insert([comp]);
-                }
-            }
-        }
-
-        // --- 6. GERÇEK ZAMANLI BULUT SENKRONİZASYONU (REALTIME POLLING & CHANNEL) ---
+        // --- 6. GERÇEK ZAMANLI VERİ SENKRONİZASYONU (REALTIME POLLING) ---
         function realtimeSync() {
             if (!supabaseClient) return;
-
-            // Her 6 saniyede bir can alıcı şantiye, bülten ve görev verilerini çekelim (Realtime fall-back)
             setInterval(fetchRealtimeData, 6000);
             fetchRealtimeData();
         }
@@ -743,24 +911,35 @@
         async function fetchRealtimeData() {
             if (!supabaseClient) return;
 
-            // Şantiyeleri çek
-            const { data: compData } = await supabaseClient.from('companies').select('*');
-            if (compData && compData.length > 0) {
-                companies = compData;
-                localStorage.setItem('isg_companies', JSON.stringify(companies));
-                refreshDashboards();
-            }
+            try {
+                // Şantiyeleri çek ve normalize et
+                const { data: compData, error: compErr } = await supabaseClient.from('companies').select('*');
+                if (!compErr && compData && compData.length > 0) {
+                    companies = compData.map(normalizeCompany);
+                    localStorage.setItem('isg_companies', JSON.stringify(companies));
+                    refreshDashboards();
+                }
 
-            // Bültenleri çek
-            const { data: bulData } = await supabaseClient.from('bulletins').select('*');
-            if (bulData && bulData.length > 0) {
-                bulletins = bulData;
-                localStorage.setItem('isg_bulletins', JSON.stringify(bulletins));
-                if (currentView === 'qr_worker') renderWorkerBulletins();
+                // Bültenleri çek
+                const { data: bulData, error: bulErr } = await supabaseClient.from('bulletins').select('*');
+                if (!bulErr && bulData && bulData.length > 0) {
+                    bulletins = bulData;
+                    localStorage.setItem('isg_bulletins', JSON.stringify(bulletins));
+                    if (currentView === 'qr_worker') renderWorkerBulletins();
+                }
+
+                // Görevleri çek ve normalize et
+                const { data: taskData, error: taskErr } = await supabaseClient.from('tasks').select('*');
+                if (!taskErr && taskData) {
+                    tasks = taskData.map(normalizeTask);
+                    localStorage.setItem('isg_tasks', JSON.stringify(tasks));
+                    refreshDashboards();
+                }
+            } catch (e) {
+                console.warn("Bulut Realtime senkronizasyon hatası. Lokal depolama devrede.");
             }
         }
 
-        // Dashboard güncelleme tetikleyicisi
         function refreshDashboards() {
             if (currentView === 'manager') renderManagerDashboard();
             if (currentView === 'expert') renderExpertDashboard();
@@ -774,7 +953,6 @@
             initialExperts.forEach(e => {
                 const opt = document.createElement('option');
                 opt.value = e.id;
-                opt.className = "bg-[#0f172a] text-white";
                 opt.innerText = e.name;
                 selectEl.appendChild(opt);
             });
@@ -792,12 +970,12 @@
                 currentUserId = expertId;
                 currentUserRole = 'expert';
                 currentUserName = expertName;
+                document.getElementById('expertHeaderName').innerText = expertName;
                 navigateTo('expert');
             }
             showToastMessage(`Hoş geldiniz Sayın ${currentUserName}`);
         }
 
-        // Geri dönüş fonksiyonları
         function handleLogout() {
             currentUserId = null;
             currentUserRole = null;
@@ -806,7 +984,6 @@
             showToastMessage("Güvenle çıkış yapıldı.");
         }
 
-        // Yönlendirme (Navigation Motoru)
         let currentView = 'login';
         function navigateTo(view) {
             currentView = view;
@@ -841,7 +1018,7 @@
             }
         }
 
-        // --- 8. ALİ İHSAN BEY MÜDÜR YÖNETİM PANELİ ---
+        // --- 8. ALİ İHSAN BEY PORTAL AKSİYONLARI ---
         function renderManagerDashboard() {
             const totalOutstandingDebt = companies.reduce((sum, company) => sum + parseDebtToFloat(company.debt), 0);
             const avgProgress = companies.length > 0 ? Math.round(companies.reduce((acc, curr) => acc + curr.progress, 0) / companies.length) : 0;
@@ -852,6 +1029,51 @@
             document.getElementById('mTotalDebt').innerText = totalOutstandingDebt.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + ' ₺';
             document.getElementById('mPendingReports').innerText = submittedReports.length;
 
+            // UZMAN PERFORMANS TABLOSUNU DOLDUR
+            const performanceBody = document.getElementById('expertPerformanceTableBody');
+            performanceBody.innerHTML = '';
+            
+            initialExperts.forEach(exp => {
+                const expCompanies = companies.filter(c => c.expertId === exp.id);
+                const expTasks = tasks.filter(t => t.expertId === exp.id);
+                const compCount = expCompanies.length;
+                
+                const avgExpProgress = compCount > 0 ? Math.round(expCompanies.reduce((sum, c) => sum + (c.progress || 0), 0) / compCount) : 0;
+                const totalExpDebt = expCompanies.reduce((sum, c) => sum + parseDebtToFloat(c.debt), 0);
+                const completedTasks = expTasks.filter(t => t.status === 'completed').length;
+                const totalTasks = expTasks.length;
+
+                const row = document.createElement('tr');
+                row.className = "hover:bg-slate-900/50 border-b border-slate-800 transition";
+                row.innerHTML = `
+                    <td class="p-3 font-bold text-white flex items-center gap-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+                        ${exp.name}
+                    </td>
+                    <td class="p-3 text-center text-slate-300 font-bold">${compCount} Şantiye</td>
+                    <td class="p-3">
+                        <div class="flex items-center gap-2">
+                            <span class="font-black text-emerald-400">% ${avgExpProgress}</span>
+                            <div class="w-24 bg-slate-800 h-1.5 rounded-full overflow-hidden hidden sm:block">
+                                <div class="h-full bg-emerald-500 rounded-full" style="width: ${avgExpProgress}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-3 font-semibold text-amber-500">${totalExpDebt.toLocaleString('tr-TR')} ₺</td>
+                    <td class="p-3 text-center">
+                        <span class="bg-blue-500/10 text-blue-400 border border-blue-900/30 px-2 py-0.5 rounded text-[10px] font-bold">
+                            ${completedTasks}/${totalTasks} Bitti
+                        </span>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button onclick="pingExpert('${exp.name}', 'Genel Performans Değerlendirmesi')" class="text-[10px] font-black uppercase text-amber-400 border border-amber-500/20 hover:border-amber-500 hover:bg-amber-500/10 px-2.5 py-1.5 rounded-xl transition">
+                            <i class="fab fa-whatsapp"></i> Uzmanı Dürt
+                        </button>
+                    </td>
+                `;
+                performanceBody.appendChild(row);
+            });
+
             // Onay bekleyenler gelen kutusu
             const reportsSection = document.getElementById('mPendingReportsSection');
             const reportsContainer = document.getElementById('mPendingReportsContainer');
@@ -861,7 +1083,7 @@
                 reportsSection.classList.remove('hidden');
                 submittedReports.forEach(c => {
                     const row = document.createElement('div');
-                    row.className = "bg-white border border-slate-100 rounded-2xl p-4 flex flex-col sm:sm:row justify-between items-start sm:items-center gap-3 shadow-sm text-slate-800";
+                    row.className = "bg-white border border-slate-100 rounded-2xl p-4 flex flex-col sm:row justify-between items-start sm:items-center gap-3 shadow-sm text-slate-800";
                     row.innerHTML = `
                         <div class="min-w-0 flex-1">
                             <span class="text-[10px] font-bold text-amber-700 bg-amber-500/10 px-2 py-0.5 rounded uppercase tracking-wider">İSG Raporu Onay Bekliyor</span>
@@ -878,33 +1100,33 @@
                 reportsSection.classList.add('hidden');
             }
 
-            // Atanan şantiyeleri listele (4 Uzman Gruplu)
+            // ATANAN ŞANTİYELERİ VE UZMAN SORUMLULUK LİSTESİNİ DOLDUR
             const expertsGrid = document.getElementById('expertsCompaniesGrid');
             expertsGrid.innerHTML = '';
 
             initialExperts.forEach(exp => {
                 const expCompanies = companies.filter(c => c.expertId === exp.id);
                 const block = document.createElement('div');
-                block.className = "bg-[#0b1322] border border-slate-800 rounded-3xl overflow-hidden flex flex-col";
+                block.className = "bg-[#0b1322] border border-slate-800 rounded-3xl overflow-hidden flex flex-col min-w-0";
                 
                 let companiesListHtml = '';
                 expCompanies.forEach(c => {
                     companiesListHtml += `
-                        <div class="p-4 border border-slate-800 rounded-2xl bg-slate-955/30 hover:border-slate-750 transition">
-                            <div class="flex justify-between items-start text-sm mb-2 gap-2">
-                                <span class="font-bold text-slate-200 truncate">${c.name}</span>
+                        <div class="p-4 border border-slate-800 rounded-2xl bg-slate-950/30 hover:border-slate-700 transition min-w-0">
+                            <div class="flex justify-between items-start text-sm mb-2 gap-2 min-w-0">
+                                <span class="font-bold text-slate-200 truncate flex-1 block" title="${c.name}">${c.name}</span>
                                 <span class="text-emerald-400 font-bold shrink-0">% ${c.progress}</span>
                             </div>
                             <div class="w-full bg-slate-800 rounded-full h-1.5 mb-4 overflow-hidden">
                                 <div class="h-full bg-emerald-500 rounded-full" style="width: ${c.progress}%"></div>
                             </div>
-                            <div class="flex justify-between items-center border-t border-slate-800 pt-3 gap-2">
-                                <div class="text-xs text-slate-400 leading-tight min-w-0">
+                            <div class="flex justify-between items-center border-t border-slate-800 pt-3 gap-2 flex-wrap sm:flex-nowrap">
+                                <div class="text-xs text-slate-400 leading-tight min-w-0 flex-1">
                                     <p class="font-bold text-slate-300 truncate">Cari: <span class="text-red-500 font-extrabold">${c.debt}</span></p>
                                     <p class="mt-0.5 font-medium truncate">Ziyaret: ${c.nextVisit || 'Ziyaret Yok'}</p>
                                 </div>
-                                <button onclick="openManageCompanyModal('${c.id}')" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-355 hover:text-white rounded-xl transition shrink-0" title="Sorumlu Değiştir">
-                                    <i class="fas fa-plus"></i> Sorumlu Değiştir
+                                <button onclick="openManageCompanyModal('${c.id}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl transition text-[11px] font-bold shrink-0 flex items-center gap-1">
+                                    <i class="fas fa-edit"></i> Düzenle
                                 </button>
                             </div>
                         </div>
@@ -912,13 +1134,13 @@
                 });
 
                 block.innerHTML = `
-                    <div class="bg-slate-900 p-4 border-b border-slate-800 font-bold text-amber-400 flex justify-between items-center shrink-0">
-                        <span class="flex items-center gap-2"><i class="fas fa-user-tie text-blue-500"></i> ${exp.name}</span>
+                    <div class="bg-slate-900 p-4 border-b border-slate-800 font-bold text-amber-400 flex justify-between items-center shrink-0 gap-2">
+                        <span class="flex items-center gap-2 truncate"><i class="fas fa-user-tie text-blue-500 shrink-0"></i> <span class="truncate">${exp.name}</span></span>
                         <span class="text-xs font-bold bg-slate-950 px-2.5 py-1 rounded-full border border-slate-800 text-slate-400 shrink-0">
                             ${expCompanies.length} Şantiye
                         </span>
                     </div>
-                    <div class="p-4 space-y-4 flex-1">
+                    <div class="p-4 space-y-4 flex-1 min-w-0">
                         ${expCompanies.length === 0 ? '<p class="text-xs text-slate-500 italic p-4 text-center">Atanan şantiye bulunmuyor.</p>' : companiesListHtml}
                     </div>
                 `;
@@ -935,24 +1157,24 @@
                 const dürtButon = t.status !== 'completed' ? `
                     <div class="mt-4 pt-3 border-t border-slate-800 flex justify-end">
                         <button onclick="pingExpert('${assignedExpName}', '${t.title}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-extrabold text-[10px] px-3 py-1.5 rounded-lg transition flex items-center gap-1 shadow-sm">
-                            <i class="fas fa-exclamation-triangle"></i> Uzmanı Dürt (Hatırlat)
+                            <i class="fas fa-exclamation-triangle"></i> Uzmanı Dürt
                         </button>
                     </div>
                 ` : '';
 
                 const card = document.createElement('div');
-                card.className = "p-4 rounded-2xl border border-slate-800 bg-[#070b13] flex flex-col justify-between";
+                card.className = "p-4 rounded-2xl border border-slate-800 bg-[#070b13] flex flex-col justify-between min-w-0";
                 card.innerHTML = `
-                    <div>
+                    <div class="min-w-0">
                         <div class="flex justify-between items-start gap-2">
-                            <span class="text-[10px] font-bold text-slate-550 uppercase truncate">${t.companyName}</span>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase truncate flex-1 block" title="${t.companyName}">${t.companyName}</span>
                             <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase shrink-0 ${statusBadge}">
                                 ${statusText}
                             </span>
                         </div>
-                        <h4 class="font-extrabold text-sm text-white mt-1 truncate">${t.title}</h4>
-                        <p class="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">${t.desc}</p>
-                        <p class="text-[10px] text-indigo-400 font-bold mt-2">Atanan Sorumlu: ${assignedExpName}</p>
+                        <h4 class="font-extrabold text-sm text-white mt-1 truncate" title="${t.title}">${t.title}</h4>
+                        <p class="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed break-words">${t.desc}</p>
+                        <p class="text-[10px] text-indigo-400 font-bold mt-2 truncate">Atanan Sorumlu: ${assignedExpName}</p>
                     </div>
                     ${dürtButon}
                 `;
@@ -960,7 +1182,7 @@
             });
         }
 
-        // --- 9. DİNAMİK CARİ RAPORU CSV İTHALAT SÜRÜCÜSÜ ---
+        // --- 9. DİNAMİK CARİ RAPORU CSV İTHALAT SÜRÜCÜSÜ (FUZZY MATCH) ---
         function handleManagerCsv(input) {
             const file = input.files[0];
             if (!file) return;
@@ -986,9 +1208,9 @@
                 .trim();
 
             csvLines.forEach(line => {
-                const rawCariName = line['Cari Adı'];
-                const rawBakiye = line['Bakiye'];
-                if (!rawCariName || rawCariName === 'Cari Adı') return;
+                const rawCariName = line['Cari Adı'] || line['Cari Unvanı'] || Object.values(line)[1];
+                const rawBakiye = line['Borç Bak.'] || line['Bakiye'] || Object.values(line)[6] || "0";
+                if (!rawCariName) return;
 
                 const cleanedCsvName = cleanStr(rawCariName);
                 let bestMatch = null;
@@ -1011,7 +1233,7 @@
                         companyId: bestMatch.id,
                         companyName: bestMatch.name,
                         oldDebt: bestMatch.debt,
-                        newDebt: rawBakiye + " ₺"
+                        newDebt: parseFloat(rawBakiye).toLocaleString('tr-TR') + " ₺"
                     });
                 }
             });
@@ -1028,19 +1250,17 @@
             const tbody = document.getElementById('csvPreviewTableBody');
             tbody.innerHTML = '';
 
-            // Seçilen bakiye farklarını dolduralım
             data.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-900/50";
                 tr.innerHTML = `
                     <td class="p-3 font-bold text-white max-w-[180px] truncate">${item.companyName}</td>
-                    <td class="p-3 text-slate-555 line-through">${item.oldDebt}</td>
+                    <td class="p-3 text-slate-500 line-through">${item.oldDebt}</td>
                     <td class="p-3 text-emerald-400 font-bold">${item.newDebt}</td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            // Global önizleme state'ine aktaralım
             csvPreviewModalData = data;
             modal.classList.remove('hidden');
         }
@@ -1054,14 +1274,14 @@
                 if (idx !== -1) {
                     updatedCompanies[idx].debt = item.newDebt;
                     
-                    // Supabase buluta eşzamanlı yaz (Kural 1 & 2)
                     if (supabaseClient) {
                         await supabaseClient.from('companies').update({ debt: item.newDebt }).eq('id', item.companyId);
                     }
                 }
             }
 
-            setCompanies(updatedCompanies);
+            companies = updatedCompanies;
+            localStorage.setItem('isg_companies', JSON.stringify(companies));
             toggleCsvPreviewModal(false);
             showToastMessage("Cari borç bakiyeleri başarıyla senkronize edildi!");
             refreshDashboards();
@@ -1096,7 +1316,6 @@
             bulletins = [newBulletin, ...bulletins];
             localStorage.setItem('isg_bulletins', JSON.stringify(bulletins));
 
-            // Supabase canliya yaz
             if (supabaseClient) {
                 await supabaseClient.from('bulletins').insert([newBulletin]);
             }
@@ -1111,7 +1330,9 @@
             const myCompanies = companies.filter(c => c.expertId === currentUserId);
             const myTasks = tasks.filter(t => t.expertId === currentUserId);
 
-            // Uzman görevleri
+            // İstatistik rozetini güncelle
+            document.getElementById('expertStatsBadge').innerText = `${myCompanies.length} Aktif Şantiye`;
+
             const tasksSection = document.getElementById('expertTasksSection');
             const tasksContainer = document.getElementById('expertTasksContainer');
             tasksContainer.innerHTML = '';
@@ -1120,18 +1341,18 @@
                 tasksSection.classList.remove('hidden');
                 myTasks.forEach(t => {
                     const statusText = t.status === 'completed' ? 'Geri Al' : 'Tamamlandı İşaretle';
-                    const badge = t.status === 'completed' ? `<span class="text-[9px] font-black text-emerald-750 bg-emerald-500/10 px-2 py-0.5 rounded uppercase">Tamamlandı</span>` : '';
+                    const badge = t.status === 'completed' ? `<span class="text-[9px] font-black text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded uppercase">Tamamlandı</span>` : '';
                     
                     const row = document.createElement('div');
-                    row.className = "bg-[#0b1322] border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3";
+                    row.className = "bg-[#0b1322] border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 min-w-0";
                     row.innerHTML = `
                         <div class="min-w-0 flex-1">
                             <div class="flex items-center gap-2">
-                                <span class="text-[9px] font-extrabold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded tracking-wider uppercase">${t.companyName}</span>
+                                <span class="text-[9px] font-extrabold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded tracking-wider uppercase truncate" title="${t.companyName}">${t.companyName}</span>
                                 ${badge}
                             </div>
-                            <p class="font-bold text-white text-sm mt-1.5 truncate">${t.title}</p>
-                            <p class="text-xs text-slate-400 mt-1 leading-relaxed">${t.desc}</p>
+                            <p class="font-bold text-white text-sm mt-1.5 truncate" title="${t.title}">${t.title}</p>
+                            <p class="text-xs text-slate-400 mt-1 leading-relaxed break-words">${t.desc}</p>
                         </div>
                         <button onclick="toggleTaskStatus('${t.id}')" class="text-xs font-bold px-4 py-2 bg-[#10b981] hover:bg-[#059669] text-white rounded-xl transition shrink-0">
                             ${statusText}
@@ -1143,52 +1364,96 @@
                 tasksSection.classList.add('hidden');
             }
 
-            // Uzman sahaları
-            const compContainer = document.getElementById('expertCompaniesContainer');
-            compContainer.innerHTML = '';
+            // UZMAN ŞANTİYE TABLOSUNUN DOLDURULMASI
+            const tableBody = document.getElementById('expertCompaniesTableBody');
+            tableBody.innerHTML = '';
 
             if (myCompanies.length > 0) {
                 myCompanies.forEach(c => {
                     const isSubmitted = c.report && c.report.status === 'submitted';
-                    const reportBtnStyle = isSubmitted ? 'bg-emerald-900 text-emerald-300' : 'bg-blue-900 text-blue-100 hover:bg-blue-800';
-                    const reportBtnText = isSubmitted ? 'Rapor Gönderildi (Düzenle)' : 'Denetim Raporu Yaz';
+                    const reportBtnStyle = isSubmitted ? 'bg-emerald-900/40 text-emerald-300 border border-emerald-500/20' : 'bg-blue-900/30 text-blue-300 border border-blue-500/20 hover:bg-blue-900/60';
+                    const reportBtnText = isSubmitted ? 'Onaya Gönderildi' : 'Denetim Raporu Yaz';
 
-                    const row = document.createElement('div');
-                    row.className = "bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4";
-                    row.innerHTML = `
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg text-white mb-1 truncate">${c.name}</h3>
-                            <div class="flex items-center gap-4 text-sm text-slate-400 mb-3">
-                                <span class="flex items-center gap-1"><i class="fas fa-calendar-day"></i> Sonraki Denetim: ${c.nextVisit || 'Planlanmadı'}</span>
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-900/40 border-b border-slate-800 transition";
+                    tr.innerHTML = `
+                        <td class="p-3">
+                            <p class="font-bold text-slate-100 text-sm truncate max-w-[240px] sm:max-w-[320px]" title="${c.name}">${c.name}</p>
+                            <p class="text-[10px] text-slate-500 font-medium">Şantiye ID: ${c.id}</p>
+                        </td>
+                        <td class="p-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-black text-emerald-400">% ${c.progress}</span>
+                                <div class="w-20 bg-slate-800 h-1.5 rounded-full overflow-hidden hidden md:block">
+                                    <div class="bg-emerald-500 h-full" style="width: ${c.progress}%"></div>
+                                </div>
                             </div>
-                            <div class="flex items-center gap-3 mt-4">
-                                <button onclick="expertIncreaseProgress('${c.id}')" class="px-4 py-2 bg-slate-850 hover:bg-slate-700 text-slate-350 hover:text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
-                                    İlerleme Kaydet: %${c.progress} <i class="fas fa-plus"></i>
+                        </td>
+                        <td class="p-3 text-center">
+                            <span class="font-extrabold text-red-400 text-xs">${c.debt || '0,00 ₺'}</span>
+                        </td>
+                        <td class="p-3 text-center">
+                            <span class="text-slate-300 font-semibold text-xs">${c.nextVisit || 'Ziyaret Yok'}</span>
+                        </td>
+                        <td class="p-3 text-right">
+                            <div class="flex justify-end gap-2 flex-wrap sm:flex-nowrap">
+                                <button onclick="expertIncreaseProgress('${c.id}')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1" title="Denetim İlerlemesini %10 Artır">
+                                    <i class="fas fa-chart-line text-emerald-500"></i> İlerleme Ekle
                                 </button>
-                                <button onclick="openSahaRaporuEditor('${c.id}', 'edit')" class="px-4 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-2 ${reportBtnStyle}">
+                                <button onclick="openSahaRaporuEditor('${c.id}', 'edit')" class="px-3 py-1.5 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1 shrink-0 ${reportBtnStyle}">
                                     <i class="fas fa-file-contract"></i> ${reportBtnText}
                                 </button>
                             </div>
-                        </div>
+                        </td>
                     `;
-                    compContainer.appendChild(row);
+                    tableBody.appendChild(tr);
                 });
             } else {
-                compContainer.innerHTML = '<p class="text-xs text-slate-500 italic text-center p-8">Atandığınız herhangi bir şantiye bulunmamaktadır.</p>';
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="p-8 text-center text-xs text-slate-505 italic">Sorumlu olduğunuz şantiye bulunmamaktadır.</td>
+                    </tr>
+                `;
             }
         }
 
         async function expertIncreaseProgress(companyId) {
-            await increaseProgress(companyId);
+            companies = companies.map(c => {
+                if (c.id === companyId) {
+                    const nextP = Math.min(100, (c.progress || 0) + 10);
+                    showToastMessage(`${c.name} İlerleme Derecesi: %${nextP}`);
+                    return { ...c, progress: nextP };
+                }
+                return c;
+            });
+            localStorage.setItem('isg_companies', JSON.stringify(companies));
+            
+            const matched = companies.find(c => c.id === companyId);
+            if (matched && supabaseClient) {
+                await supabaseClient.from('companies').update({ progress: matched.progress }).eq('id', companyId);
+            }
             renderExpertDashboard();
         }
 
-        function toggleTaskStatus(taskId) {
-            handleToggleTaskStatus(taskId);
+        async function toggleTaskStatus(taskId) {
+            tasks = tasks.map(t => {
+                if (t.id === taskId) {
+                    const nextStatus = t.status === 'completed' ? 'pending' : 'completed';
+                    showToastMessage(nextStatus === 'completed' ? "Görev başarıyla tamamlandı!" : "Görev tekrar aktif edildi.");
+                    return { ...t, status: nextStatus };
+                }
+                return t;
+            });
+            localStorage.setItem('isg_tasks', JSON.stringify(tasks));
+
+            const matchedTask = tasks.find(t => t.id === taskId);
+            if (matchedTask && supabaseClient) {
+                await supabaseClient.from('tasks').update({ status: matchedTask.status }).eq('id', taskId);
+            }
             renderExpertDashboard();
         }
 
-        // --- 12. SAHA RAPORLAMA & DÖF EDITÖRÜ ---
+        // --- 12. SAHA RAPORLAMA & DÖF EDİTÖRÜ ---
         function openSahaRaporuEditor(companyId, mode) {
             activeReportCompanyId = companyId;
             const company = companies.find(c => c.id === companyId);
@@ -1202,7 +1467,6 @@
 
             const isEditMode = mode === 'edit';
             
-            // Edit yetkilerini gösterip gizleyelim
             document.getElementById('btnNewFinding').style.display = isEditMode ? 'flex' : 'none';
             document.getElementById('btnSaveReportDraft').style.display = isEditMode ? 'block' : 'none';
             document.getElementById('btnSubmitReportToManager').style.display = isEditMode ? 'block' : 'none';
@@ -1216,13 +1480,13 @@
             container.innerHTML = '';
 
             if (activeFindings.length === 0) {
-                container.innerHTML = '<p class="text-slate-550 italic p-4 text-center border border-slate-800 rounded">Şantiyede uygunsuzluk tespit edilmemiştir.</p>';
+                container.innerHTML = '<p class="text-slate-500 italic p-4 text-center border border-slate-800 rounded">Şantiyede uygunsuzluk tespit edilmemiştir.</p>';
                 return;
             }
 
             activeFindings.forEach((finding, index) => {
                 const block = document.createElement('div');
-                block.className = "border border-slate-800 bg-slate-900/20 rounded-lg p-4 relative";
+                block.className = "border border-slate-800 bg-slate-900/20 rounded-lg p-4 relative min-w-0";
                 
                 const silButon = isEditMode ? `
                     <button onclick="removeFindingField(${finding.id})" class="absolute top-2 right-2 text-red-500 hover:bg-red-955 p-1 rounded">
@@ -1240,21 +1504,21 @@
                             </div>
                             <div class="space-y-1">
                                 <label class="text-xs font-bold text-slate-400 uppercase">Düzeltici Önleyici Öneri (DÖF)</label>
-                                <textarea oninput="updateFindingValue(${finding.id}, 'action', this.value)" class="w-full border border-slate-855 bg-slate-955 rounded p-2 text-sm h-20 outline-none text-white focus:border-blue-500">${finding.action || ''}</textarea>
+                                <textarea oninput="updateFindingValue(${finding.id}, 'action', this.value)" class="w-full border border-slate-800 bg-slate-950 rounded p-2 text-sm h-20 outline-none text-white focus:border-blue-500">${finding.action || ''}</textarea>
                             </div>
                         </div>
-                        <div class="flex gap-4 mt-3">
-                            <div class="w-1/2">
-                                <label class="text-xs font-bold text-slate-400 uppercase block mb-1">Risk Seviyesi</label>
+                        <div class="flex gap-4 mt-3 flex-wrap sm:flex-nowrap">
+                            <div class="w-full sm:w-1/2">
+                                <label class="text-xs font-bold text-slate-400 block mb-1">Risk Seviyesi</label>
                                 <select onchange="updateFindingValue(${finding.id}, 'risk', this.value)" class="border border-slate-800 bg-slate-950 text-white rounded p-1.5 text-sm w-full outline-none">
                                     <option value="Düşük" ${finding.risk === 'Düşük' ? 'selected' : ''}>Düşük</option>
                                     <option value="Orta" ${finding.risk === 'Orta' ? 'selected' : ''}>Orta</option>
                                     <option value="Yüksek" ${finding.risk === 'Yüksek' ? 'selected' : ''}>Yüksek</option>
                                 </select>
                             </div>
-                            <div class="w-1/2">
-                                <label class="text-xs font-bold text-slate-400 uppercase block mb-1">Termin Süresi (Son Gün)</label>
-                                <input type="date" value="${finding.deadline || ''}" onchange="updateFindingValue(${finding.id}, 'deadline', this.value)" class="border border-slate-855 text-white bg-slate-955 rounded p-1 text-sm w-full outline-none" />
+                            <div class="w-full sm:w-1/2">
+                                <label class="text-xs font-bold text-slate-400 block mb-1">Termin Süresi (Son Gün)</label>
+                                <input type="date" value="${finding.deadline || ''}" onchange="updateFindingValue(${finding.id}, 'deadline', this.value)" class="border border-slate-800 text-white bg-slate-950 rounded p-1 text-sm w-full outline-none" />
                             </div>
                         </div>
                     `;
@@ -1264,14 +1528,14 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1">
                                 <p class="text-xs font-bold text-slate-400 uppercase">Saha Gözlemi / Bulgular</p>
-                                <p class="text-sm font-medium text-slate-355">${finding.observation || '-'}</p>
+                                <p class="text-sm font-medium text-slate-300 break-words">${finding.observation || '-'}</p>
                             </div>
                             <div class="space-y-1">
                                 <p class="text-xs font-bold text-slate-400 uppercase">Düzeltici Önleyici Öneri (DÖF)</p>
-                                <p class="text-sm font-medium text-blue-400">${finding.action || '-'}</p>
+                                <p class="text-sm font-medium text-blue-400 break-words">${finding.action || '-'}</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 mt-3">
+                        <div class="flex gap-4 mt-3 flex-wrap sm:flex-nowrap">
                             <div>
                                 <span class="px-2 py-1 text-xs font-bold rounded ${badgeColor}">${finding.risk || 'Orta'}</span>
                             </div>
@@ -1302,19 +1566,6 @@
             activeFindings = activeFindings.map(f => f.id === id ? { ...f, [field]: value } : f);
         }
 
-        // Görev oluşturulurken tetiklenen kilitli durum kontrolü
-        function handleToggleTaskStatus(taskId) {
-            tasks = tasks.map(t => {
-                if (t.id === taskId) {
-                    const nextStatus = t.status === 'completed' ? 'pending' : 'completed';
-                    showToastMessage(nextStatus === 'completed' ? "Görev başarıyla tamamlandı!" : "Görev tekrar etkinleştirildi.");
-                    return { ...t, status: nextStatus };
-                }
-                return t;
-            });
-            localStorage.setItem('isg_tasks', JSON.stringify(tasks));
-        }
-
         function removeFindingField(id) {
             activeFindings = activeFindings.filter(f => f.id !== id);
             renderFindingsList(true);
@@ -1327,7 +1578,19 @@
                 findings: activeFindings
             };
 
-            await saveReport(activeReportCompanyId, reportPayload, status);
+            companies = companies.map(c => {
+                if (c.id === activeReportCompanyId) {
+                    showToastMessage(status === 'submitted' ? "Rapor Ali İhsan Bey'e başarıyla gönderildi!" : "Rapor taslağı kaydedildi.");
+                    return { ...c, report: reportPayload };
+                }
+                return c;
+            });
+            localStorage.setItem('isg_companies', JSON.stringify(companies));
+
+            if (supabaseClient) {
+                await supabaseClient.from('companies').update({ report: reportPayload }).eq('id', activeReportCompanyId);
+            }
+
             toggleReportModal(false);
             if (currentUserRole === 'expert') renderExpertDashboard();
             if (currentUserRole === 'manager') renderManagerDashboard();
@@ -1347,7 +1610,7 @@
             activeFindings.forEach((f, idx) => {
                 textContent += `${idx + 1}. TESPIT VE GOZLEM: ${f.observation}\n`;
                 textContent += `   ACIL ALINACAK DÖF ONLEMI: ${f.action}\n`;
-                textContent += `   RISK: ${f.risk}  |  TERMİN: ${f.deadline}\n\n`;
+                textContent += `   RISK: ${f.risk}  |  TERMIN: ${f.deadline}\n\n`;
             });
 
             const element = document.createElement("a");
@@ -1366,7 +1629,7 @@
             else modal.classList.add('hidden');
         }
 
-        // --- 13. YÖNETİCİ MODALLAR ---
+        // --- 13. YÖNETİCİ GÖREV VE ATAMA MODALLARI ---
         function openManageCompanyModal(companyId) {
             const company = companies.find(c => c.id === companyId);
             if (!company) return;
@@ -1375,13 +1638,11 @@
             document.getElementById('manageNextVisit').value = company.nextVisit || '';
             document.getElementById('manageDebt').value = company.debt || '';
 
-            // Uzman select'ini dolduralım
             const selectEl = document.getElementById('manageExpertSelect');
             selectEl.innerHTML = '';
             initialExperts.forEach(e => {
                 const opt = document.createElement('option');
                 opt.value = e.id;
-                opt.className = "bg-[#0f172a] text-white";
                 opt.innerText = e.name;
                 if (e.id === company.expertId) opt.selected = true;
                 selectEl.appendChild(opt);
@@ -1396,7 +1657,26 @@
             const nextVisit = document.getElementById('manageNextVisit').value;
             const debt = document.getElementById('manageDebt').value;
 
-            await updateCompanyDetails(activeReportCompanyId, expertId, nextVisit, debt);
+            companies = companies.map(c => {
+                if (c.id === activeReportCompanyId) {
+                    showToastMessage(`${c.name} sorumluluk bilgileri başarıyla güncellendi.`);
+                    return { ...c, expertId, nextVisit, debt };
+                }
+                return c;
+            });
+            localStorage.setItem('isg_companies', JSON.stringify(companies));
+
+            const matched = companies.find(c => c.id === activeReportCompanyId);
+            if (matched && supabaseClient) {
+                await supabaseClient.from('companies').update({
+                    expertId: matched.expertId,
+                    expertid: matched.expertId, // Postgres uyumluluğu için
+                    nextVisit: matched.nextVisit,
+                    nextvisit: matched.nextVisit, // Postgres uyumluluğu için
+                    debt: matched.debt
+                }).eq('id', activeReportCompanyId);
+            }
+
             toggleManageModal(false);
             renderManagerDashboard();
         }
@@ -1415,7 +1695,6 @@
                 initialExperts.forEach(e => {
                     const opt = document.createElement('option');
                     opt.value = e.id;
-                    opt.className = "bg-[#0f172a] text-white";
                     opt.innerText = e.name;
                     selectEl.appendChild(opt);
                 });
@@ -1425,7 +1704,7 @@
             }
         }
 
-        function createNewTask() {
+        async function createNewTask() {
             const title = document.getElementById('taskTitleInput').value;
             const desc = document.getElementById('taskDescInput').value;
             const expertId = document.getElementById('taskExpertSelect').value;
@@ -1436,9 +1715,43 @@
                 return;
             }
 
-            handleCreateTask(title, desc, expertId, companyName);
+            const newTask = {
+                id: 'task_' + Date.now(),
+                title,
+                desc,
+                expertId,
+                companyName,
+                status: 'pending'
+            };
+
+            tasks = [newTask, ...tasks];
+            localStorage.setItem('isg_tasks', JSON.stringify(tasks));
+            showToastMessage(`Görev başarıyla uzmanına iletildi!`);
+
+            if (supabaseClient) {
+                await supabaseClient.from('tasks').insert([
+                    {
+                        id: newTask.id,
+                        title: newTask.title,
+                        desc: newTask.desc,
+                        expertId: newTask.expertId,
+                        expertid: newTask.expertId, // Postgres küçük harf uyumluluğu
+                        companyName: newTask.companyName,
+                        companyname: newTask.companyName, // Postgres küçük harf uyumluluğu
+                        status: newTask.status
+                    }
+                ]);
+            }
+
             toggleTaskModal(false);
             renderManagerDashboard();
+        }
+
+        function pingExpert(expertName, taskTitle) {
+            const message = encodeURIComponent(`Sayın ${expertName}, Ali İhsan Bey sizi "${taskTitle}" görevi için dürtüyor! Lütfen acilen kontrol ediniz.`);
+            const waUrl = `https://wa.me/${phoneContact}?text=${message}`;
+            window.open(waUrl, '_blank');
+            showToastMessage("Uzman WhatsApp üzerinden başarıyla dürtüldü!", "info");
         }
 
         // --- 14. QR SİMÜLATÖRLERİ SÜRÜCÜSÜ ---
@@ -1448,13 +1761,13 @@
             companies.forEach(c => {
                 const opt = document.createElement('option');
                 opt.value = c.id;
-                opt.className = "bg-[#0f172a] text-white";
                 opt.innerText = c.name;
                 selectEl.appendChild(opt);
             });
             updateCompanyQR();
         }
 
+        // QR Seçicisi ve QR kodu yenileme tetikleyicisi
         function updateCompanyQR() {
             const compId = document.getElementById('qrCompanySelector').value;
             const qrUrl = `${serverIp}?view=company&id=${compId}`;
@@ -1462,7 +1775,6 @@
             document.getElementById('qrCompanyLink').innerText = qrUrl;
             document.getElementById('qrCompanyImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrUrl)}&color=059669`;
             
-            // Simülasyon butonu ataması
             document.getElementById('qrCompanySimBtn').onclick = function() {
                 setSelectedCompany(compId);
                 navigateTo('qr_company');
@@ -1483,7 +1795,7 @@
             selectedCompanyId = id;
         }
 
-        // --- 15. VIP FİRMA VE İŞÇİ GÖRÜNÜMÜ MOTORU ---
+        // --- 15. VIP FİRMA SAHİBİ VE İŞÇİ GÖRÜNÜMÜ MOTORU ---
         function renderCompanyClientView() {
             const company = companies.find(c => c.id === selectedCompanyId) || companies[0];
             const assignedExpert = initialExperts.find(e => e.id === company?.expertId) || initialExperts[0];
@@ -1497,13 +1809,13 @@
             findings.forEach(f => {
                 const riskBadge = f.risk === 'Yüksek' ? 'bg-red-500/20 text-red-400' : 'bg-orange-500/20 text-orange-400';
                 findingsHtml += `
-                    <div class="p-3 bg-slate-955 rounded-xl border border-slate-800 text-xs text-left">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-extrabold text-slate-200">Gözlem: ${f.observation}</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded uppercase ${riskBadge}">${f.risk}</span>
+                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs text-left min-w-0">
+                        <div class="flex justify-between items-center mb-1 gap-2">
+                            <span class="font-extrabold text-slate-200 truncate flex-1 block">Gözlem: ${f.observation}</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded uppercase shrink-0 ${riskBadge}">${f.risk}</span>
                         </div>
-                        <p class="text-slate-400 mt-1"><span class="text-emerald-400 font-bold">DÖF Önlemi:</span> ${f.action}</p>
-                        <p class="text-[9px] text-slate-505 mt-1">Termin Tarihi: ${f.deadline || '-'}</p>
+                        <p class="text-slate-400 mt-1 break-words"><span class="text-emerald-400 font-bold">DÖF Önlemi:</span> ${f.action}</p>
+                        <p class="text-[9px] text-slate-500 mt-1">Termin Tarihi: ${f.deadline || '-'}</p>
                     </div>
                 `;
             });
@@ -1515,31 +1827,31 @@
                     <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">VIP PORTAL</span>
                 </div>
                 <div class="p-6 space-y-6">
-                    <div class="bg-[#0b1322] border border-slate-800 rounded-2xl p-5 relative overflow-hidden">
+                    <div class="bg-[#0b1322] border border-slate-800 rounded-2xl p-5 relative overflow-hidden min-w-0">
                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sözleşmeli Şantiye / Firma</p>
-                        <h3 class="font-extrabold text-base text-white leading-tight mt-1">${company?.name}</h3>
-                        <p class="text-xs text-amber-500 font-semibold mt-2">Atanan Uzman: ${assignedExpert.name}</p>
+                        <h3 class="font-extrabold text-base text-white leading-tight mt-1 break-words">${company?.name}</h3>
+                        <p class="text-xs text-amber-500 font-semibold mt-2 truncate">Atanan Uzman: ${assignedExpert.name}</p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-[#0b1322] border border-slate-800 rounded-2xl p-4 text-center">
                             <i class="fas fa-shield-halved text-emerald-400 text-xl mb-1 block"></i>
-                            <p class="text-[10px] text-slate-505 font-bold uppercase">Denetim İlerlemesi</p>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase">Denetim İlerlemesi</p>
                             <p class="text-xl font-black text-white mt-1">% ${company?.progress}</p>
-                            <div class="w-full bg-slate-855 h-1.5 rounded-full overflow-hidden mt-3">
+                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-3">
                                 <div class="bg-emerald-500 h-full" style="width: ${company?.progress}%"></div>
                             </div>
                         </div>
                         <div class="bg-[#0b1322] border border-slate-800 rounded-2xl p-4 text-center">
                             <i class="fas fa-wallet text-red-400 text-xl mb-1 block"></i>
-                            <p class="text-[10px] text-slate-505 font-bold uppercase">Cari Hesap Borcu</p>
-                            <p class="text-xl font-black text-red-400 mt-1">${company?.debt || '0,00 ₺'}</p>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase">Cari Hesap Borcu</p>
+                            <p class="text-xl font-black text-red-400 mt-1 truncate">${company?.debt || '0,00 ₺'}</p>
                             <p class="text-[9px] text-slate-400 mt-3 font-semibold uppercase tracking-wider">Mali Durum</p>
                         </div>
                     </div>
 
                     <div class="flex bg-[#0b1322] border border-slate-800 rounded-2xl p-4 gap-4 items-center">
-                        <div class="bg-blue-[#070b13] p-3.5 rounded-xl text-blue-400 border border-blue-900/30"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="bg-[#070b13] p-3.5 rounded-xl text-blue-400 border border-blue-900/30"><i class="fas fa-calendar-alt"></i></div>
                         <div>
                             <p class="text-[10px] text-slate-455 font-bold uppercase tracking-wider">Planlanan Sonraki Ziyaret</p>
                             <p class="text-sm font-extrabold text-slate-200 mt-0.5">${company?.nextVisit || 'Ziyaret Planlanmadı'}</p>
@@ -1551,7 +1863,7 @@
                             <i class="fas fa-triangle-exclamation text-amber-500"></i> Şantiyedeki Güncel İSG Tespitleriniz
                         </h4>
                         <div class="space-y-3.5 max-h-[160px] overflow-y-auto pr-1">
-                            ${findingsHtml || '<p class="text-xs text-slate-400 italic">Sahanızda aktif bir uygunsuzluk bulunmamaktadır.</p>'}
+                            ${findingsHtml || '<p class="text-xs text-slate-400 italic text-center py-2">Sahanızda aktif bir uygunsuzluk bulunmamaktadır.</p>'}
                         </div>
                     </div>
 
@@ -1559,11 +1871,11 @@
                         <i class="fas fa-print text-amber-400"></i> Şantiye İSG Durum Raporunu İndir
                     </button>
 
-                    <div class="space-y-2 pt-4 border-t border-slate-800/60 text-slate-100">
+                    <div class="space-y-2 pt-4 border-t border-slate-800 text-slate-100">
                         <a href="https://wa.me/${phoneContact}?text=${waMessageExpert}" target="_blank" class="w-full bg-[#10b981] hover:bg-[#059669] text-white font-extrabold p-3.5 rounded-xl transition text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md">
-                            <i class="fab fa-whatsapp text-white"></i> İSG Uzmanına Soru Sor
+                            <i class="fab fa-whatsapp text-white"></i> İSG Uzmanına Soru Sör
                         </a>
-                        <a href="https://wa.me/${phoneContact}?text=${waMessageManager}" target="_blank" class="w-full bg-slate-955 hover:bg-slate-850 border border-slate-800 text-amber-500 font-extrabold p-3.5 rounded-xl transition text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                        <a href="https://wa.me/${phoneContact}?text=${waMessageManager}" target="_blank" class="w-full bg-slate-950 hover:bg-slate-850 border border-slate-800 text-amber-500 font-extrabold p-3.5 rounded-xl transition text-xs uppercase tracking-wider flex items-center justify-center gap-2">
                             <i class="fas fa-shield-halved text-amber-400"></i> Ali İhsan Bey'e Bağlan
                         </a>
                     </div>
@@ -1593,26 +1905,25 @@
             });
 
             if (matchesSearchAndCategory.length === 0) {
-                container.innerHTML = '<div class="p-8 text-center border border-slate-855 rounded-2xl bg-slate-900/30 text-slate-500 text-xs italic">Eşleşen herhangi bir bülten bulunamadı.</div>';
+                container.innerHTML = '<div class="p-8 text-center border border-slate-800 rounded-2xl bg-slate-900/30 text-slate-500 text-xs italic">Eşleşen herhangi bir bülten bulunamadı.</div>';
                 return;
             }
 
             matchesSearchAndCategory.forEach(b => {
                 const div = document.createElement('div');
-                div.className = "bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-orange-500/30 transition-all duration-300";
+                div.className = "bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-orange-500/30 transition-all duration-300 min-w-0";
                 div.innerHTML = `
                     <div class="absolute right-0 top-0 w-24 h-24 bg-gradient-to-bl from-orange-500/5 to-transparent rounded-bl-full"></div>
                     <div class="flex justify-between items-center text-[10px] font-bold text-slate-400 mb-2">
                         <span class="uppercase tracking-widest text-orange-500">${b.category || 'GENEL İSG'}</span>
                         <span>${b.date}</span>
                     </div>
-                    <h3 class="font-extrabold text-sm text-white group-hover:text-orange-400 transition-colors">${b.title}</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed mt-2.5">${b.content}</p>
+                    <h3 class="font-extrabold text-sm text-white group-hover:text-orange-400 transition-colors break-words">${b.title}</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed mt-2.5 break-words">${b.content}</p>
                 `;
                 container.appendChild(div);
             });
 
-            // WhatsApp linkini dinamik güncelleyelim
             const waMsg = encodeURIComponent("Merhaba, şantiyedeki İSG bültenleri hakkında uzmanımıza bir İSG sorusu iletmek istiyorum.");
             document.getElementById('workerWhatsAppBtn').href = `https://wa.me/${phoneContact}?text=${waMsg}`;
         }
@@ -1620,7 +1931,6 @@
         function setWorkerCategory(cat) {
             workerCategory = cat;
             
-            // Buton aktiflik sınıflarını düzenle
             const buttons = document.querySelectorAll('.category-btn');
             buttons.forEach(btn => {
                 if (btn.innerText === cat || (cat === 'Hepsi' && btn.innerText === 'HEPSİ')) {
@@ -1637,7 +1947,6 @@
             renderWorkerBulletins();
         }
 
-        // --- 16. LOKAL YARDIMCI FONKSİYONLAR ---
         function toggleSettingsModal(show) {
             const modal = document.getElementById('settingsModal');
             if (show) {
@@ -1648,22 +1957,24 @@
             }
         }
 
+        // Vercel yayını yönlendirmesini kaydeder
         function saveAppSettings() {
             const ip = document.getElementById('settingsServerIpInput').value;
-            saveSettings(ip, supabaseUrl, supabaseAnonKey);
+            serverIp = ip;
+            localStorage.setItem('isg_server_ip', ip);
+            showToastMessage("Sistem yönlendirme adresleri güncellendi!");
+            toggleSettingsModal(false);
+            if (currentView === 'qr_generator_company') updateCompanyQR();
+            if (currentView === 'qr_generator_worker') initWorkerQRView();
         }
 
-        function setSelectedCompany(id) {
-            selectedCompanyId = id;
-        }
-
-        // --- DESTEKÇİ BİLEŞENLER ---
+        // --- 16. ÖZEL HTML BİLEŞENLERİ (CUSTOM ELEMENTS) ---
         class Logo extends HTMLElement {
             connectedCallback() {
                 this.innerHTML = `
-                    <div class="flex items-center gap-3.5">
-                        <svg viewBox="0 0 100 100" fill="none" class="w-11 h-11 drop-shadow-[0_0_15px_rgba(16,185,129,0.35)]">
-                            <rect x="18" y="18" width="64" height="64" rx="18" stroke="url(#logoGoldGrad2)" stroke-width="6.5" fill="#090f19"/>
+                    <div class="flex items-center gap-3.5 select-none shrink-0">
+                        <svg viewBox="0 0 100 100" fill="none" class="w-11 h-11 drop-shadow-[0_0_15px_rgba(16,185,129,0.35)] shrink-0">
+                            <rect x="18" y="18" width="64" height="64" rx="18" stroke="url(#logoGoldGrad2)" stroke-width="6.5" fill="#090f19" />
                             <path d="M40 51L48 59L61 41" stroke="#10b981" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <circle cx="50" cy="50" r="44" stroke="rgba(245, 158, 11, 0.15)" stroke-width="1.5" stroke-dasharray="6 4"/>
                             <defs>
@@ -1675,8 +1986,8 @@
                             </defs>
                         </svg>
                         <div class="text-left">
-                            <span class="font-extrabold text-white tracking-[0.15em] text-lg uppercase block">DIŞ SAHA</span>
-                            <span class="text-[9px] font-black text-slate-400 tracking-[0.25em] block uppercase opacity-85">KOLLEKTİF GRUP</span>
+                            <span class="font-extrabold text-white tracking-[0.15em] text-lg uppercase block leading-none">DIŞ SAHAN</span>
+                            <span class="text-[9px] font-black text-slate-500 tracking-[0.25em] block uppercase opacity-85 mt-1">KOLLEKTİF GRUP</span>
                         </div>
                     </div>
                 `;
