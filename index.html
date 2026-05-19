@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dış Sahan - Premium İSG & Cari Yönetim</title>
-    <!-- Tailwind CSS, PapaParse ve FontAwesome İkonları -->
+    <title>Dış Saha - Premium İSG & Cari Yönetim</title>
+    <!-- Tailwind CSS ve FontAwesome İkonları -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -18,9 +18,9 @@
             color: #f1f5f9;
         }
 
-        /* Midnight Velvet, Emerald Green & Brass Gold Geçişleri */
+        /* Varak Altın ve Gece Mavisi Premium Geçişleri (image_344d2f.png esintili) */
         .premium-gradient {
-            background: linear-gradient(135deg, #05080f 0%, #0c1322 50%, #070b13 100%);
+            background: linear-gradient(135deg, #090f19 0%, #0c1322 50%, #070b13 100%);
         }
 
         .gold-border {
@@ -87,8 +87,8 @@
             <i class="fas fa-cog text-amber-500"></i> Yönlendirme Ayarı
         </button>
 
-        <div class="bg-[#0b1322]/90 border border-amber-500/20 rounded-[32px] shadow-2xl p-6 sm:p-10 w-full max-w-md relative z-10 text-center">
-            <!-- Kurumsal Logo -->
+        <div class="bg-[#0b1322]/90 border border-amber-500/20 rounded-[32px] shadow-2xl p-10 w-full max-w-md relative z-10 text-center">
+            <!-- Kurumsal Vektör Logo -->
             <div class="mb-10 flex justify-center items-center gap-3.5">
                 <svg viewBox="0 0 100 100" fill="none" class="w-12 h-12 drop-shadow-[0_0_15px_rgba(16,185,129,0.35)]">
                     <rect x="18" y="18" width="64" height="64" rx="18" stroke="url(#logoGoldGrad)" stroke-width="6.5" fill="#090f19"/>
@@ -103,21 +103,21 @@
                     </defs>
                 </svg>
                 <div class="text-left">
-                    <span class="font-extrabold text-white tracking-[0.15em] text-xl uppercase bg-gradient-to-r from-amber-400 via-yellow-200 to-emerald-400 bg-clip-text text-transparent block">DIŞ SAHAN</span>
-                    <span class="text-[10px] font-black text-slate-400 tracking-[0.25em] block uppercase opacity-85">PREMIUM PORTAL</span>
+                    <span class="font-extrabold text-white tracking-[0.15em] text-xl uppercase bg-gradient-to-r from-amber-400 via-yellow-200 to-emerald-400 bg-clip-text text-transparent block">DIŞ SAHA</span>
+                    <span class="text-[10px] font-black text-slate-400 tracking-[0.25em] block uppercase opacity-85">KOLLEKTİF GRUP</span>
                 </div>
             </div>
 
             <div class="space-y-4">
                 <!-- MÜDÜR PORTAL BUTONU -->
                 <button onclick="handleLogin('manager')" class="w-full bg-[#0a0f1d] border border-amber-500/20 hover:border-amber-500/60 hover:bg-[#121b30] text-white p-4 rounded-xl font-bold flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-3"><i class="fas fa-users text-amber-500"></i> <span class="font-semibold text-sm">MÜDÜR PORTALİ (Ali İhsan Bey)</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-users text-amber-500"></i> <span class="font-semibold text-sm">MÜDÜR PORTALI (Ali İhsan Bey)</span></div>
                     <i class="fas fa-arrow-right text-amber-500"></i>
                 </button>
 
                 <div class="relative py-2">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-800"></div></div>
-                    <div class="relative flex justify-center"><span class="bg-[#0b1322] px-4 text-[10px] font-bold text-emerald-450 uppercase tracking-widest">UZMAN GİRİŞ ALANI (4 UZMAN)</span></div>
+                    <div class="relative flex justify-center"><span class="bg-[#0b1322] px-4 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">UZMAN GİRİŞ ALANI (4 UZMAN)</span></div>
                 </div>
 
                 <!-- 4 UZMAN SEÇİM ALANI -->
@@ -154,7 +154,7 @@
             <div onclick="navigateTo('login')" class="cursor-pointer"><custom-logo></custom-logo></div>
             <div class="flex items-center gap-4">
                 <span class="text-amber-500 font-bold text-sm">Yönetici: Ali İhsan Bey</span>
-                <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
+                <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-775 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </header>
 
@@ -206,7 +206,7 @@
                     </div>
                 </div>
                 <div class="bg-[#0b1322] border border-amber-500/10 p-6 rounded-[24px] shadow-sm flex items-center gap-4 hover:border-amber-500/30 transition">
-                    <div class="bg-amber-955 p-4 rounded-2xl text-amber-500"><i class="fas fa-wallet text-2xl"></i></div>
+                    <div class="bg-amber-955 p-4 rounded-2xl text-amber-405"><i class="fas fa-wallet text-2xl"></i></div>
                     <div class="min-w-0 flex-1">
                         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">Toplam Alacak</p>
                         <p id="mTotalDebt" class="text-xl font-black text-amber-400 truncate">0,00 ₺</p>
@@ -216,7 +216,7 @@
                     <div class="bg-orange-955 p-4 rounded-2xl text-orange-400"><i class="fas fa-envelope text-2xl"></i></div>
                     <div class="min-w-0 flex-1">
                         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">Yeni Raporlar</p>
-                        <p id="mPendingReports" class="text-2xl font-black text-orange-500 truncate">0</p>
+                        <p id="mPendingReports" class="text-2xl font-black text-orange-505 truncate">0</p>
                     </div>
                 </div>
             </div>
@@ -225,7 +225,6 @@
             <div id="dragDropImportContainer" class="bg-[#0b1322] border-2 border-dashed border-[#c29c53]/30 p-8 rounded-[32px] shadow-xl hover:border-[#c29c53]/70 transition-all duration-300 text-center relative overflow-hidden group">
                 <div class="absolute inset-0 bg-gradient-to-tr from-amber-500/5 to-emerald-500/5 pointer-events-none"></div>
                 
-                <!-- Tıklama ve tarayıcı görünmezlik kilidi çözüldü! hidden yerine absolute opacity-0 kullanıldı -->
                 <input type="file" accept=".csv" id="universalCsvInput" onchange="handleUniversalCsvUpload(this)" class="absolute opacity-0 w-1 h-1 pointer-events-none">
                 
                 <label for="universalCsvInput" class="cursor-pointer block space-y-4 relative z-10">
@@ -348,7 +347,7 @@
             <custom-logo></custom-logo>
             <div class="flex items-center gap-3">
                 <span id="expertHeaderName" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20 truncate max-w-[150px]">-</span>
-                <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
+                <button onclick="handleLogout()" class="p-2.5 bg-slate-800 hover:bg-slate-750 rounded-xl border border-slate-700 transition"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </header>
 
@@ -428,7 +427,7 @@
 
             <div class="relative text-slate-800">
                 <input type="text" id="workerSearchInput" oninput="filterWorkerBulletins()" placeholder="Yönetmelik veya kural ara..." class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-3.5 pl-10 text-xs font-semibold text-white placeholder-slate-555 outline-none focus:border-orange-500 transition shadow-inner" />
-                <i class="fas fa-search absolute left-3.5 top-4 text-slate-500"></i>
+                <i class="fas fa-search absolute left-3.5 top-4 text-slate-505"></i>
             </div>
 
             <div id="workerCategoryFilter" class="flex gap-2 overflow-x-auto pb-1 -mx-2 px-2">
@@ -447,8 +446,8 @@
                 </a>
             </div>
 
-            <button onclick="navigateTo('login')" class="w-full bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white font-bold p-4 rounded-xl transition text-xs uppercase tracking-wider">
-                 ← Giriş Ekranına Dön
+            <button onclick="navigateTo('login')" class="w-full bg-slate-900 hover:bg-slate-705 border border-slate-800 text-slate-400 hover:text-white font-bold p-4 rounded-xl transition text-xs uppercase tracking-wider">
+                 <!-- ← Giriş Ekranına Dön -->
             </button>
         </div>
     </div>
@@ -479,7 +478,7 @@
 
             <div class="flex gap-3">
                 <button id="qrCompanySimBtn" class="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-bold hover:bg-emerald-700 transition text-sm">Simülatörü Aç</button>
-                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-205 py-3 rounded-xl font-bold transition text-sm">Geri Dön</button>
+                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-705 text-slate-202 py-3 rounded-xl font-bold transition text-sm">Geri Dön</button>
             </div>
         </div>
     </div>
@@ -513,7 +512,7 @@
     </div>
 
     <!-- PROJE AYARLARI MODAL -->
-    <div id="settingsModal" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 hidden">
+    <div id="settingsModal" class="fixed inset-0 bg-slate-955/80 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl text-slate-100">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-cog text-blue-500"></i> Sistem IP ve Domain Ayarı</h3>
@@ -528,13 +527,13 @@
             </div>
             <div class="flex gap-2 mt-6">
                 <button onclick="saveAppSettings()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 transition text-sm rounded-xl text-center">Kaydet</button>
-                <button onclick="toggleSettingsModal(false)" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl text-sm transition">Kapat</button>
+                <button onclick="toggleSettingsModal(false)" class="px-4 py-3 bg-slate-800 hover:bg-slate-755 text-slate-300 font-bold rounded-xl text-sm transition">Kapat</button>
             </div>
         </div>
     </div>
 
     <!-- MÜDÜR YENİ GÖREV EKLEME MODAL -->
-    <div id="createTaskModal" class="fixed inset-0 bg-slate-950/70 z-50 flex items-center justify-center p-4 hidden">
+    <div id="createTaskModal" class="fixed inset-0 bg-slate-955/70 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl text-slate-100">
             <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
                 <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-plus text-blue-500"></i> Yeni İş Emri Görevi</h3>
@@ -543,13 +542,13 @@
             <div class="space-y-4">
                 <div>
                     <label class="text-xs font-bold text-slate-400 block mb-1">Sorumlu İSG Uzmanı</label>
-                    <select id="taskExpertSelect" class="w-full border border-slate-800 p-2.5 rounded-xl text-xs font-semibold bg-[#070b13] text-white outline-none focus:border-blue-500">
+                    <select id="taskExpertSelect" class="w-full border-2 border-slate-800 p-2.5 rounded-xl text-xs font-semibold bg-[#070b13] text-white outline-none focus:border-blue-500">
                         <!-- JS ile dolacak -->
                     </select>
                 </div>
                 <div>
                     <label class="text-xs font-bold text-slate-400 block mb-1">Şantiye / Şirket Unvanı</label>
-                    <input type="text" id="taskCompanyNameInput" class="w-full border border-slate-800 text-white bg-[#070b13] p-2.5 rounded-xl text-xs outline-none focus:border-blue-500" placeholder="Örn: 12 M TURİZM">
+                    <input type="text" id="taskCompanyNameInput" class="w-full border border-slate-855 text-white p-2.5 rounded-xl text-xs outline-none focus:border-blue-500" placeholder="Örn: 12 M TURİZM">
                 </div>
                 <div>
                     <label class="text-xs font-bold text-slate-400 block mb-1">Görev / İş Emri Başlığı</label>
@@ -567,24 +566,24 @@
         </div>
     </div>
 
-    <!-- FIRMA YÖNETİM MODAL -->
+    <!-- FIRMA YÖNETİM MODAL (MANAGE MODAL) -->
     <div id="manageCompanyModal" class="fixed inset-0 bg-slate-955/70 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl text-slate-100">
           <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
             <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-building text-blue-500"></i> Şantiye Bilgi Yönetimi</h3>
-            <button onclick="toggleManageModal(false)" class="text-slate-400 hover:text-slate-355"><i class="fas fa-times"></i></button>
+            <button onclick="toggleManageModal(false)" class="text-slate-400 hover:text-slate-350"><i class="fas fa-times"></i></button>
           </div>
           <p id="manageCompanyName" class="text-xs text-amber-505 font-bold mb-4 uppercase tracking-wider block break-words">-</p>
           <div class="space-y-4">
             <div>
               <label class="text-xs font-bold text-slate-400 block mb-1">Sorumlu Uzman Ataması</label>
-              <select id="manageExpertSelect" class="w-full border border-slate-800 p-3 rounded-xl text-sm font-semibold outline-none bg-[#070b13] text-white">
+              <select id="manageExpertSelect" class="w-full border-2 border-slate-800 p-3 rounded-xl text-sm font-semibold outline-none bg-[#070b13] text-white">
                 <!-- JS ile dolacak -->
               </select>
             </div>
             <div>
               <label class="text-xs font-bold text-slate-400 block mb-1">Sonraki Ziyaret Tarihi</label>
-              <input type="date" id="manageNextVisit" class="w-full border border-slate-800 bg-[#070b13] text-white p-2.5 rounded-xl text-xs outline-none">
+              <input type="date" id="manageNextVisit" class="w-full border-2 border-[#c29c53]/20 bg-[#070b13] text-white p-2.5 rounded-xl text-xs outline-none">
             </div>
             <div>
               <label class="text-xs font-bold text-slate-400 block mb-1">Güncel Cari Borç Bakiyesi</label>
@@ -593,7 +592,7 @@
           </div>
           <div class="flex gap-2 mt-6 pt-3 border-t border-slate-800">
             <button onclick="saveCompanyManagement()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 transition text-sm rounded-xl">Değişiklikleri Kaydet</button>
-            <button onclick="toggleManageModal(false)" class="px-4 py-3 bg-slate-850 hover:bg-slate-750 text-slate-300 font-bold rounded-xl transition text-sm">Kapat</button>
+            <button onclick="toggleManageModal(false)" class="px-4 py-3 bg-slate-855 hover:bg-slate-750 text-slate-300 font-bold rounded-xl transition text-sm">Kapat</button>
           </div>
         </div>
     </div>
@@ -622,7 +621,7 @@
             </div>
             <div class="flex gap-2 mt-6 pt-3 border-t border-slate-800 shrink-0">
                 <button onclick="confirmCariImport()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-3.5 rounded-xl transition text-sm shadow-lg">Değişiklikleri Onayla & Kaydet</button>
-                <button onclick="toggleCsvPreviewModal(false)" class="px-5 py-3.5 bg-slate-805 hover:bg-slate-750 text-slate-300 font-bold rounded-xl transition text-sm">Vazgeç</button>
+                <button onclick="toggleCsvPreviewModal(false)" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition text-sm">Vazgeç</button>
             </div>
         </div>
     </div>
@@ -670,7 +669,7 @@
 
             <div class="bg-slate-900 p-4 border-t border-slate-800 flex justify-end gap-3 flex-wrap">
                 <button onclick="toggleReportModal(false)" class="px-4 py-2 text-slate-400 hover:bg-slate-800 rounded font-medium text-xs">Kapat</button>
-                <button id="btnSaveReportDraft" onclick="submitReport('draft')" class="px-4 py-2 bg-slate-955 border border-slate-800 text-slate-300 hover:bg-slate-800 rounded font-medium flex items-center gap-2 text-xs">
+                <button id="btnSaveReportDraft" onclick="submitReport('draft')" class="px-4 py-2 bg-slate-955 border border-slate-850 text-slate-300 hover:bg-slate-800 rounded font-medium flex items-center gap-2 text-xs">
                     <i class="fas fa-floppy-disk"></i> Taslak Kaydet
                 </button>
                 <button id="btnSubmitReportToManager" onclick="submitReport('submitted')" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center gap-2 text-xs">
@@ -889,7 +888,94 @@
             }, 3000);
         }
 
-        // --- 5. İLK AÇILIŞ VE OTO-TOHUMLAMA (AUTO SEED) ---
+        // --- 5. UZMAN SEÇİCİ BAŞLANGIÇ SÜRÜCÜSÜ ---
+        function initLoginSelectors() {
+            const selectEl = document.getElementById('loginExpertSelect');
+            if (selectEl) {
+                selectEl.innerHTML = '';
+                initialExperts.forEach(e => {
+                    const opt = document.createElement('option');
+                    opt.value = e.id;
+                    opt.innerText = e.name;
+                    selectEl.appendChild(opt);
+                });
+            }
+        }
+
+        // --- GERÇEK ZAMANLI SÜRÜCÜ BAĞLANTILARI ---
+        function realtimeSync() {
+            if (!supabaseClient) return;
+            setInterval(fetchRealtimeData, 6000);
+            fetchRealtimeData();
+        }
+
+        async function fetchRealtimeData() {
+            if (!supabaseClient) return;
+
+            try {
+                // Şantiyeleri çek og normalize et
+                const { data: compData, error: compErr } = await supabaseClient.from('companies').select('*');
+                if (!compErr && compData && compData.length > 0) {
+                    companies = compData.map(normalizeCompany);
+                    localStorage.setItem('isg_companies', JSON.stringify(companies));
+                    refreshDashboards();
+                }
+
+                // Bültenleri çek
+                const { data: bulData, error: bulErr } = await supabaseClient.from('bulletins').select('*');
+                if (!bulErr && bulData && bulData.length > 0) {
+                    bulletins = bulData;
+                    localStorage.setItem('isg_bulletins', JSON.stringify(bulletins));
+                    if (currentView === 'qr_worker') renderWorkerBulletins();
+                }
+
+                // Görevleri çek og normalize et
+                const { data: taskData, error: taskErr } = await supabaseClient.from('tasks').select('*');
+                if (!taskErr && taskData) {
+                    tasks = taskData.map(normalizeTask);
+                    localStorage.setItem('isg_tasks', JSON.stringify(tasks));
+                    refreshDashboards();
+                }
+            } catch (e) {
+                console.warn("Bulut Realtime senkronizasyon hatası. Lokal depolama devrede.");
+            }
+        }
+
+        // --- SÜRÜKLE GÖRÜŞ ALANI (YÖNLENDİRME) ---
+        function navigateTo(view) {
+            currentView = view;
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('managerView').classList.add('hidden');
+            document.getElementById('expertView').classList.add('hidden');
+            document.getElementById('qrGenCompanyView').classList.add('hidden');
+            document.getElementById('qrGenWorkerView').classList.add('hidden');
+            document.getElementById('companyView').classList.add('hidden');
+            document.getElementById('workerView').classList.add('hidden');
+
+            if (view === 'login') {
+                document.getElementById('loginView').classList.remove('hidden');
+            } else if (view === 'manager') {
+                document.getElementById('managerView').classList.remove('hidden');
+                renderManagerDashboard();
+            } else if (view === 'expert') {
+                document.getElementById('expertView').classList.remove('hidden');
+                renderExpertDashboard();
+            } else if (view === 'qr_generator_company') {
+                document.getElementById('qrGenCompanyView').classList.remove('hidden');
+                initCompanyQRView();
+            } else if (view === 'qr_generator_worker') {
+                document.getElementById('qrGenWorkerView').classList.remove('hidden');
+                initWorkerQRView();
+            } else if (view === 'qr_company') {
+                document.getElementById('companyView').classList.remove('hidden');
+                renderCompanyClientView();
+            } else if (view === 'qr_worker') {
+                document.getElementById('workerView').classList.remove('hidden');
+                renderWorkerBulletins();
+            }
+        }
+
+        // --- 6. İLK AÇILIŞ VE OTO-TOHUMLAMA (AUTO SEED) ---
         window.onload = function() {
             // Canlı Vercel adresini dinamik keşfet ve ata! 
             // Bu sayede mobil cihaz QR tarattığında 'proje_yuklendiginde_buraya_url_gelecek' gibi DNS hataları almaz!
@@ -1016,7 +1102,7 @@
             });
         }
 
-        // "DIŞ SAHA CARİ.pdf" Tablo Düzenine Göre Akıllı Eşleme ve Ayrıştırma Motoru
+        // "DIŞ SAHA CARİ.pdf" Tablo Düzenine Göre Akıllı Eşleme og Ayrıştırma Motoru
         async function processUniversalCsv(csvLines) {
             let bakiyeGuncellemeListesi = [];
             let yeniFirmaDizisi = [];
@@ -1033,7 +1119,7 @@
                     .trim();
             };
 
-            // PDF/CSV sütun başlıklarındaki tırnak, boşluk ve gizli karakterleri (\n vb.) temizleme eşleyicisi
+            // PDF/CSV sütun başlıklarındaki tırnak, boşluk og gizli karakterleri (\n vb.) temizleme eşleyicisi
             const findColumnValue = (rowObj, possibleNames) => {
                 const keys = Object.keys(rowObj);
                 for (let key of keys) {
@@ -1076,7 +1162,7 @@
                     }
                 });
 
-                // Sayısal bakiye biçimlendirme ve temizleyici (NaN hatalarını önler)
+                // Sayısal bakiye biçimlendirme og temizleyici (NaN hatalarını önler)
                 const sanitizeDebtString = (val) => {
                     if (!val) return "0,00 ₺";
                     let str = String(val).replace(/[^0-9,.-]/g, '').trim();
@@ -1121,643 +1207,7 @@
                 }
             });
 
-            // 1. Yeni Firmaları sisteme ekle ve Supabase'e yaz
-            if (yeniFirmaDizisi.length > 0) {
-                let successCount = 0;
-                for (const newComp of yeniFirmaDizisi) {
-                    existingCompaniesCopy.push(newComp);
-                    if (supabaseClient) {
-                        const { error } = await supabaseClient.from('companies').upsert([{
-                            id: newComp.id,
-                            name: newComp.name,
-                            companyname: newComp.name,
-                            debt: newComp.debt,
-                            progress: 0,
-                            nextvisit: '',
-                            expertid: ''
-                        }]);
-                        if (!error) successCount++;
-                    }
-                }
-                showToastMessage(`${successCount} Yeni Şantiye Sürükle-Bırak İle Atama Bekleyen Olarak İthal Edildi!`, "info");
-            }
-
-            // 2. Eşleşenlerin cari güncellemelerini modalda göster
-            if (bakiyeGuncellemeListesi.length > 0) {
-                companies = existingCompaniesCopy;
-                localStorage.setItem('isg_companies', JSON.stringify(companies));
-                openCsvPreviewModal(bakiyeGuncellemeListesi);
-            } else {
-                companies = existingCompaniesCopy;
-                localStorage.setItem('isg_companies', JSON.stringify(companies));
-                refreshDashboards();
-            }
-        }
-
-        // --- 6. GERÇEK ZAMANLI VERİ SENKRONİZASYONU (REALTIME POLLING) ---
-        function realtimeSync() {
-            if (!supabaseClient) return;
-            setInterval(fetchRealtimeData, 6000);
-            fetchRealtimeData();
-        }
-
-        async function fetchRealtimeData() {
-            if (!supabaseClient) return;
-
-            try {
-                // Şantiyeleri çek ve normalize et
-                const { data: compData, error: compErr } = await supabaseClient.from('companies').select('*');
-                if (!compErr && compData && compData.length > 0) {
-                    companies = compData.map(normalizeCompany);
-                    localStorage.setItem('isg_companies', JSON.stringify(companies));
-                    refreshDashboards();
-                }
-
-                // Bültenleri çek
-                const { data: bulData, error: bulErr } = await supabaseClient.from('bulletins').select('*');
-                if (!bulErr && bulData && bulData.length > 0) {
-                    bulletins = bulData;
-                    localStorage.setItem('isg_bulletins', JSON.stringify(bulletins));
-                    if (currentView === 'qr_worker') renderWorkerBulletins();
-                }
-
-                // Görevleri çek og normalize et
-                const { data: taskData, error: taskErr } = await supabaseClient.from('tasks').select('*');
-                if (!taskErr && taskData) {
-                    tasks = taskData.map(normalizeTask);
-                    localStorage.setItem('isg_tasks', JSON.stringify(tasks));
-                    refreshDashboards();
-                }
-            } catch (e) {
-                console.warn("Bulut Realtime senkronizasyon hatası. Lokal depolama devrede.");
-            }
-        }
-
-        function refreshDashboards() {
-            if (currentView === 'manager') renderManagerDashboard();
-            if (currentView === 'expert') renderExpertDashboard();
-            if (currentView === 'qr_company') renderCompanyClientView();
-        }
-
-        // --- 7. GİRİŞ VE PANEL SEÇİMLERİ ---
-        function initLoginSelectors() {
-            const selectEl = document.getElementById('loginExpertSelect');
-            selectEl.innerHTML = '';
-            initialExperts.forEach(e => {
-                const opt = document.createElement('option');
-                opt.value = e.id;
-                opt.innerText = e.name;
-                selectEl.appendChild(opt);
-            });
-        }
-
-        // Kullanıcı Rol Ataması
-        function handleLogin(role) {
-            if (role === 'manager') {
-                currentUserId = 'manager1';
-                currentUserRole = 'manager';
-                currentUserName = 'Ali İhsan Bey';
-                navigateTo('manager');
-            } else {
-                const expertId = document.getElementById('loginExpertSelect').value;
-                const expertName = initialExperts.find(e => e.id === expertId).name;
-                currentUserId = expertId;
-                currentUserRole = 'expert';
-                currentUserName = expertName;
-                document.getElementById('expertHeaderName').innerText = expertName;
-                navigateTo('expert');
-            }
-            showToastMessage(`Hoş geldiniz Sayın ${currentUserName}`);
-        }
-
-        function handleLogout() {
-            currentUserId = null;
-            currentUserRole = null;
-            currentUserName = "";
-            navigateTo('login');
-            showToastMessage("Güvenle çıkış yapıldı.");
-        }
-
-        let currentView = 'login';
-        function navigateTo(view) {
-            currentView = view;
-            document.getElementById('loginView').classList.add('hidden');
-            document.getElementById('managerView').classList.add('hidden');
-            document.getElementById('expertView').classList.add('hidden');
-            document.getElementById('qrGenCompanyView').classList.add('hidden');
-            document.getElementById('qrGenWorkerView').classList.add('hidden');
-            document.getElementById('companyView').classList.add('hidden');
-            document.getElementById('workerView').classList.add('hidden');
-
-            if (view === 'login') {
-                document.getElementById('loginView').classList.remove('hidden');
-            } else if (view === 'manager') {
-                document.getElementById('managerView').classList.remove('hidden');
-                renderManagerDashboard();
-            } else if (view === 'expert') {
-                document.getElementById('expertView').classList.remove('hidden');
-                renderExpertDashboard();
-            } else if (view === 'qr_generator_company') {
-                document.getElementById('qrGenCompanyView').classList.remove('hidden');
-                initCompanyQRView();
-            } else if (view === 'qr_generator_worker') {
-                document.getElementById('qrGenWorkerView').classList.remove('hidden');
-                initWorkerQRView();
-            } else if (view === 'qr_company') {
-                document.getElementById('companyView').classList.remove('hidden');
-                renderCompanyClientView();
-            } else if (view === 'qr_worker') {
-                document.getElementById('workerView').classList.remove('hidden');
-                renderWorkerBulletins();
-            }
-        }
-
-        // --- 8. ALİ İHSAN BEY PORTAL AKSİYONLARI ---
-        function renderManagerDashboard() {
-            const totalOutstandingDebt = companies.reduce((sum, company) => sum + parseDebtToFloat(company.debt), 0);
-            const avgProgress = companies.length > 0 ? Math.round(companies.reduce((acc, curr) => acc + curr.progress, 0) / companies.length) : 0;
-            const submittedReports = companies.filter(c => c.report && c.report.status === 'submitted');
-
-            document.getElementById('mTotalCompanies').innerText = companies.length;
-            document.getElementById('mAvgProgress').innerText = `%${avgProgress}`;
-            document.getElementById('mTotalDebt').innerText = totalOutstandingDebt.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + ' ₺';
-            document.getElementById('mPendingReports').innerText = submittedReports.length;
-
-            // --- ATAMA BEKLEYEN ŞANTİYELERİN KONTROLÜ ---
-            const unassignedCompanies = companies.filter(c => !c.expertId || c.expertId === "");
-            const unassignedSection = document.getElementById('unassignedCompaniesSection');
-            const unassignedCountBadge = document.getElementById('unassignedCountBadge');
-            const unassignedTbody = document.getElementById('unassignedCompaniesTableBody');
-            
-            unassignedTbody.innerHTML = '';
-            if (unassignedCompanies.length > 0) {
-                unassignedSection.classList.remove('hidden');
-                unassignedCountBadge.innerText = `${unassignedCompanies.length} Firma Atama Bekliyor`;
-                
-                unassignedCompanies.forEach(c => {
-                    const tr = document.createElement('tr');
-                    tr.className = "border-b border-amber-500/10 hover:bg-amber-500/5 transition";
-                    
-                    // Her şantiye için uzman seçim dropdown elemanı oluşturalım
-                    let expertOptions = `<option value="">Uzman Seçilmedi...</option>`;
-                    initialExperts.forEach(exp => {
-                        expertOptions += `<option value="${exp.id}">${exp.name}</option>`;
-                    });
-
-                    tr.innerHTML = `
-                        <td class="p-3 font-bold text-amber-100 break-words max-w-[280px]">${c.name}</td>
-                        <td class="p-3 font-semibold text-slate-300">${c.debt}</td>
-                        <td class="p-3">
-                            <select id="assign_select_${c.id}" class="bg-slate-900 text-white border border-amber-500/25 p-2 rounded-xl text-xs outline-none focus:border-amber-500 max-w-[220px]">
-                                ${expertOptions}
-                            </select>
-                        </td>
-                        <td class="p-3 text-right">
-                            <button onclick="handleDirectAssignment('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-extrabold text-[11px] px-4 py-2 rounded-xl transition shadow-md shadow-amber-500/10 shrink-0">
-                                <i class="fas fa-user-plus"></i> Uzmanı Ata
-                            </button>
-                        </td>
-                    `;
-                    unassignedTbody.appendChild(tr);
-                });
-            } else {
-                unassignedSection.classList.add('hidden');
-            }
-
-            // UZMAN PERFORMANS TABLOSUNU DOLDUR
-            const performanceBody = document.getElementById('expertPerformanceTableBody');
-            performanceBody.innerHTML = '';
-            
-            initialExperts.forEach(exp => {
-                const expCompanies = companies.filter(c => c.expertId === exp.id);
-                const expTasks = tasks.filter(t => t.expertId === exp.id);
-                const compCount = expCompanies.length;
-                
-                const avgExpProgress = compCount > 0 ? Math.round(expCompanies.reduce((sum, c) => sum + (c.progress || 0), 0) / compCount) : 0;
-                const totalExpDebt = expCompanies.reduce((sum, c) => sum + parseDebtToFloat(c.debt), 0);
-                const completedTasks = expTasks.filter(t => t.status === 'completed').length;
-                const totalTasks = expTasks.length;
-
-                const row = document.createElement('tr');
-                row.className = "hover:bg-slate-900/50 border-b border-slate-800 transition";
-                row.innerHTML = `
-                    <td class="p-3 font-bold text-white flex items-center gap-2">
-                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
-                        ${exp.name}
-                    </td>
-                    <td class="p-3 text-center text-slate-300 font-bold">${compCount} Şantiye</td>
-                    <td class="p-3">
-                        <div class="flex items-center gap-2">
-                            <span class="font-black text-emerald-400">% ${avgExpProgress}</span>
-                            <div class="w-24 bg-slate-800 h-1.5 rounded-full overflow-hidden hidden sm:block">
-                                <div class="h-full bg-emerald-500 rounded-full" style="width: ${avgExpProgress}%"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="p-3 font-semibold text-amber-500">${totalExpDebt.toLocaleString('tr-TR')} ₺</td>
-                    <td class="p-3 text-center">
-                        <span class="bg-blue-500/10 text-blue-400 border border-blue-900/30 px-2 py-0.5 rounded text-[10px] font-bold">
-                            ${completedTasks}/${totalTasks} Bitti
-                        </span>
-                    </td>
-                    <td class="p-3 text-right">
-                        <button onclick="pingExpert('${exp.name}', 'Genel Performans Değerlendirmesi')" class="text-[10px] font-black uppercase text-amber-400 border border-amber-500/20 hover:border-amber-500 hover:bg-amber-500/10 px-2.5 py-1.5 rounded-xl transition">
-                            <i class="fab fa-whatsapp"></i> Uzmanı Dürt
-                        </button>
-                    </td>
-                `;
-                performanceBody.appendChild(row);
-            });
-
-            // Onay bekleyenler gelen kutusu
-            const reportsSection = document.getElementById('mPendingReportsSection');
-            const reportsContainer = document.getElementById('mPendingReportsContainer');
-            reportsContainer.innerHTML = '';
-            
-            if (submittedReports.length > 0) {
-                reportsSection.classList.remove('hidden');
-                submittedReports.forEach(c => {
-                    const row = document.createElement('div');
-                    row.className = "bg-white border border-slate-100 rounded-2xl p-4 flex flex-col sm:row justify-between items-start sm:items-center gap-3 shadow-sm text-slate-800";
-                    row.innerHTML = `
-                        <div class="min-w-0 flex-1">
-                            <span class="text-[10px] font-bold text-amber-700 bg-amber-500/10 px-2 py-0.5 rounded uppercase tracking-wider">İSG Raporu Onay Bekliyor</span>
-                            <p class="font-bold text-slate-800 text-sm mt-1 truncate">${c.name}</p>
-                            <p class="text-xs text-slate-400 truncate">Sorumlu Uzman: ${initialExperts.find(e => e.id === c.expertId)?.name || 'Atanmamış'}</p>
-                        </div>
-                        <button onclick="openSahaRaporuEditor('${c.id}', 'view')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shrink-0">
-                            Raporu İncele
-                        </button>
-                    `;
-                    reportsContainer.appendChild(row);
-                });
-            } else {
-                reportsSection.classList.add('hidden');
-            }
-
-            // ATANAN ŞANTİYELERİ VE UZMAN SORUMLULUK LİSTESİNİ DOLDUR
-            const expertsGrid = document.getElementById('expertsCompaniesGrid');
-            expertsGrid.innerHTML = '';
-
-            initialExperts.forEach(exp => {
-                const expCompanies = companies.filter(c => c.expertId === exp.id);
-                const block = document.createElement('div');
-                block.className = "bg-[#0b1322] border border-slate-800 rounded-3xl overflow-hidden flex flex-col min-w-0";
-                
-                let companiesListHtml = '';
-                expCompanies.forEach(c => {
-                    companiesListHtml += `
-                        <div class="p-4 border border-slate-800 rounded-2xl bg-slate-955/30 hover:border-slate-750 transition min-w-0">
-                            <div class="flex justify-between items-start text-sm mb-2 gap-2 min-w-0">
-                                <span class="font-bold text-slate-200 truncate flex-1 block" title="${c.name}">${c.name}</span>
-                                <span class="text-emerald-400 font-bold shrink-0">% ${c.progress}</span>
-                            </div>
-                            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-4 overflow-hidden">
-                                <div class="h-full bg-emerald-500 rounded-full" style="width: ${c.progress}%"></div>
-                            </div>
-                            <div class="flex justify-between items-center border-t border-slate-800 pt-3 gap-2 flex-wrap sm:flex-nowrap">
-                                <div class="text-xs text-slate-400 leading-tight min-w-0 flex-1">
-                                    <p class="font-bold text-slate-300 truncate">Cari: <span class="text-red-500 font-extrabold">${c.debt}</span></p>
-                                    <p class="mt-0.5 font-medium truncate">Ziyaret: ${c.nextVisit || 'Ziyaret Yok'}</p>
-                                </div>
-                                <button onclick="openManageCompanyModal('${c.id}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl transition text-[11px] font-bold shrink-0 flex items-center gap-1">
-                                    <i class="fas fa-edit"></i> Düzenle
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                block.innerHTML = `
-                    <div class="bg-slate-900 p-4 border-b border-slate-800 font-bold text-amber-400 flex justify-between items-center shrink-0 gap-2">
-                        <span class="flex items-center gap-2 truncate"><i class="fas fa-user-tie text-blue-500 shrink-0"></i> <span class="truncate">${exp.name}</span></span>
-                        <span class="text-xs font-bold bg-slate-950 px-2.5 py-1 rounded-full border border-slate-800 text-slate-400 shrink-0">
-                            ${expCompanies.length} Şantiye
-                        </span>
-                    </div>
-                    <div class="p-4 space-y-4 flex-1 min-w-0">
-                        ${expCompanies.length === 0 ? '<p class="text-xs text-slate-505 italic p-4 text-center">Atanan şantiye bulunmuyor.</p>' : companiesListHtml}
-                    </div>
-                `;
-                expertsGrid.appendChild(block);
-            });
-
-            // Müdür görevleri listele
-            const tasksGrid = document.getElementById('managerTasksGrid');
-            tasksGrid.innerHTML = '';
-            tasks.forEach(t => {
-                const assignedExpName = initialExperts.find(e => e.id === t.expertId)?.name || 'Bilinmeyen Uzman';
-                const statusBadge = t.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400';
-                const statusText = t.status === 'completed' ? 'Tamamlandı' : 'İşlem Bekliyor';
-                const dürtButon = t.status !== 'completed' ? `
-                    <div class="mt-4 pt-3 border-t border-slate-800 flex justify-end">
-                        <button onclick="pingExpert('${assignedExpName}', '${t.title}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-extrabold text-[10px] px-3 py-1.5 rounded-lg transition flex items-center gap-1 shadow-sm">
-                            <i class="fas fa-exclamation-triangle"></i> Uzmanı Dürt
-                        </button>
-                    </div>
-                ` : '';
-
-                const card = document.createElement('div');
-                card.className = "p-4 rounded-2xl border border-slate-800 bg-[#070b13] flex flex-col justify-between min-w-0";
-                card.innerHTML = `
-                    <div class="min-w-0">
-                        <div class="flex justify-between items-start gap-2">
-                            <span class="text-[10px] font-bold text-slate-500 uppercase truncate flex-1 block" title="${t.companyName}">${t.companyName}</span>
-                            <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase shrink-0 ${statusBadge}">
-                                ${statusText}
-                            </span>
-                        </div>
-                        <h4 class="font-extrabold text-sm text-white mt-1 truncate" title="${t.title}">${t.title}</h4>
-                        <p class="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed break-words">${t.desc}</p>
-                        <p class="text-[10px] text-indigo-400 font-bold mt-2 truncate">Atanan Sorumlu: ${assignedExpName}</p>
-                    </div>
-                    ${dürtButon}
-                `;
-                tasksGrid.appendChild(card);
-            });
-        }
-
-        // --- 9. DİNAMİK CARİ RAPORU CSV SÜRÜCÜLERİ VE FUZZY MATCH ---
-        function handleManagerCsv(input) {
-            const file = input.files[0];
-            if (!file) return;
-
-            Papa.parse(file, {
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    processCsvData(results.data);
-                }
-            });
-        }
-
-        function processCsvData(csvLines) {
-            const previewData = [];
-            
-            const cleanStr = (s) => s.toLowerCase()
-                .replace(/[^a-z0-9]/g, '')
-                .replace('ltd', '')
-                .replace('sti', '')
-                .replace('san', '')
-                .replace('tic', '')
-                .trim();
-
-            csvLines.forEach(line => {
-                const rawCariName = line['Cari Adı'] || line['Cari Unvanı'] || Object.values(line)[1];
-                const rawBakiye = line['Borç Bak.'] || line['Bakiye'] || Object.values(line)[6] || "0";
-                if (!rawCariName) return;
-
-                const cleanedCsvName = cleanStr(rawCariName);
-                let bestMatch = null;
-                let bestScore = 0;
-
-                companies.forEach(comp => {
-                    const cleanedComp = cleanStr(comp.name);
-                    const csvWords = cleanedCsvName.split(' ').filter(w => w.length > 1);
-                    const intersection = csvWords.filter(w => cleanedComp.includes(w));
-                    
-                    const score = intersection.length;
-                    if (score > bestScore) {
-                        bestScore = score;
-                        bestMatch = comp;
-                    }
-                });
-
-                if (bestMatch && bestScore > 0) {
-                    previewData.push({
-                        companyId: bestMatch.id,
-                        companyName: bestMatch.name,
-                        oldDebt: bestMatch.debt,
-                        newDebt: parseFloat(rawBakiye).toLocaleString('tr-TR') + " ₺"
-                    });
-                }
-            });
-
-            if (previewData.length > 0) {
-                openCsvPreviewModal(previewData);
-            } else {
-                showToastMessage("Portföyle eşleşen bakiye bulunamadı!", "error");
-            }
-        }
-
-        function openCsvPreviewModal(data) {
-            const modal = document.getElementById('csvPreviewModal');
-            const tbody = document.getElementById('csvPreviewTableBody');
-            tbody.innerHTML = '';
-
-            data.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-900/50";
-                tr.innerHTML = `
-                    <td class="p-3 font-bold text-white max-w-[180px] truncate">${item.companyName}</td>
-                    <td class="p-3 text-slate-505 line-through">${item.oldDebt}</td>
-                    <td class="p-3 text-emerald-400 font-bold">${item.newDebt}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            csvPreviewModalData = data;
-            modal.classList.remove('hidden');
-        }
-
-        let csvPreviewModalData = [];
-        async function confirmCariImport() {
-            const updatedCompanies = [...companies];
-            
-            for (const item of csvPreviewModalData) {
-                const idx = updatedCompanies.findIndex(c => c.id === item.companyId);
-                if (idx !== -1) {
-                    updatedCompanies[idx].debt = item.newDebt;
-                    
-                    if (supabaseClient) {
-                        await supabaseClient.from('companies').update({ debt: item.newDebt }).eq('id', item.companyId);
-                    }
-                }
-            }
-
-            companies = updatedCompanies;
-            localStorage.setItem('isg_companies', JSON.stringify(companies));
-            toggleCsvPreviewModal(false);
-            showToastMessage("Cari borç bakiyeleri başarıyla senkronize edildi!");
-            refreshDashboards();
-        }
-
-        function toggleCsvPreviewModal(show) {
-            const modal = document.getElementById('csvPreviewModal');
-            if (show) modal.classList.remove('hidden');
-            else modal.classList.add('hidden');
-        }
-
-        // Sürükle Bırak İthalat
-        function initDragAndDrop() {
-            const dropZone = document.getElementById('dragDropImportContainer');
-            if (!dropZone) return;
-
-            // Global olay önleme dinleyicilerini tüm sayfa genelinde (iframe sandboxing aşımı) tanımlıyoruz.
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                window.addEventListener(eventName, (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }, false);
-                document.body.addEventListener(eventName, (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }, false);
-            });
-
-            ['dragenter', 'dragover'].forEach(eventName => {
-                dropZone.addEventListener(eventName, (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    dropZone.classList.add('drag-over');
-                }, false);
-            });
-
-            ['dragleave', 'drop'].forEach(eventName => {
-                dropZone.addEventListener(eventName, (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    dropZone.classList.remove('drag-over');
-                }, false);
-            });
-
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                dropZone.classList.remove('drag-over');
-                
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                if (files && files.length > 0) {
-                    handleUniversalCsvFile(files[0]);
-                }
-            }, false);
-        }
-
-        // Akıllı Evrensel CSV İthalat Motoru (Fuzzy Match ve Yeni Firma Ekleme)
-        function handleUniversalCsvUpload(input) {
-            const file = input.files[0];
-            handleUniversalCsvFile(file);
-        }
-
-        // Programatik input dosya kısıtlamasını aşan doğrudan dosya okuyucu
-        function handleUniversalCsvFile(file) {
-            if (!file) return;
-            Papa.parse(file, {
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    processUniversalCsv(results.data);
-                }
-            });
-        }
-
-        // "DIŞ SAHA CARİ.pdf" Tablo Düzenine Göre Akıllı Eşleme ve Ayrıştırma Motoru
-        async function processUniversalCsv(csvLines) {
-            let bakiyeGuncellemeListesi = [];
-            let yeniFirmaDizisi = [];
-            let existingCompaniesCopy = [...companies];
-
-            const cleanStr = (s) => {
-                if (!s) return '';
-                return String(s).toLowerCase()
-                    .replace(/[^a-z0-9ıüöçşğ]/gi, '') // Türkçe karakter desteği ile temizleme
-                    .replace('ltd', '')
-                    .replace('sti', '')
-                    .replace('san', '')
-                    .replace('tic', '')
-                    .trim();
-            };
-
-            // PDF/CSV sütun başlıklarındaki tırnak, boşluk ve gizli karakterleri (\n vb.) temizleme eşleyicisi
-            const findColumnValue = (rowObj, possibleNames) => {
-                const keys = Object.keys(rowObj);
-                for (let key of keys) {
-                    const cleanKey = key.replace(/[^a-zA-Z0-9ıüöçşğ\s]/g, '').toLowerCase().trim();
-                    for (let pos of possibleNames) {
-                        if (cleanKey.includes(pos) || pos.includes(cleanKey)) {
-                            return rowObj[key];
-                        }
-                    }
-                }
-                return null;
-            };
-
-            csvLines.forEach(line => {
-                // Akıllı kolon eşleştirme uygulayalım
-                const rawCariName = findColumnValue(line, ['cari adi', 'cariadı', 'unvan', 'firma', 'musteri']);
-                const rawBakiye = findColumnValue(line, ['borc bak', 'bakiye', 'borcbakiyesi', 'borc']);
-                const rawPhone = findColumnValue(line, ['telefon', 'tel', 'gsm', 'phone']);
-                
-                if (!rawCariName) return;
-                
-                const rawCariNameStr = String(rawCariName).trim();
-                
-                if (rawCariNameStr === '' || rawCariNameStr.toLowerCase().includes("cari adı") || rawCariNameStr.toLowerCase().includes("toplam tutarlar")) return;
-
-                const cleanedCsvName = cleanStr(rawCariNameStr);
-                let bestMatch = null;
-                let bestScore = 0;
-
-                // Mevcut sistem firmalarında fuzzy arama yap
-                existingCompaniesCopy.forEach(comp => {
-                    const cleanedComp = cleanStr(comp.name);
-                    const csvWords = cleanedCsvName.split(' ').filter(w => w.length > 1);
-                    const intersection = csvWords.filter(w => cleanedComp.includes(w));
-                    
-                    const score = intersection.length;
-                    if (score > bestScore) {
-                        bestScore = score;
-                        bestMatch = comp;
-                    }
-                });
-
-                // Sayısal bakiye biçimlendirme ve temizleyici (NaN hatalarını önler)
-                const sanitizeDebtString = (val) => {
-                    if (!val) return "0,00 ₺";
-                    let str = String(val).replace(/[^0-9,.-]/g, '').trim();
-                    if (str === '') return "0,00 ₺";
-                    if (str.includes('.') && !str.includes(',')) {
-                        const num = parseFloat(str) || 0;
-                        return num.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + " ₺";
-                    }
-                    let normalized = str.replace(/\./g, '').replace(',', '.');
-                    const num = parseFloat(normalized) || 0;
-                    return num.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + " ₺";
-                };
-
-                const finalDebt = sanitizeDebtString(rawBakiye);
-                const finalPhone = rawPhone ? String(rawPhone).trim().replace(/[^0-9]/g, '') : '';
-
-                // Eğer %50'den fazla uyuşma varsa bakiyesini güncelle
-                if (bestMatch && bestScore >= 1) {
-                    bakiyeGuncellemeListesi.push({
-                        companyId: bestMatch.id,
-                        companyName: bestMatch.name,
-                        oldDebt: bestMatch.debt,
-                        newDebt: finalDebt
-                    });
-                } else {
-                    // Hiç uyuşma yoksa yepyeni bir firma olarak sisteme ithal et
-                    const newCompanyId = 'comp_imported_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
-
-                    yeniFirmaDizisi.push({
-                        id: newCompanyId,
-                        name: rawCariNameStr.replace(/\n/g, ' ').toUpperCase().trim(),
-                        companyname: rawCariNameStr.replace(/\n/g, ' ').toUpperCase().trim(),
-                        debt: finalDebt,
-                        progress: 0,
-                        nextVisit: '',
-                        nextvisit: '',
-                        expertId: '', // Atama bekleyen
-                        expertid: '',
-                        phone: finalPhone,
-                        report: { status: 'draft', date: '', findings: [] }
-                    });
-                }
-            });
-
-            // 1. Yeni Firmaları sisteme ekle ve Supabase'e yaz
+            // 1. Yeni Firmaları sisteme ekle og Supabase'e yaz
             if (yeniFirmaDizisi.length > 0) {
                 let successCount = 0;
                 for (const newComp of yeniFirmaDizisi) {
@@ -1911,7 +1361,7 @@
                     tr.innerHTML = `
                         <td class="p-3">
                             <p class="font-bold text-slate-100 text-sm truncate max-w-[240px] sm:max-w-[320px]" title="${c.name}">${c.name}</p>
-                            <p class="text-[10px] text-slate-505 font-medium">Şantiye ID: ${c.id}</p>
+                            <p class="text-[10px] text-slate-550 font-medium">Şantiye ID: ${c.id}</p>
                         </td>
                         <td class="p-3">
                             <div class="flex items-center gap-2">
@@ -1929,7 +1379,7 @@
                         </td>
                         <td class="p-3 text-right">
                             <div class="flex justify-end gap-2 flex-wrap sm:flex-nowrap">
-                                <button onclick="expertIncreaseProgress('${c.id}')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1" title="Denetim İlerlemesini %10 Artır">
+                                <button onclick="expertIncreaseProgress('${c.id}')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-202 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1" title="Denetim İlerlemesini %10 Artır">
                                     <i class="fas fa-chart-line text-emerald-500"></i> İlerleme Ekle
                                 </button>
                                 <button onclick="openSahaRaporuEditor('${c.id}', 'edit')" class="px-3 py-1.5 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1 shrink-0 ${reportBtnStyle}">
@@ -2341,7 +1791,7 @@
             const assignedExpert = initialExperts.find(e => e.id === company?.expertId) || initialExperts[0];
             
             const waMessageExpert = encodeURIComponent("Merhaba, " + company?.name + " şantiyesinden borç durumu ve İSG denetimi ile ilgili bir sorumuz bulunmaktadır.");
-            const waMessageManager = encodeURIComponent("Ali İhsan Bey merhaba, " + company?.name + " firması olarak İSG bakiye ve denetim detayları hususunda görüşmek istiyoruz.");
+            const waMessageManager = encodeURIComponent("Ali İhsan Bey merhaba, " + company?.name + " firması olarak İSG bakiye og denetim detayları hususunda görüşmek istiyoruz.");
 
             let findingsHtml = '';
             const findings = (company?.report && company.report.findings) || [];
@@ -2355,7 +1805,7 @@
                             <span class="px-2 py-0.5 text-[9px] font-black rounded uppercase shrink-0 ${riskBadge}">${f.risk}</span>
                         </div>
                         <p class="text-slate-400 mt-1 break-words"><span class="text-emerald-400 font-bold">DÖF Önlemi:</span> ${f.action}</p>
-                        <p class="text-[9px] text-slate-505 mt-1">Termin Tarihi: ${f.deadline || '-'}</p>
+                        <p class="text-[9px] text-slate-500 mt-1">Termin Tarihi: ${f.deadline || '-'}</p>
                     </div>
                 `;
             });
@@ -2376,9 +1826,9 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-[#0b1322] border border-slate-800 rounded-2xl p-4 text-center">
                             <i class="fas fa-shield-halved text-emerald-400 text-xl mb-1 block"></i>
-                            <p class="text-[10px] text-slate-505 font-bold uppercase">Denetim İlerlemesi</p>
+                            <p class="text-[10px] text-slate-555 font-bold uppercase">Denetim İlerlemesi</p>
                             <p class="text-xl font-black text-white mt-1">% ${company?.progress}</p>
-                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-3">
+                            <div class="w-full bg-slate-855 h-1.5 rounded-full overflow-hidden mt-3">
                                 <div class="bg-emerald-500 h-full" style="width: ${company?.progress}%"></div>
                             </div>
                         </div>
@@ -2413,9 +1863,9 @@
 
                     <div class="space-y-2 pt-4 border-t border-slate-800 text-slate-100">
                         <a href="https://wa.me/${phoneContact}?text=${waMessageExpert}" target="_blank" class="w-full bg-[#10b981] hover:bg-[#059669] text-white font-extrabold p-3.5 rounded-xl transition text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md">
-                            <i class="fab fa-whatsapp text-white"></i> İSG Uzmanına Soru Sor
+                            <i class="fab fa-whatsapp text-white"></i> İSG Uzmanına Soru Sör
                         </a>
-                        <a href="https://wa.me/${phoneContact}?text=${waMessageManager}" target="_blank" class="w-full bg-slate-950 hover:bg-slate-850 border border-slate-800 text-amber-500 font-extrabold p-3.5 rounded-xl transition text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                        <a href="https://wa.me/${phoneContact}?text=${waMessageManager}" target="_blank" class="w-full bg-slate-950 hover:bg-slate-855 border border-slate-800 text-amber-500 font-extrabold p-3.5 rounded-xl transition text-xs uppercase tracking-wider flex items-center justify-center gap-2">
                             <i class="fas fa-shield-halved text-amber-400"></i> Ali İhsan Bey'e Bağlan
                         </a>
                     </div>
