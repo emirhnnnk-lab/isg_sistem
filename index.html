@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -297,7 +297,7 @@
                     </div>
                     <div>
                         <label class="text-xs font-bold text-slate-400 block mb-1">Bülten İçeriği / Talimatlar</label>
-                        <textarea id="bulContentInput" placeholder="Çalışanların şantiyede dikkat etmesi gereken kuralları yazın..." class="w-full bg-[#070b13] border border-slate-800 rounded-xl p-3 text-sm text-white outline-none focus:border-amber-500 h-24"></textarea>
+                        <textarea id="bulContentInput" placeholder="Çalısanların şantiyede dikkat etmesi gereken kuralları yazın..." class="w-full bg-[#070b13] border border-slate-800 rounded-xl p-3 text-sm text-white outline-none focus:border-amber-500 h-24"></textarea>
                     </div>
                     <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-6 py-3 rounded-xl transition flex items-center gap-1.5">
                         <i class="fas fa-plus"></i> Bülteni Panoya As
@@ -457,9 +457,19 @@
         <div class="w-full max-w-md bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden shadow-xl p-8 text-center border-t-[10px] border-emerald-500">
             <div class="flex justify-between items-center mb-6 text-white border-b border-slate-800 pb-3">
                 <h2 class="text-lg font-bold text-left flex items-center gap-2"><i class="fas fa-qrcode text-emerald-500 text-xl"></i> Müşteri VIP QR</h2>
-                <button onclick="toggleSettingsModal(true)" class="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition">
+                <button onclick="toggleSettingsModal(true)" class="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition" title="Manuel IP/Domain Yönlendirmesini Düzenle">
                     <i class="fas fa-cog"></i>
                 </button>
+            </div>
+
+            <!-- DİNAMİK PREVIEW KILAVUZU (MOBİL BAĞLANTI KILAVUZU) -->
+            <div id="companyQrWarning" class="mb-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 text-left">
+                <p class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                    <i class="fas fa-satellite-dish"></i> Sanal Ortam Hatası Önleyici Aktif!
+                </p>
+                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                    Canvas sanal bulut ortamından kaynaklanan mobil DNS çökme hatası önlenmiştir. QR kod otomatik olarak <b>canlı Vercel sisteminize</b> yönlendirilmiştir.
+                </p>
             </div>
             
             <p class="text-xs text-slate-400 mb-6 text-left leading-relaxed">Seçtiğiniz firmanın mobil jüri önizlemesini başlatmak için QR kodu telefondan taratın veya simülatörü çalıştırın.</p>
@@ -471,9 +481,15 @@
                 <img id="qrCompanyImg" src="" alt="QR" class="w-48 h-48 rounded-lg" />
             </div>
 
-            <div class="bg-slate-950 p-3 rounded-xl mb-6 text-left border border-slate-800 min-w-0">
+            <div class="bg-slate-950 p-3 rounded-xl mb-4 text-left border border-slate-800 min-w-0">
                 <span class="text-[10px] font-bold text-slate-500 uppercase block">QR Linki</span>
                 <span id="qrCompanyLink" class="text-[11px] font-semibold text-slate-300 break-all select-all text-emerald-400 block">-</span>
+            </div>
+
+            <div class="flex gap-2 mb-6">
+                <button onclick="copyToClipboard('qrCompanyLink')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2 px-3 rounded-xl font-bold border border-slate-700 flex items-center justify-center gap-1.5 transition">
+                    <i class="fas fa-copy"></i> Linki Kopyala
+                </button>
             </div>
 
             <div class="flex gap-3">
@@ -488,9 +504,19 @@
         <div class="w-full max-w-md bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden shadow-xl p-8 text-center border-t-[10px] border-orange-500">
             <div class="flex justify-between items-center mb-6 text-white border-b border-slate-800 pb-3">
                 <h2 class="text-lg font-bold text-left flex items-center gap-2"><i class="fas fa-qrcode text-orange-500 text-xl"></i> İşçi Panosu QR</h2>
-                <button onclick="toggleSettingsModal(true)" class="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition">
+                <button onclick="toggleSettingsModal(true)" class="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition" title="Manuel IP/Domain Yönlendirmesini Düzenle">
                     <i class="fas fa-cog"></i>
                 </button>
+            </div>
+
+            <!-- DİNAMİK PREVIEW KILAVUZU (MOBİL BAĞLANTI KILAVUZU) -->
+            <div id="workerQrWarning" class="mb-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 text-left">
+                <p class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                    <i class="fas fa-satellite-dish"></i> Sanal Ortam Hatası Önleyici Aktif!
+                </p>
+                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                    Canvas sanal bulut ortamından kaynaklanan mobil DNS çökme hatası önlenmiştir. QR kod otomatik olarak <b>canlı Vercel sisteminize</b> yönlendirilmiştir.
+                </p>
             </div>
             
             <p class="text-xs text-slate-400 mb-8 text-left leading-relaxed">Yemekhane veya şantiyeye asılacak ortak panoda işçilerin bültene erişmesini sağlayan QR koddur.</p>
@@ -499,14 +525,20 @@
                 <img id="qrWorkerImg" src="" alt="QR" class="w-48 h-48 rounded-lg" />
             </div>
 
-            <div class="bg-slate-950 p-3 rounded-xl mb-6 text-left border border-slate-800 min-w-0">
+            <div class="bg-slate-950 p-3 rounded-xl mb-4 text-left border border-slate-800 min-w-0">
                 <span class="text-[10px] font-bold text-slate-500 uppercase block">QR Linki</span>
                 <span id="qrWorkerLink" class="text-[11px] font-semibold text-slate-300 break-all select-all text-orange-400 block">-</span>
             </div>
 
+            <div class="flex gap-2 mb-6">
+                <button onclick="copyToClipboard('qrWorkerLink')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2 px-3 rounded-xl font-bold border border-slate-700 flex items-center justify-center gap-1.5 transition">
+                    <i class="fas fa-copy"></i> Linki Kopyala
+                </button>
+            </div>
+
             <div class="flex gap-3">
                 <button id="qrWorkerSimBtn" class="flex-1 bg-orange-600 text-white py-3 rounded-xl font-bold transition text-sm">Simülatörü Aç</button>
-                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 py-3 rounded-xl font-bold transition text-sm">Geri Dön</button>
+                <button onclick="navigateTo('login')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-202 py-3 rounded-xl font-bold transition text-sm">Geri Dön</button>
             </div>
         </div>
     </div>
@@ -514,20 +546,23 @@
     <!-- PROJE AYARLARI MODAL -->
     <div id="settingsModal" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl text-slate-100">
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
                 <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-cog text-blue-500"></i> Sistem IP ve Domain Ayarı</h3>
-                <button onclick="toggleSettingsModal(false)" class="text-slate-400 hover:text-slate-300"><i class="fas fa-times"></i></button>
+                <button onclick="toggleSettingsModal(false)" class="text-slate-400 hover:text-slate-350"><i class="fas fa-times"></i></button>
             </div>
             <div class="space-y-4">
                 <div>
-                    <label class="text-xs font-bold text-slate-400 block mb-1">Vercel Yayın Adresi (QR Kodların Hedefi)</label>
+                    <label class="text-xs font-bold text-slate-400 block mb-1">Yayın Adresi (QR Kodların Hedefi)</label>
                     <input type="text" id="settingsServerIpInput" class="w-full bg-[#070b13] border border-slate-800 rounded-xl p-3 text-sm text-white outline-none focus:border-amber-500" placeholder="https://isg-sistem.vercel.app/">
-                    <span class="text-[10px] text-slate-400 mt-1 block">* Telefonda QR okuttuğunda açılacak canlı Vercel adresini buraya girin.</span>
+                    <span class="text-[10px] text-slate-400 mt-1 block">* Telefonda QR okuttuğunda açılacak canlı Vercel adresinizi veya yerel Wi-Fi IP'nizi buraya girin.</span>
                 </div>
             </div>
-            <div class="flex gap-2 mt-6">
-                <button onclick="saveAppSettings()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 transition text-sm rounded-xl text-center">Kaydet</button>
-                <button onclick="toggleSettingsModal(false)" class="px-4 py-3 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-xl text-sm transition">Kapat</button>
+            <div class="flex gap-2 mt-6 pt-3 border-t border-slate-800">
+                <button onclick="saveAppSettings()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold p-3.5 transition text-sm rounded-xl text-center shadow-lg">Ayarları Kaydet</button>
+                <button onclick="resetServerIpToDefault()" class="px-3 py-3.5 bg-red-900/30 hover:bg-red-900/50 text-red-200 font-bold rounded-xl text-sm transition" title="Canlı Vercel Varsayılanına Sıfırla">
+                    Sıfırla
+                </button>
+                <button onclick="toggleSettingsModal(false)" class="px-4 py-3.5 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-xl text-sm transition">Kapat</button>
             </div>
         </div>
     </div>
@@ -605,7 +640,7 @@
                 <button onclick="toggleCsvPreviewModal(false)" class="text-slate-400 hover:text-slate-300"><i class="fas fa-times"></i></button>
             </div>
             <p class="text-xs text-slate-400 mb-4 leading-relaxed">Yüklediğiniz raporda akıllı unvan eşleştiriciyle eşleştirilen şantiye bakiye değişimleri aşağıdadır. Onay verdiğinizde bulut sistemi güncellenecektir.</p>
-            <div class="flex-1 overflow-y-auto border border-slate-800 bg-slate-950 rounded-2xl">
+            <div class="flex-1 overflow-y-auto border border-slate-800 bg-slate-955 rounded-2xl">
                 <table class="w-full text-left border-collapse text-xs min-w-[450px]">
                     <thead>
                         <tr class="bg-slate-900 border-b border-slate-800 text-slate-400 font-extrabold uppercase">
@@ -621,7 +656,7 @@
             </div>
             <div class="flex gap-2 mt-6 pt-3 border-t border-slate-800 shrink-0">
                 <button onclick="confirmCariImport()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-3.5 rounded-xl transition text-sm shadow-lg">Değişiklikleri Onayla & Kaydet</button>
-                <button onclick="toggleCsvPreviewModal(false)" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition text-sm">Vazgeç</button>
+                <button onclick="toggleCsvPreviewModal(false)" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-xl transition text-sm">Vazgeç</button>
             </div>
         </div>
     </div>
@@ -690,7 +725,6 @@
           { id: 'exp4', name: "Fatma Şahin (İSG Uzmanı)" }
         ];
 
-        // "DIŞ SAHA CARİ.pdf" dökümanından süzülen 20 gerçek şantiye unvanı, borç bakiyeleri ve telefon numaraları.
         const initialCompanies = [
           // Ahmet Yılmaz (exp1) - 5 Firma
           { 
@@ -776,7 +810,7 @@
             report: { status: 'draft', date: '', findings: []}
           },
           { 
-            id: 'comp19', name: "AYAZ GRUP TEKSTİL İNŞAAT VE PAZARLAMA", debt: "22.800,00 ₺", progress: 60, nextVisit: "2026-05-29", expertId: 'exp4',
+            id: 'comp19', name: "AYAZ GRUP TEKSTİL INŞAAT VE PAZARLAMA", debt: "22.800,00 ₺", progress: 60, nextVisit: "2026-05-29", expertId: 'exp4',
             report: { status: 'draft', date: '', findings: []}
           },
           { 
@@ -824,7 +858,9 @@
         let tasks = JSON.parse(localStorage.getItem('isg_tasks')) || [];
         const experts = initialExperts;
 
-        let serverIp = localStorage.getItem('isg_server_ip') || "https://isg-sistem.vercel.app/";
+        // SANAL SUNUCU OYNATMA HATALARI İÇİN DEFAULT LIVE URL ATANIYOR
+        const defaultLiveUrl = "https://isg-sistem.vercel.app/";
+        let serverIp = localStorage.getItem('isg_server_ip') || defaultLiveUrl;
         let selectedCompanyId = 'comp1';
         let workerSearch = "";
         let workerCategory = "Hepsi";
@@ -875,10 +911,10 @@
             
             if (type === 'error') {
                 icon.className = "fas fa-circle-exclamation text-red-500 text-lg";
-                toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-red-950 border border-red-800 text-red-100";
+                toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-red-955 border border-red-800 text-red-100";
             } else if (type === 'info') {
                 icon.className = "fas fa-info-circle text-blue-400 text-lg";
-                toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-blue-950 border border-blue-900/30 text-white";
+                toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-blue-955 border border-blue-900/30 text-white";
             } else {
                 icon.className = "fas fa-shield-halved text-amber-400 text-lg";
                 toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl bg-[#0b0f19] border border-amber-500/30 text-white";
@@ -1206,7 +1242,7 @@
                     card.innerHTML = `
                         <div class="min-w-0">
                             <div class="flex justify-between items-start gap-2">
-                                <span class="text-[10px] font-bold text-slate-500 uppercase truncate flex-1 block" title="${t.companyName}">${t.companyName}</span>
+                                <span class="text-[10px] font-bold text-slate-505 uppercase truncate flex-1 block" title="${t.companyName}">${t.companyName}</span>
                                 <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase shrink-0 ${statusBadge}">
                                     ${statusText}
                                 </span>
@@ -1224,14 +1260,31 @@
 
         // --- 6. İLK AÇILIŞ VE OTO-TOHUMLAMA (AUTO SEED) ---
         window.onload = function() {
-            // Canlı adresi dinamik olarak keşfet (Vercel vb. ortamlar için file:// değilse)
             const currentOrigin = window.location.origin + window.location.pathname;
-            if (window.location.protocol !== 'file:') {
+            
+            // GOOGLE USERCONTENT, LOCALHOST VEYA sandbox ortamında mıyız testi
+            const isLocalOrSandbox = window.location.protocol === 'file:' || 
+                                     window.location.hostname.includes('localhost') || 
+                                     window.location.hostname.includes('127.0.0.1') ||
+                                     window.location.hostname.includes('usercontent') ||
+                                     window.location.hostname.includes('webcontainer') ||
+                                     window.location.hostname.includes('stackblitz') ||
+                                     window.location.hostname.includes('preview');
+
+            if (!isLocalOrSandbox) {
+                // Eğer gerçek bir domainse (Vercel vb.), orayı yakala ve server adresi yap
                 serverIp = currentOrigin;
                 localStorage.setItem('isg_server_ip', currentOrigin);
             } else {
-                serverIp = "https://isg-sistem.vercel.app/";
-                localStorage.setItem('isg_server_ip', serverIp);
+                // Eğer kısıtlı/sanal sandbox ortamındaysak, tarayıcıda kayıtlı olanı oku. 
+                // Yoksa DNS hatasını önlemek için doğrudan varsayılan canlı Vercel adresini dayat!
+                const savedIp = localStorage.getItem('isg_server_ip');
+                if (savedIp && !savedIp.includes('usercontent') && !savedIp.includes('file:')) {
+                    serverIp = savedIp;
+                } else {
+                    serverIp = defaultLiveUrl;
+                    localStorage.setItem('isg_server_ip', defaultLiveUrl);
+                }
             }
             
             initLoginSelectors();
@@ -1241,6 +1294,27 @@
             }
             realtimeSync();
             initDragAndDrop(); // Sürükle bırak başlatıcı
+        }
+
+        // CLIPBOARD COPY MOTORU (Iframe sandbox kısıtlamalarını esneten modern fallback)
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            showToastMessage("Bağlantı başarıyla panoya kopyalandı!");
+        }
+
+        function resetServerIpToDefault() {
+            serverIp = defaultLiveUrl;
+            localStorage.setItem('isg_server_ip', defaultLiveUrl);
+            document.getElementById('settingsServerIpInput').value = defaultLiveUrl;
+            showToastMessage("Sunucu yönlendirmesi canlı Vercel adresine sıfırlandı!");
+            if (currentView === 'qr_generator_company') updateCompanyQR();
+            if (currentView === 'qr_generator_worker') initWorkerQRView();
         }
 
         async function checkAndSeedDatabase() {
@@ -1658,7 +1732,7 @@
                         </td>
                         <td class="p-3 text-right">
                             <div class="flex justify-end gap-2 flex-wrap sm:flex-nowrap">
-                                <button onclick="expertIncreaseProgress('${c.id}')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1" title="Denetim İlerlemesini %10 Artır">
+                                <button onclick="expertIncreaseProgress('${c.id}')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-202 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1" title="Denetim İlerlemesini %10 Artır">
                                     <i class="fas fa-chart-line text-emerald-500"></i> İlerleme Ekle
                                 </button>
                                 <button onclick="openSahaRaporuEditor('${c.id}', 'edit')" class="px-3 py-1.5 text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1 shrink-0 ${reportBtnStyle}">
@@ -1750,7 +1824,7 @@
                 block.className = "border border-slate-800 bg-slate-900/20 rounded-lg p-4 relative min-w-0";
                 
                 const silButon = isEditMode ? `
-                    <button onclick="removeFindingField(${finding.id})" class="absolute top-2 right-2 text-red-500 hover:bg-red-950 p-1 rounded">
+                    <button onclick="removeFindingField(${finding.id})" class="absolute top-2 right-2 text-red-500 hover:bg-red-955 p-1 rounded">
                         <i class="fas fa-times"></i>
                     </button>
                 ` : '';
@@ -1765,7 +1839,7 @@
                             </div>
                             <div class="space-y-1">
                                 <label class="text-xs font-bold text-slate-400 uppercase">Düzeltici Önleyici Öneri (DÖF)</label>
-                                <textarea oninput="updateFindingValue(${finding.id}, 'action', this.value)" class="w-full border border-slate-800 bg-slate-950 text-white rounded p-2 text-sm h-20 outline-none focus:border-blue-500">${finding.action || ''}</textarea>
+                                <textarea oninput="updateFindingValue(${finding.id}, 'action', this.value)" class="w-full border border-slate-800 bg-slate-955 text-white rounded p-2 text-sm h-20 outline-none focus:border-blue-500">${finding.action || ''}</textarea>
                             </div>
                         </div>
                         <div class="flex gap-4 mt-3 flex-wrap sm:flex-nowrap">
@@ -1824,6 +1898,7 @@
             renderFindingsList(true);
         }
 
+        // Taslaktan silme
         function removeFindingField(id) {
             activeFindings = activeFindings.filter(f => f.id !== id);
             renderFindingsList(true);
@@ -2085,12 +2160,12 @@
 
             if (hasReport) {
                 comp.report.findings.forEach(f => {
-                    const badge = f.risk === 'Yüksek' ? 'bg-red-950 text-red-400 border border-red-800' : 'bg-amber-950 text-amber-400 border border-amber-800';
+                    const badge = f.risk === 'Yüksek' ? 'bg-red-955 text-red-400 border border-red-800' : 'bg-amber-955 text-amber-400 border border-amber-800';
                     reportHtml += `
                         <div class="border border-slate-800 bg-slate-900/40 p-4 rounded-xl space-y-2">
                             <div class="flex justify-between items-center">
                                 <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badge}">${f.risk} Risk</span>
-                                <span class="text-[10px] text-slate-500 font-bold">Termin: ${f.deadline || 'Belirtilmedi'}</span>
+                                <span class="text-[10px] text-slate-505 font-bold">Termin: ${f.deadline || 'Belirtilmedi'}</span>
                             </div>
                             <p class="text-xs font-bold text-slate-200">Uygunsuzluk: <span class="font-medium text-slate-400">${f.observation}</span></p>
                             <p class="text-xs font-bold text-emerald-400">DÖF Önerisi: <span class="font-medium text-slate-300">${f.action}</span></p>
@@ -2162,7 +2237,7 @@
             });
 
             if (matchesSearchAndCategory.length === 0) {
-                container.innerHTML = '<div class="p-8 text-center border border-slate-800 rounded-2xl bg-slate-900/30 text-slate-500 text-xs italic">Eşleşen herhangi bir bülten bulunamadı.</div>';
+                container.innerHTML = '<div class="p-8 text-center border border-slate-800 rounded-2xl bg-slate-900/30 text-slate-505 text-xs italic">Eşleşen herhangi bir bülten bulunamadı.</div>';
                 return;
             }
 
@@ -2215,13 +2290,17 @@
         }
 
         function saveAppSettings() {
-            const ip = document.getElementById('settingsServerIpInput').value;
-            serverIp = ip;
-            localStorage.setItem('isg_server_ip', ip);
-            showToastMessage("Sistem yönlendirme adresleri güncellendi!");
-            toggleSettingsModal(false);
-            if (currentView === 'qr_generator_company') updateCompanyQR();
-            if (currentView === 'qr_generator_worker') initWorkerQRView();
+            const ip = document.getElementById('settingsServerIpInput').value.trim();
+            if (ip) {
+                serverIp = ip;
+                localStorage.setItem('isg_server_ip', ip);
+                showToastMessage("Yönlendirme adresi güncellendi!");
+                toggleSettingsModal(false);
+                if (currentView === 'qr_generator_company') updateCompanyQR();
+                if (currentView === 'qr_generator_worker') initWorkerQRView();
+            } else {
+                showToastMessage("Lütfen geçerli bir yönlendirme adresi girin!", "error");
+            }
         }
 
         class Logo extends HTMLElement {
